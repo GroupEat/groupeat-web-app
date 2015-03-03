@@ -1,0 +1,8 @@
+{
+  "name": "groupeat",
+  "author": "Thibault Derousseaux tib.dex@gmail.com",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.8.11"
+  }
+}

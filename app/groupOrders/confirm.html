@@ -1,0 +1,26 @@
+<div layout="row" ng-controller="ConfirmationController as vm">
+    <div flex-sm="5" flex="10" flex-lg="30" flex-gt-lg="33"></div>
+    <div flex-sm="90" flex="80" flex-lg="40" flex-gt-lg="33">
+        <md-content>
+            <md-card>
+                <md-toolbar class="md-accent">
+                    <h2 class="md-toolbar-tools">
+                        <span>{{ "confirmGroupOrderTitle" | translate }}</span>
+                    </h2>
+                </md-toolbar>
+                <form name="confirmGroupOrderForm" class="groupeat-form" novalidate>
+                    <md-select ng-model="vm.preparedAt" placeholder="{{ 'confirmGroupOrderPlaceholder' | translate }}">
+                        <md-option ng-value="opt" ng-required ng-repeat="opt in vm.availableTimes">{{ opt }}</md-option>
+                    </md-select>
+                    <section layout="row" layout-sm="column" layout-align="center center">
+                        <button class="groupeat-submit md-raised md-primary md-button md-default-theme"
+                                ng-click="vm.confirmGroupOrder()"
+                                ng-disabled="vm.preparedAt === undefined">
+                            <span>{{ "confirm" | translate }}</span>
+                        </button>
+                    </section>
+                </form>
+            </md-card>
+        </md-content>
+    </div>
+</div>

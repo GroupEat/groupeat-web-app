@@ -23,7 +23,7 @@ module.exports = require("angular").module("groupeat.config", [
     .config(function($translateProvider) {
         $translateProvider
             .useStaticFilesLoader({
-                prefix: "/assets/translations/",
+                prefix: "/translations/",
                 suffix: ".json"
             })
             .preferredLanguage("fr")
@@ -40,6 +40,6 @@ module.exports = require("angular").module("groupeat.config", [
     .run(function (validator, elementModifier, defaultErrorMessageResolver) {
         validator.registerDomModifier(elementModifier.key, elementModifier);
         validator.setDefaultElementModifier(elementModifier.key);
-        defaultErrorMessageResolver.setI18nFileRootPath("/assets/translations");
+        defaultErrorMessageResolver.setI18nFileRootPath("/translations");
         defaultErrorMessageResolver.setCulture("fr-FR");
     });

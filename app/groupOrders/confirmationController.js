@@ -1,3 +1,4 @@
+/*@ngInject*/
 var ConfirmationController = function($http, $routeParams, $mdDialog, $filter) {
     var preparationTimeInMinutes = 45; // TODO: sync with API value
     var stepInMinutes = 5;

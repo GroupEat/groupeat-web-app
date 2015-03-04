@@ -1,3 +1,4 @@
+/*@ngInject*/
 var PasswordResetController = function($http, $routeParams, $mdDialog, $filter) {
     var vm = this;
 

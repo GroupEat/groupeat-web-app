@@ -1,13 +1,23 @@
 var gulp = require('gulp'),
+    argv = require('yargs').argv,
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
     del = require('del'),
+    gulpif = require('gulp-if'),
+    minifyCSS = require('gulp-minify-css'),
+    ngAnnotate = require('gulp-ng-annotate'),
+    plumber = require('gulp-plumber'),
     rsync = require('gulp-rsync'),
     runSequence = require('run-sequence'),
     sass = require('gulp-sass'),
+    shell = require('gulp-shell'),
     uglify = require('gulp-uglify');
 
+var prodIP = '178.62.158.190';
+var prod = argv.prod !== undefined;
+
 gulp.task('deploy', function(callback) {
+    prod = true;
     runSequence(
         'build',
         'rsync',
@@ -29,15 +39,18 @@ gulp.task('bundle', function() {
     return gulp.src(['./app/app.js'])
         .pipe(browserify({
             insertGlobals: true,
-            debug: true
+            debug: !prod
         }))
+        .pipe(ngAnnotate())
+        .pipe(gulpif(prod, uglify()))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('sass', function () {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
-        .pipe(sass({sourceComments: 'map'}))
+        .pipe(sass({sourceComments: prod ? false : 'map'}))
+        .pipe(gulpif(prod, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))
         .pipe(gulp.dest('dist/'));
 });
@@ -57,7 +70,7 @@ gulp.task('rsync', function() {
         .pipe(rsync({
             destination: '~/frontend',
             root: '.',
-            hostname: '178.62.158.190',
+            hostname: prodIP,
             username: 'vagrant',
             incremental: true,
             progress: true,

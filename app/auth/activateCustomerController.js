@@ -1,3 +1,4 @@
+/*@ngInject*/
 var ActivateCustomerController = function($http, $routeParams, $mdDialog, $filter) {
     activate();
 

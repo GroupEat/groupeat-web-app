@@ -3,12 +3,12 @@ require("angular-route");
 module.exports = require("angular").module("groupeat.routing", [
     "ngRoute"
 ])
-    .config(function($locationProvider) {
+    .config(/*@ngInject*/ function($locationProvider) {
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     })
 
-    .config(function($routeProvider) {
+    .config(/*@ngInject*/ function($routeProvider) {
         $routeProvider
             .when("/", { templateUrl: "/showcase/showcase.html" })
             .when("/docs", { templateUrl: "/admin/login.html" })

@@ -1,3 +1,4 @@
+/*@ngInject*/
 var DocsController = function($http, $window) {
     var vm = this;
 

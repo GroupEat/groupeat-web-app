@@ -1,3 +1,4 @@
+/*@ngInject*/
 var ElementModifier = function($filter, $window) {
     var factory = {
         makeValid: makeValid,

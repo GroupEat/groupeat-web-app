@@ -16,11 +16,11 @@ module.exports = require("angular").module("groupeat.config", [
     "pascalprecht.translate",
     "jcs-autoValidate"
 ])
-    .config(function(localStorageServiceProvider) {
+    .config(/*@ngInject*/ function(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix("groupeat-web-frontend");
     })
 
-    .config(function($translateProvider) {
+    .config(/*@ngInject*/ function($translateProvider) {
         $translateProvider
             .useStaticFilesLoader({
                 prefix: "/translations/",
@@ -31,13 +31,13 @@ module.exports = require("angular").module("groupeat.config", [
             .useLocalStorage();
     })
 
-    .config(function($mdThemingProvider) {
+    .config(/*@ngInject*/ function($mdThemingProvider) {
         $mdThemingProvider.theme("default")
             .primaryPalette("orange")
             .accentPalette("red")
     })
 
-    .run(function (validator, elementModifier, defaultErrorMessageResolver) {
+    .run(/*@ngInject*/ function(validator, elementModifier, defaultErrorMessageResolver) {
         validator.registerDomModifier(elementModifier.key, elementModifier);
         validator.setDefaultElementModifier(elementModifier.key);
         defaultErrorMessageResolver.setI18nFileRootPath("/translations");

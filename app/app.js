@@ -1,3 +1,13 @@
+var angular = require("angular");
+
+require("./config");
+require("./routing");
+require("./admin/module");
+require("./auth/module");
+require("./groupOrders/module");
+require("./showcase/module");
+require("./support/module");
+
 angular.module("groupeat", [
     "groupeat.config",
     "groupeat.routing",

@@ -1,1 +1,1 @@
-angular.module("groupeat.showcase", []);
+require("angular").module("groupeat.showcase", []);

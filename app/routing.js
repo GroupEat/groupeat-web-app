@@ -1,4 +1,6 @@
-angular.module("groupeat.routing", [
+require("angular-route");
+
+module.exports = require("angular").module("groupeat.routing", [
     "ngRoute"
 ])
     .config(function($locationProvider) {

@@ -1,7 +1,4 @@
-angular.module("groupeat.support")
-    .factory("elementModifier", elementModifier);
-
-function elementModifier($filter, $window) {
+var ElementModifier = function($filter, $window) {
     var factory = {
         makeValid: makeValid,
         makeInvalid: makeInvalid,
@@ -47,3 +44,5 @@ function elementModifier($filter, $window) {
 
     return factory;
 };
+
+module.exports = ElementModifier;

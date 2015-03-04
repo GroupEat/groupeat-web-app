@@ -1,7 +1,4 @@
-angular.module("groupeat.admin")
-    .controller("DocsController", DocsController);
-
-function DocsController($http, $window) {
+var DocsController = function($http, $window) {
     var vm = this;
 
     vm.logIn = logIn;
@@ -50,4 +47,6 @@ function DocsController($http, $window) {
                 console.log(response);
             });
     };
-}
+};
+
+module.exports = DocsController;

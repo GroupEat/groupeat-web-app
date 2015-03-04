@@ -1,7 +1,4 @@
-angular.module("groupeat.auth")
-    .controller("ActivateCustomerController", ActivateCustomerController);
-
-function ActivateCustomerController($http, $routeParams, $mdDialog, $filter) {
+var ActivateCustomerController = function($http, $routeParams, $mdDialog, $filter) {
     activate();
 
     function activate() {
@@ -34,4 +31,6 @@ function ActivateCustomerController($http, $routeParams, $mdDialog, $filter) {
                 );
             });
     };
-}
+};
+
+module.exports = ActivateCustomerController;

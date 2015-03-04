@@ -1,4 +1,15 @@
-angular.module("groupeat.config", [
+require("angular-aria");
+require("angular-animate");
+require("angular-cookies");
+require("angular-material");
+require("angular-local-storage");
+require("angular-translate");
+require("../bower_components/angular-translate-storage-local/angular-translate-storage-local");
+require("../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie");
+require("../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files");
+require("angular-auto-validate");
+
+module.exports = require("angular").module("groupeat.config", [
     "ngMaterial",
     "ngCookies",
     "LocalStorageModule",

@@ -1,7 +1,4 @@
-angular.module("groupeat.groupOrders")
-    .controller("ConfirmationController", ConfirmationController);
-
-function ConfirmationController($http, $routeParams, $mdDialog, $filter) {
+var ConfirmationController = function($http, $routeParams, $mdDialog, $filter) {
     var preparationTimeInMinutes = 45; // TODO: sync with API value
     var stepInMinutes = 5;
 
@@ -117,4 +114,6 @@ function ConfirmationController($http, $routeParams, $mdDialog, $filter) {
                 preparedAtDate.getSeconds().padLeft()
             ].join(":");
     }
-}
+};
+
+module.exports = ConfirmationController;

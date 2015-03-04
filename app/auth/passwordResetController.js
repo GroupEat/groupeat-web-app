@@ -1,7 +1,4 @@
-angular.module("groupeat.auth")
-    .controller("PasswordResetController", PasswordResetController);
-
-function PasswordResetController($http, $routeParams, $mdDialog, $filter) {
+var PasswordResetController = function($http, $routeParams, $mdDialog, $filter) {
     var vm = this;
 
     vm.resetPassword = resetPassword;
@@ -37,4 +34,6 @@ function PasswordResetController($http, $routeParams, $mdDialog, $filter) {
                 );
             });
     };
-}
+};
+
+module.exports = PasswordResetController;

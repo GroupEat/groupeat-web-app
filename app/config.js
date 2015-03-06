@@ -1,3 +1,5 @@
+var angular = require("angular");
+
 require("angular-aria");
 require("angular-animate");
 require("angular-cookies");
@@ -9,18 +11,18 @@ require("../bower_components/angular-translate-storage-cookie/angular-translate-
 require("../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files");
 require("angular-auto-validate");
 
-module.exports = require("angular").module("groupeat.config", [
+module.exports = angular.module("groupeat.config", [
     "ngMaterial",
     "ngCookies",
     "LocalStorageModule",
     "pascalprecht.translate",
     "jcs-autoValidate"
 ])
-    .config(/*@ngInject*/ function(localStorageServiceProvider) {
+    .config(function(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix("groupeat-web-frontend");
     })
 
-    .config(/*@ngInject*/ function($translateProvider) {
+    .config(function($translateProvider) {
         $translateProvider
             .useStaticFilesLoader({
                 prefix: "/translations/",
@@ -31,13 +33,13 @@ module.exports = require("angular").module("groupeat.config", [
             .useLocalStorage();
     })
 
-    .config(/*@ngInject*/ function($mdThemingProvider) {
+    .config(function($mdThemingProvider) {
         $mdThemingProvider.theme("default")
             .primaryPalette("orange")
             .accentPalette("red")
     })
 
-    .run(/*@ngInject*/ function(validator, elementModifier, defaultErrorMessageResolver) {
+    .run(function(validator, elementModifier, defaultErrorMessageResolver) {
         validator.registerDomModifier(elementModifier.key, elementModifier);
         validator.setDefaultElementModifier(elementModifier.key);
         defaultErrorMessageResolver.setI18nFileRootPath("/translations");

@@ -10,7 +10,6 @@ var gulp = require('gulp'),
     rsync = require('gulp-rsync'),
     runSequence = require('run-sequence'),
     sass = require('gulp-sass'),
-    shell = require('gulp-shell'),
     uglify = require('gulp-uglify');
 
 var conf = {

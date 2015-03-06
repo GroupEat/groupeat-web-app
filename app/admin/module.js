@@ -1,3 +1,3 @@
 require("angular").module("groupeat.admin", [])
-    .controller("DocsController", require("./docsController"))
+    .controller("DocsController", require("./docs.controller"))
 ;

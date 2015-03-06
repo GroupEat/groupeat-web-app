@@ -18,7 +18,7 @@ module.exports = angular.module("groupeat.routing", [
                 templateUrl: "/showcase/showcase.html",
                 controller: "ActivateCustomerController"
             })
-            .when("/auth/password/reset", { templateUrl: "/auth/passwordReset.html" })
-            .when("/groupOrders/:groupOrderId/confirm", { templateUrl: "/groupOrders/confirm.html" })
+            .when("/auth/password/reset", { templateUrl: "/auth/password-reset.html" })
+            .when("/groupOrders/:groupOrderId/confirm", { templateUrl: "/group-orders/confirm.html" })
             .otherwise({redirectTo: "/"});
     });

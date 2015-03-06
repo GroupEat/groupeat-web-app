@@ -4,7 +4,7 @@ require("./config");
 require("./routing");
 require("./admin/module");
 require("./auth/module");
-require("./groupOrders/module");
+require("./group-orders/module");
 require("./showcase/module");
 require("./support/module");
 

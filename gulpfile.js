@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     minifyCSS = require('gulp-minify-css'),
     ngAnnotate = require('gulp-ng-annotate'),
+    plumber = require('gulp-plumber'),
     rsync = require('gulp-rsync'),
     runSequence = require('run-sequence'),
     sass = require('gulp-sass'),
@@ -49,6 +50,7 @@ gulp.task('clean', function() {
 
 gulp.task('bundle', function() {
     return gulp.src(['./app/app.js'])
+        .pipe(plumber())
         .pipe(browserify({
             insertGlobals: true,
             debug: !conf.prod
@@ -62,6 +64,7 @@ gulp.task('bundle', function() {
 
 gulp.task('sass', function () {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
+        .pipe(plumber())
         .pipe(sass({sourceComments: conf.prod ? false : 'map'}))
         .pipe(gulpif(conf.prod, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))

@@ -22,12 +22,19 @@ var conf = {
     prod: gutil.env.prod != undefined
 }
 
+gulp.task('default', function(callback) {
+    runSequence(
+        'build',
+        'watch',
+        callback);
+});
+
 gulp.task('watch', function() {
-    livereload.listen();
     gulp.watch(conf.sassPaths, ['sass']);
     gulp.watch(conf.viewsPaths, ['views']);
     gulp.watch(conf.assetsPaths, ['assets']);
     gulp.watch(conf.scriptsPaths, ['bundle']);
+    return livereload.listen();
 });
 
 gulp.task('build', function(callback) {

@@ -1,3 +1,3 @@
-require("angular").module("groupeat.groupOrders", [])
-    .controller("ConfirmationController", require("./confirmation.controller.js"))
+require('angular').module('groupeat.groupOrders', [])
+    .controller('ConfirmationController', require('./confirmation.controller.js'))
 ;

@@ -2,7 +2,7 @@
   "confirm": "confirmer",
   "logIn": "se connecter",
 
-  "errorDialogTitle": "Oops ...",
+  "errorPopupTitle": "Oops ...",
 
   "email": "adresse e-mail",
   "password": "mot de passe",
@@ -23,6 +23,8 @@
   "confirmGroupOrderTitle": "Confirmer la commande",
   "confirmGroupOrderPlaceholder": "Sélectionner l'heure du début de livraison prévue",
   "confirmGroupOrderSuccess": "Merci d'avoir confirmé la commande groupée !",
+
+  "authenticationError": "Mauvais identifiants, vous n'avez pas pu être connecté...",
 
   "adminLogin": "Zone administrateur"
 }

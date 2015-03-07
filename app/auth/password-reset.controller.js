@@ -1,40 +1,20 @@
 /*@ngInject*/
-var PasswordResetController = function($http, $routeParams, $mdDialog, $filter) {
+module.exports = function(api, $routeParams, popup) {
     var vm = this;
 
     vm.resetPassword = resetPassword;
 
     function resetPassword() {
-        var request = {
-            method: "POST",
-            url: "/api/auth/password",
-            headers: {
-                "Accept": "application/vnd.groupeat.v1+json"
-            },
-            data: {
-                "email": this.email,
-                "password": this.password,
-                "token": $routeParams["token"]
-            }
-        };
-
-        $http(request)
+        api('POST', 'api/auth/password', {
+            'email': this.email,
+            'password': this.password,
+            'token': $routeParams['token']
+        })
             .success(function() {
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        .content($filter("translate")("resetPasswordSuccess"))
-                        .ok("x")
-                );
+                popup.defaultContentOnly('resetPasswordSuccess');
             })
             .error(function(response) {
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        .title($filter("translate")("errorDialogTitle"))
-                        .content($filter("translate")(response["error_key"]))
-                        .ok("x")
-                );
+                popup.default('errorDialogTitle', response['error_key']);
             });
-    };
-};
-
-module.exports = PasswordResetController;
+    }
+}

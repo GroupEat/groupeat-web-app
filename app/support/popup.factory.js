@@ -4,7 +4,7 @@ module.exports = function($mdDialog, $filter) {
         default: showDefault,
         error: showError,
         defaultContentOnly: showDefaultContentOnly
-    }
+    };
 
     return factory;
 

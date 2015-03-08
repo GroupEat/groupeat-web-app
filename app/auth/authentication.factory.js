@@ -16,11 +16,11 @@ module.exports = function($injector, $q, popup) {
         var api = $injector.get('api');
 
         return api('POST', 'auth/token', {
-            'email': email,
-            'password': password
+            email: email,
+            password: password
         }).then(function(response) {
             that.token = response.data.data.token;
-        }, function(response) {
+        }, function() {
             popup.error('authenticationError');
 
             return $q.reject(false);
@@ -28,7 +28,7 @@ module.exports = function($injector, $q, popup) {
     }
 
     function isLoggedIn() {
-        return that.token !== undefined;
+        return that.token != null;
     }
 
     function getToken() {

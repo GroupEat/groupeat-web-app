@@ -1,0 +1,18 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "latedef": "nofunc",
+  "noarg": true,
+  "nocomma": true,
+  "nonbsp": true,
+  "quotmark": "single",
+  "shadow": true,
+  "singleGroups": true,
+  "undef": true,
+  "unused": true,
+
+  "eqnull": true,
+
+  "browserify": true
+}

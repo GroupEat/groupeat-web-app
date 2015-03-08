@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     del = require('del'),
     gulpif = require('gulp-if'),
     gutil = require('gulp-util'),
+    jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload'),
     minifyCSS = require('gulp-minify-css'),
     ngAnnotate = require('gulp-ng-annotate'),
@@ -11,6 +12,7 @@ var gulp = require('gulp'),
     rsync = require('gulp-rsync'),
     runSequence = require('run-sequence'),
     sass = require('gulp-sass'),
+    stylish = require('jshint-stylish'),
     uglify = require('gulp-uglify');
 
 var conf = {
@@ -48,7 +50,13 @@ gulp.task('clean', function() {
     return del('dist/');
 });
 
-gulp.task('bundle', function() {
+gulp.task('lint', function() {
+    return gulp.src('app/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+})
+
+gulp.task('bundle', ['lint'], function() {
     return gulp.src(['./app/app.js'])
         .pipe(plumber())
         .pipe(browserify({

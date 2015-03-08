@@ -15,7 +15,7 @@ module.exports = function($filter, $window) {
     function makeValid(element) {
         var errors = dom.getElementById(element[0].id + 'errors');
 
-        if (errors !== null) {
+        if (errors != null) {
             errors.innerHTML = '';
         }
     }
@@ -34,9 +34,9 @@ module.exports = function($filter, $window) {
 
         var errorsContainer = dom.getElementById(errorsId);
 
-        errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>'
-            + capitalize(errorMessage, 'first')
-            + '</div>';
+        errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>' +
+            capitalize(errorMessage, 'first') +
+            '</div>';
     }
 
     function makeDefault(el) {

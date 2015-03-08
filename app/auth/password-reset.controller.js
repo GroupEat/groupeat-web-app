@@ -6,15 +6,15 @@ module.exports = function(api, $routeParams, popup) {
 
     function resetPassword() {
         api('POST', 'api/auth/password', {
-            'email': this.email,
-            'password': this.password,
-            'token': $routeParams['token']
+            email: this.email,
+            password: this.password,
+            token: $routeParams.token
         })
             .success(function() {
                 popup.defaultContentOnly('resetPasswordSuccess');
             })
             .error(function(response) {
-                popup.default('errorDialogTitle', response['error_key']);
+                popup.default('errorDialogTitle', response.error_key);
             });
     }
-}
+};

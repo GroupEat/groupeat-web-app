@@ -4,13 +4,13 @@ module.exports = function(api, $routeParams, popup) {
 
     function activate() {
         api('POST', 'auth/activationTokens', {
-            'token': $routeParams['token']
+            token: $routeParams.token
         })
             .success(function() {
                 popup.default('activationSuccessTitle', 'activationSuccess');
             })
             .error(function() {
                 popup.default('activationErrorTitle', 'activationError');
-            })
+            });
     }
-}
+};

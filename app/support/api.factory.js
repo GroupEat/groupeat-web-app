@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 /*@ngInject*/
 module.exports = function($http, $location, authentication) {
     var factory = makeRequest;
@@ -15,7 +13,7 @@ module.exports = function($http, $location, authentication) {
             }
         };
 
-        if (method != 'GET') {
+        if (method !== 'GET') {
             request.data = data;
         }
 

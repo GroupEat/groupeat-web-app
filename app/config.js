@@ -36,7 +36,7 @@ module.exports = angular.module('groupeat.config', [
     .config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('orange')
-            .accentPalette('red')
+            .accentPalette('red');
     })
 
     .run(function(validator, elementModifier, defaultErrorMessageResolver) {

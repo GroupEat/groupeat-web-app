@@ -1,5 +1,7 @@
+var _ = require('lodash');
+
 /*@ngInject*/
-module.exports = function(api, $routeParams, popup) {
+module.exports = function(api, authentication, $routeParams, popup) {
     var preparationTimeInMinutes = 45; // TODO: sync with API value
     var stepInMinutes = 5;
 
@@ -10,33 +12,35 @@ module.exports = function(api, $routeParams, popup) {
     activate();
 
     function activate() {
-        api('GET', 'groupOrders/' + $routeParams['groupOrderId'])
+        authentication.setToken($routeParams.token);
+
+        api('GET', 'groupOrders/' + $routeParams.groupOrderId)
             .success(function(response) {
-                vm.availableTimes = getAvailableTimes(Date.parse(response['data']['completedAt']));
+                vm.availableTimes = getAvailableTimes(Date.parse(response.data.completedAt));
             });
     }
 
     function confirmGroupOrder() {
-        api('POST', 'groupOrders/' + $routeParams['groupOrderId'] + '/confirm', {
+        api('POST', 'groupOrders/' + $routeParams.groupOrderId + '/confirm', {
             preparedAt: getPreparedAtString(vm.availableTimes, vm.preparedAt)
         })
             .success(function() {
                 popup.defaultContentOnly('confirmGroupOrderSuccess');
             })
             .error(function(response) {
-                popup.error(response['error_key']);
+                popup.error(response.error_key);
             });
     }
 
     function getAvailableTimes(completedAt) { // TODO: use moment.js instead
         var currentTimestamp = Date.now();
-        var latestPreparedTimestamp = completedAt + (60000 * preparationTimeInMinutes);
+        var latestPreparedTimestamp = completedAt + 60000 * preparationTimeInMinutes;
 
         var timestampOnStep;
         var availableTimestamps = [];
         var offsetWithStep = (new Date(latestPreparedTimestamp)).getMinutes() % stepInMinutes;
 
-        if (offsetWithStep != 0) {
+        if (offsetWithStep !== 0) {
             availableTimestamps.push(latestPreparedTimestamp);
             timestampOnStep = latestPreparedTimestamp - offsetWithStep * 60000;
         } else {
@@ -63,23 +67,18 @@ module.exports = function(api, $routeParams, popup) {
     }
 
     function getPreparedAtString(availableTimes, preparedAt) {
-        Number.prototype.padLeft = function(base, chr) {
-            var len = (String(base || 10).length - String(this).length) + 1;
-            return len > 0 ? new Array(len).join(chr || '0') + this : this;
-        }
-
         var preparedAtDate = new Date(parseInt(Object.keys(vm.availableTimes).filter(function(key) {
             return availableTimes[key] === preparedAt;
         })[0]));
 
         return [
                 preparedAtDate.getFullYear(),
-                (preparedAtDate.getMonth() + 1).padLeft(),
-                preparedAtDate.getDate().padLeft()
+                _.padLeft(preparedAtDate.getMonth() + 1),
+                _.padLeft(preparedAtDate.getDate())
             ].join('-') + ' ' + [
-                preparedAtDate.getHours().padLeft(),
-                preparedAtDate.getMinutes().padLeft(),
-                preparedAtDate.getSeconds().padLeft()
+                _.padLeft(preparedAtDate.getHours()),
+                _.padLeft(preparedAtDate.getMinutes()),
+                _.padLeft(preparedAtDate.getSeconds())
             ].join(':');
     }
-}
+};

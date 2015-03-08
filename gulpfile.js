@@ -1,20 +1,20 @@
-var gulp = require('gulp'),
-    browserify = require('gulp-browserify'),
-    concat = require('gulp-concat'),
-    del = require('del'),
-    gulpif = require('gulp-if'),
-    gutil = require('gulp-util'),
-    jscs = require('gulp-jscs'),
-    jshint = require('gulp-jshint'),
-    livereload = require('gulp-livereload'),
-    minifyCSS = require('gulp-minify-css'),
-    ngAnnotate = require('gulp-ng-annotate'),
-    plumber = require('gulp-plumber'),
-    rsync = require('gulp-rsync'),
-    runSequence = require('run-sequence'),
-    sass = require('gulp-sass'),
-    stylish = require('jshint-stylish'),
-    uglify = require('gulp-uglify');
+var gulp = require('gulp');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
+var del = require('del');
+var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
+var jscs = require('gulp-jscs');
+var jshint = require('gulp-jshint');
+var livereload = require('gulp-livereload');
+var minifyCSS = require('gulp-minify-css');
+var ngAnnotate = require('gulp-ng-annotate');
+var plumber = require('gulp-plumber');
+var rsync = require('gulp-rsync');
+var runSequence = require('run-sequence');
+var sass = require('gulp-sass');
+var stylish = require('jshint-stylish');
+var uglify = require('gulp-uglify');
 
 var conf = {
     prodIP: '178.62.158.190',
@@ -22,11 +22,11 @@ var conf = {
     viewsPaths: ['app/**/*.html'],
     assetsPaths: ['assets/**/*'],
     scriptsPaths: ['app/**/*.js'],
-    prod: gutil.env.prod != undefined
-}
+    prod: gutil.env.prod !== undefined
+};
 
 gulp.task('default', function(callback) {
-    runSequence(
+    return runSequence(
         'build',
         'watch',
         callback);
@@ -37,11 +37,12 @@ gulp.task('watch', function() {
     gulp.watch(conf.viewsPaths, ['views']);
     gulp.watch(conf.assetsPaths, ['assets']);
     gulp.watch(conf.scriptsPaths, ['bundle']);
+    
     return livereload.listen();
 });
 
 gulp.task('build', function(callback) {
-    runSequence(
+    return runSequence(
         'clean',
         ['bundle', 'sass', 'views', 'assets'],
         callback);
@@ -77,7 +78,7 @@ gulp.task('bundle', ['jscs', 'lint'], function() {
         .pipe(livereload());
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', function() {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
         .pipe(plumber())
         .pipe(sass({sourceComments: conf.prod ? false : 'map'}))
@@ -101,7 +102,8 @@ gulp.task('assets', function() {
 
 gulp.task('deploy', function(callback) {
     conf.prod = true;
-    runSequence(
+
+    return runSequence(
         'build',
         'rsync',
         callback);

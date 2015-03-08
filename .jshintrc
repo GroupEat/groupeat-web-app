@@ -13,6 +13,7 @@
   "unused": true,
 
   "eqnull": true,
+  "regexp": true,
 
   "browserify": true
 }

@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     del = require('del'),
     gulpif = require('gulp-if'),
     gutil = require('gulp-util'),
+    jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload'),
     minifyCSS = require('gulp-minify-css'),
@@ -50,13 +51,19 @@ gulp.task('clean', function() {
     return del('dist/');
 });
 
+gulp.task('jscs', function() {
+    return gulp.src(conf.scriptsPaths)
+        .pipe(jscs()); // TODO: set 'requireCamelCaseOrUpperCaseIdentifiers' to true when error_key has changed to errorKey
+});
+
 gulp.task('lint', function() {
-    return gulp.src('app/**/*.js')
+    return gulp.src(conf.scriptsPaths)
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
-})
+        .pipe(gulpif(conf.prod, jshint.reporter('fail')));
+});
 
-gulp.task('bundle', ['lint'], function() {
+gulp.task('bundle', ['jscs', 'lint'], function() {
     return gulp.src(['./app/app.js'])
         .pipe(plumber())
         .pipe(browserify({

@@ -5,11 +5,16 @@
  - Bower
  - Gulp
 
-## Installation
+## Installing
 
-`bower install & npm install` (run it also after each `git pull`)
+`bower install & npm install`
+
+## Updating
+
+`gulp pull`
 
 ## Building
 
-`gulp` for building and watching (livereload) or `gulp build` to build only.
+ - `gulp` for building and watching (livereload)
+ - `gulp build` to build only
 

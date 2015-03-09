@@ -72,7 +72,7 @@ gulp.task('lint', function() {
 
 gulp.task('bundle', ['jscs', 'lint'], function() {
     return gulp.src(['./app/app.js'])
-        .pipe(plumber())
+        .pipe(gulpif(!conf.prod, plumber()))
         .pipe(browserify({
             insertGlobals: true,
             debug: !conf.prod
@@ -86,7 +86,7 @@ gulp.task('bundle', ['jscs', 'lint'], function() {
 
 gulp.task('sass', function() {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
-        .pipe(plumber())
+        .pipe(gulpif(!conf.prod, plumber()))
         .pipe(sass({sourceComments: conf.prod ? false : 'map'}))
         .pipe(gulpif(conf.prod, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))

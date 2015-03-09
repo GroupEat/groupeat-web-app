@@ -13,6 +13,7 @@ var plumber = require('gulp-plumber');
 var rsync = require('gulp-rsync');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
+var shell = require('gulp-shell');
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 
@@ -37,7 +38,7 @@ gulp.task('watch', function() {
     gulp.watch(conf.viewsPaths, ['views']);
     gulp.watch(conf.assetsPaths, ['assets']);
     gulp.watch(conf.scriptsPaths, ['bundle']);
-    
+
     return livereload.listen();
 });
 
@@ -51,6 +52,11 @@ gulp.task('build', function(callback) {
 gulp.task('clean', function() {
     return del('dist/');
 });
+
+gulp.task('pull', shell.task([
+    'git pull',
+    'bower install & npm install'
+]));
 
 gulp.task('jscs', function() {
     return gulp.src(conf.scriptsPaths)

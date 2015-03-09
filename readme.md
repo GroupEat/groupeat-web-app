@@ -1,20 +1,19 @@
-## Prerequisites
+# Prerequisites
 
  - Node.js
  - NPM
  - Bower
  - Gulp
 
-## Installing
+# Installing
 
 `bower install & npm install`
 
-## Updating
+# Updating
 
 `gulp pull`
 
-## Building
+# Building
 
  - `gulp` for building and watching (livereload)
  - `gulp build` to build only
-

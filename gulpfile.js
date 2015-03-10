@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -88,6 +90,7 @@ gulp.task('sass', function() {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
         .pipe(gulpif(!conf.prod, plumber()))
         .pipe(sass({sourceComments: conf.prod ? false : 'map'}))
+        .pipe(autoprefixer())
         .pipe(gulpif(conf.prod, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))
         .pipe(gulp.dest('dist/'))

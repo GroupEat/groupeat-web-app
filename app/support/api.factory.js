@@ -1,5 +1,5 @@
 /*@ngInject*/
-module.exports = function($http, $location, authentication) {
+module.exports = function($http, authentication) {
     var factory = makeRequest;
 
     return factory;
@@ -7,7 +7,7 @@ module.exports = function($http, $location, authentication) {
     function makeRequest(method, url, data) {
         var request = {
             method: method,
-            url: 'https://' + $location.host() + '/api/' + url,
+            url: '/api/' + url,
             headers: {
                 Accept: 'application/vnd.groupeat.v1+json'
             }

@@ -62,7 +62,7 @@ gulp.task('pull', shell.task([
 
 gulp.task('jscs', function() {
     return gulp.src(conf.scriptsPaths)
-        .pipe(jscs()); // TODO: set 'requireCamelCaseOrUpperCaseIdentifiers' to true when error_key has changed to errorKey
+        .pipe(jscs());
 });
 
 gulp.task('lint', function() {

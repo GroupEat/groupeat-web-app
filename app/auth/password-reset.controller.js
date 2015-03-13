@@ -14,7 +14,7 @@ module.exports = function(api, $routeParams, popup) {
                 popup.defaultContentOnly('resetPasswordSuccess');
             })
             .error(function(response) {
-                popup.default('errorDialogTitle', response.error_key);
+                popup.default('errorDialogTitle', response.errorKey);
             });
     }
 };

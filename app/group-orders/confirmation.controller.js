@@ -28,7 +28,7 @@ module.exports = function(api, authentication, $routeParams, popup) {
                 popup.defaultContentOnly('confirmGroupOrderSuccess');
             })
             .error(function(response) {
-                popup.error(response.error_key);
+                popup.error(response.errorKey);
             });
     }
 

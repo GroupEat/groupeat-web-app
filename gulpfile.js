@@ -6,11 +6,13 @@ var concat = require('gulp-concat');
 var del = require('del');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
+var insert = require('gulp-insert');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var livereload = require('gulp-livereload');
 var minifyCSS = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
+var open = require('gulp-open');
 var plumber = require('gulp-plumber');
 var rsync = require('gulp-rsync');
 var runSequence = require('run-sequence');
@@ -20,18 +22,23 @@ var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 
 var conf = {
+    distPath: 'dist/',
     prodIP: '178.62.158.190',
+    mainPath: 'dist/index.html',
     sassPaths: ['scss/**/*.scss'],
     viewsPaths: ['app/**/*.html'],
     assetsPaths: ['assets/**/*'],
     scriptsPaths: ['app/**/*.js'],
+    localHost: 'http://groupeat.dev',
     prod: gutil.env.prod !== undefined
 };
 
 gulp.task('default', function(callback) {
     return runSequence(
         'build',
+        'inject-livereload',
         'watch',
+        'open',
         callback);
 });
 
@@ -60,6 +67,19 @@ gulp.task('pull', shell.task([
     'bower install & npm install'
 ]));
 
+gulp.task('open', function() {
+    return gulp.src(conf.mainPath)
+        .pipe(open('', {
+            url: conf.localHost
+        }));
+});
+
+gulp.task('inject-livereload', function() {
+    return gulp.src(conf.mainPath)
+        .pipe(insert.append('<script src="http://127.0.0.1:35729/livereload.js?ext=Chrome"></script>'))
+        .pipe(gulp.dest(conf.distPath));
+});
+
 gulp.task('jscs', function() {
     return gulp.src(conf.scriptsPaths)
         .pipe(jscs());
@@ -82,7 +102,7 @@ gulp.task('bundle', ['jscs', 'lint'], function() {
         .pipe(ngAnnotate())
         .pipe(gulpif(conf.prod, uglify()))
         .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
 });
 
@@ -93,19 +113,19 @@ gulp.task('sass', function() {
         .pipe(autoprefixer())
         .pipe(gulpif(conf.prod, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
 });
 
 gulp.task('views', function() {
     return gulp.src(conf.viewsPaths)
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
 });
 
 gulp.task('assets', function() {
     return gulp.src(conf.assetsPaths)
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
 });
 

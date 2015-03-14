@@ -23,7 +23,10 @@ module.exports = function DocsController(api, $window, authentication, $location
                 document.open('text/html');
                 document.write(response); // jshint ignore:line
                 document.close();
-                document.getElementById(hash).scrollIntoView();
+
+                if (hash !== '') {
+                    document.getElementById(hash).scrollIntoView();
+                }
             });
         });
     }

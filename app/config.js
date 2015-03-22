@@ -6,9 +6,9 @@ require('angular-cookies');
 require('angular-material');
 require('angular-local-storage');
 require('angular-translate');
-require('../bower_components/angular-translate-storage-local/angular-translate-storage-local');
-require('../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie');
-require('../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files');
+require('../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local');
+require('../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie');
+require('../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files');
 require('angular-auto-validate');
 
 module.exports = angular.module('groupeat.config', [

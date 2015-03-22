@@ -64,7 +64,7 @@ gulp.task('clean', function() {
 
 gulp.task('pull', shell.task([
     'git pull',
-    'bower install & npm install'
+    'npm install'
 ]));
 
 gulp.task('open', function() {

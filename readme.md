@@ -2,12 +2,11 @@
 
  - Node.js
  - NPM
- - Bower
  - Gulp
 
 # Installing
 
-`bower install & npm install`
+`npm install`
 
 # Updating
 

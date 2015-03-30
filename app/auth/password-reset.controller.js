@@ -1,20 +1,22 @@
-/*@ngInject*/
-module.exports = function(api, $routeParams, popup) {
-    var vm = this;
+export class PasswordResetController {
+    /*@ngInject*/
+    constructor(api, $routeParams, popup) {
+        this.api = api;
+        this.popup = popup;
 
-    vm.resetPassword = resetPassword;
+        this.token = $routeParams.token;
 
-    function resetPassword() {
-        api('POST', 'api/auth/password', {
+        this.email = '';
+        this.password = '';
+    }
+
+    resetPassword() {
+        this.api.send('POST', 'api/auth/password', {
             email: this.email,
             password: this.password,
-            token: $routeParams.token
+            token: this.token
         })
-            .success(function() {
-                popup.defaultContentOnly('resetPasswordSuccess');
-            })
-            .error(function(response) {
-                popup.default('errorDialogTitle', response.errorKey);
-            });
+            .success(() => this.popup.defaultContentOnly('resetPasswordSuccess'))
+            .error(response => this.popup.default('errorDialogTitle', response.errorKey));
     }
-};
+}

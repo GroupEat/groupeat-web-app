@@ -1,7 +1,10 @@
-require('angular-input-match');
+import angular from 'angular';
+import 'angular-input-match';
+import { ActivateCustomerController } from './activate-customer.controller.js';
+import { Authentication } from './authentication.service.js';
+import { PasswordResetController } from './password-reset.controller.js';
 
-require('angular').module('groupeat.auth', ['validation.match'])
-    .controller('ActivateCustomerController', require('./activate-customer.controller'))
-    .factory('authentication', require('./authentication.factory'))
-    .controller('PasswordResetController', require('./password-reset.controller'))
-;
+angular.module('groupeat.auth', ['validation.match'])
+    .controller('ActivateCustomerController', ActivateCustomerController)
+    .service('authentication', Authentication)
+    .controller('PasswordResetController', PasswordResetController);

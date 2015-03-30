@@ -1,7 +1,10 @@
-require('angular-capitalize-filter');
+import angular from 'angular';
+import 'angular-capitalize-filter';
+import { Api } from './api.service.js';
+import { ElementModifier } from './element-modifier.service.js';
+import { Popup } from './popup.service.js';
 
-require('angular').module('groupeat.support', ['angular-capitalize-filter'])
-    .factory('api', require('./api.factory'))
-    .factory('elementModifier', require('./element-modifier.factory'))
-    .factory('popup', require('./popup.factory'))
-;
+angular.module('groupeat.support', ['angular-capitalize-filter'])
+    .service('api', Api)
+    .service('elementModifier', ElementModifier)
+    .service('popup', Popup);

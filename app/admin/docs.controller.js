@@ -1,33 +1,35 @@
-/*@ngInject*/
-module.exports = function DocsController(api, $window, authentication, $location) {
-    var vm = this;
+export class DocsController {
+    /*@ngInject*/
+    constructor(api, $window, authentication, $location) {
+        this.api = api;
+        this.authentication = authentication;
+        this.$location = $location;
 
-    vm.logIn = logIn;
+        this.dom = $window.document;
 
-    activate();
+        this.email = '';
+        this.password = '';
 
-    function activate() {
-        if ($location.host() === 'groupeat.dev') {
-            vm.email = 'admin@groupeat.fr';
-            vm.password = 'groupeat';
-            vm.logIn();
+        if (this.$location.host() === 'groupeat.dev') {
+            this.email = 'admin@groupeat.fr';
+            this.password = 'groupeat';
+            this.logIn();
         }
     }
 
-    function logIn() {
-        var hash = $location.hash();
+    logIn() {
+        const hash = this.$location.hash();
 
-        authentication.logIn(vm.email, vm.password).then(function() {
-            api('GET', 'admin/docs').success(function(response) {
-                var document = $window.document;
-                document.open('text/html');
-                document.write(response); // jshint ignore:line
-                document.close();
+        this.authentication.logIn(this.email, this.password).then(() => {
+            this.api.send('GET', 'admin/docs').success(response => {
+                this.dom.open('text/html');
+                this.dom.write(response); // jshint ignore:line
+                this.dom.close();
 
                 if (hash !== '') {
-                    document.getElementById(hash).scrollIntoView();
+                    this.dom.getElementById(hash).scrollIntoView();
                 }
             });
         });
     }
-};
+}

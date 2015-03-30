@@ -1,16 +1,15 @@
-/*@ngInject*/
-module.exports = function(api, $routeParams, popup) {
-    activate();
+export class ActivateCustomerController {
+    /*@ngInject*/
+    constructor(api, $routeParams, popup) {
+        this.api = api;
+        this.popup = popup;
 
-    function activate() {
-        api('POST', 'auth/activationTokens', {
-            token: $routeParams.token
+        this.token = $routeParams.token;
+
+        this.api.send('POST', 'auth/activationTokens', {
+            token: this.token
         })
-            .success(function() {
-                popup.default('activationSuccessTitle', 'activationSuccess');
-            })
-            .error(function() {
-                popup.default('activationErrorTitle', 'activationError');
-            });
+            .success(() => this.popup.default('activationSuccessTitle', 'activationSuccess'))
+            .error(() => this.popup.default('activationErrorTitle', 'activationError'));
     }
-};
+}

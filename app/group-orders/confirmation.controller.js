@@ -1,44 +1,46 @@
-var _ = require('lodash');
+import * as _ from 'lodash';
 
-/*@ngInject*/
-module.exports = function(api, authentication, $routeParams, popup) {
-    var preparationTimeInMinutes = 45; // TODO: sync with API value
-    var stepInMinutes = 5;
+export class ConfirmationController {
+    /*@ngInject*/
+    constructor(api, authentication, $routeParams, popup) {
+        this.preparationTimeInMinutes = 45;
+        this.stepInMinutes = 5;
 
-    var vm = this;
+        this.api = api;
+        this.authentication = authentication;
+        this.popup = popup;
 
-    vm.confirmGroupOrder = confirmGroupOrder;
+        this.token = $routeParams.token;
+        this.groupOrderId = $routeParams.groupOrderId;
 
-    activate();
+        //const PREPARATION_TIME_IN_MINUTES = 45; // TODO: sync with API value
 
-    function activate() {
-        authentication.setToken($routeParams.token);
+        this.availableTimes = {};
+        this.preparedAt = undefined;
 
-        api('GET', 'groupOrders/' + $routeParams.groupOrderId)
-            .success(function(response) {
-                vm.availableTimes = getAvailableTimes(Date.parse(response.data.completedAt));
+        this.authentication.setToken(this.token);
+
+        this.api.send('GET', 'groupOrders/' + this.groupOrderId)
+            .success(response => {
+                this.availableTimes = this.getAvailableTimes(Date.parse(response.data.closedAt));
             });
     }
 
-    function confirmGroupOrder() {
-        api('POST', 'groupOrders/' + $routeParams.groupOrderId + '/confirm', {
-            preparedAt: getPreparedAtString(vm.availableTimes, vm.preparedAt)
+    confirmGroupOrder() {
+        this.api.send('POST', 'groupOrders/' + this.groupOrderId + '/confirm', {
+            preparedAt: this.getPreparedAtString(this.availableTimes, this.preparedAt)
         })
-            .success(function() {
-                popup.defaultContentOnly('confirmGroupOrderSuccess');
-            })
-            .error(function(response) {
-                popup.error(response.errorKey);
-            });
+            .success(() => this.popup.defaultContentOnly('confirmGroupOrderSuccess'))
+            .error(response => this.popup.error(response.errorKey));
     }
 
-    function getAvailableTimes(completedAt) { // TODO: use moment.js instead
-        var currentTimestamp = Date.now();
-        var latestPreparedTimestamp = completedAt + 60000 * preparationTimeInMinutes;
+    getAvailableTimes(closedAt) {
+        const currentTimestamp = Date.now();
+        const latestPreparedTimestamp = closedAt + 60000 * this.preparationTimeInMinutes;
 
-        var timestampOnStep;
-        var availableTimestamps = [];
-        var offsetWithStep = (new Date(latestPreparedTimestamp)).getMinutes() % stepInMinutes;
+        let timestampOnStep;
+        let availableTimestamps = [];
+        const offsetWithStep = (new Date(latestPreparedTimestamp)).getMinutes() % this.stepInMinutes;
 
         if (offsetWithStep !== 0) {
             availableTimestamps.push(latestPreparedTimestamp);
@@ -49,16 +51,16 @@ module.exports = function(api, authentication, $routeParams, popup) {
 
         while (timestampOnStep > currentTimestamp) {
             availableTimestamps.push(timestampOnStep);
-            timestampOnStep -= stepInMinutes * 60000;
+            timestampOnStep -= this.stepInMinutes * 60000;
         }
 
         availableTimestamps.reverse();
 
-        var availableTimes = {};
+        let availableTimes = {};
 
-        for (var i = 0; i < availableTimestamps.length; i++) {
-            var timestamp = availableTimestamps[i];
-            var date = new Date(timestamp);
+        for (let i = 0; i < availableTimestamps.length; i++) {
+            const timestamp = availableTimestamps[i];
+            const date = new Date(timestamp);
 
             availableTimes[timestamp] = ('0' + date.getHours()).slice(-2) + 'h' + ('0' + date.getMinutes()).slice(-2);
         }
@@ -66,10 +68,10 @@ module.exports = function(api, authentication, $routeParams, popup) {
         return availableTimes;
     }
 
-    function getPreparedAtString(availableTimes, preparedAt) {
-        var preparedAtDate = new Date(parseInt(Object.keys(vm.availableTimes).filter(function(key) {
-            return availableTimes[key] === preparedAt;
-        })[0]));
+    getPreparedAtString(availableTimes, preparedAt) {
+        const preparedAtDate = new Date(parseInt(Object.keys(this.availableTimes).filter(
+                key => availableTimes[key] === preparedAt
+        )[0]));
 
         return [
                 preparedAtDate.getFullYear(),
@@ -81,4 +83,4 @@ module.exports = function(api, authentication, $routeParams, popup) {
                 _.padLeft(preparedAtDate.getSeconds())
             ].join(':');
     }
-};
+}

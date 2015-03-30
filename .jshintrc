@@ -1,6 +1,7 @@
 {
   "bitwise": true,
   "curly": true,
+  "esnext": true,
   "eqeqeq": true,
   "latedef": "nofunc",
   "noarg": true,

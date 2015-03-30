@@ -1,1 +1,3 @@
-require('angular').module('groupeat.showcase', []);
+import angular from 'angular';
+
+angular.module('groupeat.showcase', []);

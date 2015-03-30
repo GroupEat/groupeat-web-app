@@ -1,17 +1,16 @@
-var angular = require('angular');
+import angular from 'angular';
+import 'angular-aria';
+import 'angular-animate';
+import 'angular-cookies';
+import 'angular-material';
+import 'angular-local-storage';
+import 'angular-translate';
+import '../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
+import '../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
+import '../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
+import 'angular-auto-validate';
 
-require('angular-aria');
-require('angular-animate');
-require('angular-cookies');
-require('angular-material');
-require('angular-local-storage');
-require('angular-translate');
-require('../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local');
-require('../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie');
-require('../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files');
-require('angular-auto-validate');
-
-module.exports = angular.module('groupeat.config', [
+angular.module('groupeat.config', [
     'ngMaterial',
     'ngCookies',
     'LocalStorageModule',
@@ -21,7 +20,6 @@ module.exports = angular.module('groupeat.config', [
     .config(function(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix('groupeat-web-frontend');
     })
-
     .config(function($translateProvider) {
         $translateProvider
             .useStaticFilesLoader({
@@ -32,13 +30,11 @@ module.exports = angular.module('groupeat.config', [
             .fallbackLanguage(['fr'])
             .useLocalStorage();
     })
-
     .config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('orange')
             .accentPalette('red');
     })
-
     .run(function(validator, elementModifier, defaultErrorMessageResolver) {
         validator.registerDomModifier(elementModifier.key, elementModifier);
         validator.setDefaultElementModifier(elementModifier.key);

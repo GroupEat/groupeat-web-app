@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 
 var autoprefixer = require('gulp-autoprefixer');
+var babel = require('gulp-babel');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -62,6 +63,10 @@ gulp.task('clean', function() {
     return del('dist/');
 });
 
+gulp.task('clean-temp', function() {
+    return del('temp/');
+});
+
 gulp.task('pull', shell.task([
     'git pull',
     'npm install'
@@ -82,7 +87,7 @@ gulp.task('inject-livereload', function() {
 
 gulp.task('jscs', function() {
     return gulp.src(conf.scriptsPaths)
-        .pipe(jscs());
+        .pipe(jscs({esnext: true}));
 });
 
 gulp.task('lint', function() {
@@ -92,8 +97,15 @@ gulp.task('lint', function() {
         .pipe(gulpif(conf.prod, jshint.reporter('fail')));
 });
 
-gulp.task('bundle', ['jscs', 'lint'], function() {
-    return gulp.src(['./app/app.js'])
+gulp.task('babel', function() {
+    return gulp.src('app/**/*.js')
+        .pipe(gulpif(!conf.prod, plumber()))
+        .pipe(babel())
+        .pipe(gulp.dest('temp'));
+});
+
+gulp.task('browserify', ['jscs', 'lint'], function() {
+    return gulp.src(['./temp/app.js'])
         .pipe(gulpif(!conf.prod, plumber()))
         .pipe(browserify({
             insertGlobals: true,
@@ -104,6 +116,14 @@ gulp.task('bundle', ['jscs', 'lint'], function() {
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
+});
+
+gulp.task('bundle', function(callback) {
+    return runSequence(
+        'babel',
+        'browserify',
+        'clean-temp',
+        callback);
 });
 
 gulp.task('sass', function() {

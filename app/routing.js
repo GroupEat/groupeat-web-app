@@ -1,15 +1,13 @@
-var angular = require('angular');
+import angular from 'angular';
+import 'angular-route';
 
-require('angular-route');
-
-module.exports = angular.module('groupeat.routing', [
+angular.module('groupeat.routing', [
     'ngRoute'
 ])
     .config(function($locationProvider) {
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     })
-
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {templateUrl: '/showcase/showcase.html'})

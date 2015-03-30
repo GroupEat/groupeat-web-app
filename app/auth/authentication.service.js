@@ -10,8 +10,8 @@ export class Authentication {
 
     logIn(email, password) {
         return this.$injector.get('api').send('POST', 'auth/token', {
-            email: email,
-            password: password
+            email,
+            password
         })
             .then(
                 response => {

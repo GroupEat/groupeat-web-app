@@ -11,7 +11,7 @@ export class PasswordResetController {
     }
 
     resetPassword() {
-        this.api.send('POST', 'api/auth/password', {
+        this.api.post('api/auth/password', {
             email: this.email,
             password: this.password,
             token: this.token

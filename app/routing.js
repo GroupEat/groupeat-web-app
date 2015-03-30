@@ -4,19 +4,29 @@ import 'angular-route';
 angular.module('groupeat.routing', [
     'ngRoute'
 ])
-    .config(function($locationProvider) {
+    .config($locationProvider => {
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     })
-    .config(function($routeProvider) {
+    .config($routeProvider => {
         $routeProvider
-            .when('/', {templateUrl: '/showcase/showcase.html'})
-            .when('/docs', {templateUrl: '/admin/login.html'})
+            .when('/', {
+                templateUrl: '/showcase/showcase.html'
+            })
+            .when('/docs', {
+                templateUrl: '/admin/login.html'
+            })
             .when('/auth/activate', {
                 templateUrl: '/showcase/showcase.html',
                 controller: 'ActivateCustomerController'
             })
-            .when('/auth/password/reset', {templateUrl: '/auth/password-reset.html'})
-            .when('/groupOrders/:groupOrderId/confirm', {templateUrl: '/group-orders/confirm.html'})
-            .otherwise({redirectTo: '/'});
+            .when('/auth/password/reset', {
+                templateUrl: '/auth/password-reset.html'
+            })
+            .when('/groupOrders/:groupOrderId/confirm', {
+                templateUrl: '/group-orders/confirm.html'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
     });

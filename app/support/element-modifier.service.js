@@ -17,7 +17,7 @@ export class ElementModifier {
 
     makeInvalid(element, errorMessage) {
         var element = element[0];
-        var errorsId = element.id + 'errors';
+        var errorsId = `${element.id}-errors`;
 
         if (this.dom.getElementById(errorsId) === null) {
             var div = this.dom.createElement('div');

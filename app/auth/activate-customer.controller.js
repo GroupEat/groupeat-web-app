@@ -4,11 +4,9 @@ export class ActivateCustomerController {
         this.api = api;
         this.popup = popup;
 
-        this.token = $routeParams.token;
+        const token = $routeParams.token;
 
-        this.api.send('POST', 'auth/activationTokens', {
-            token: this.token
-        })
+        this.api.post('auth/activationTokens', { token })
             .success(() => this.popup.default('activationSuccessTitle', 'activationSuccess'))
             .error(() => this.popup.default('activationErrorTitle', 'activationError'));
     }

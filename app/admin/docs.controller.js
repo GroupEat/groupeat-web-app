@@ -21,7 +21,7 @@ export class DocsController {
         const hash = this.$location.hash();
 
         this.authentication.logIn(this.email, this.password).then(() => {
-            this.api.send('GET', 'admin/docs').success(response => {
+            this.api.get('admin/docs').success(response => {
                 this.dom.open('text/html');
                 this.dom.write(response); // jshint ignore:line
                 this.dom.close();

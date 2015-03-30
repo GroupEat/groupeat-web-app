@@ -5,10 +5,30 @@ export class Api {
         this.authentication = authentication;
     }
 
-    send(method, url ,data) {
+    get(url) {
+        return this.send('GET', url, {});
+    }
+
+    post(url, data) {
+        return this.send('POST', url, data);
+    }
+
+    put(url, data) {
+        return this.send('PUT', url, data);
+    }
+
+    patch(url, data) {
+        return this.send('PATCH', url, data);
+    }
+
+    delete(url, data) {
+        return this.send('DELETE', url, data);
+    }
+
+    send(method, url, data) {
         let request = {
-            method: method,
-            url: '/api/' + url,
+            method,
+            url: `/api/${url}`,
             headers: {
                 Accept: 'application/vnd.groupeat.v1+json'
             }

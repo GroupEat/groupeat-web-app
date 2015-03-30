@@ -18,14 +18,14 @@ export class ConfirmationController {
 
         this.authentication.setToken(this.token);
 
-        this.api.send('GET', 'groupOrders/' + this.groupOrderId)
+        this.api.get(`groupOrders/${this.groupOrderId}`)
             .success(response => {
                 this.availableTimes = this.getAvailableTimes(Date.parse(response.data.closedAt));
             });
     }
 
     confirmGroupOrder() {
-        this.api.send('POST', 'groupOrders/' + this.groupOrderId + '/confirm', {
+        this.api.post(`groupOrders/${this.groupOrderId}/confirm`, {
             preparedAt: this.getPreparedAtString(this.availableTimes, this.preparedAt)
         })
             .success(() => this.popup.defaultContentOnly('confirmGroupOrderSuccess'))

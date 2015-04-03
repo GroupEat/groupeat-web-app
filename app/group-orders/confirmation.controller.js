@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export class ConfirmationController {
+export default class ConfirmationController {
     /*@ngInject*/
     constructor(api, authentication, $routeParams, popup) {
         this.preparationTimeInMinutes = 45; // TODO: sync with API value

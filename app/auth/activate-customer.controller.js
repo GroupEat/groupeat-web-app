@@ -1,4 +1,4 @@
-export class ActivateCustomerController {
+export default class ActivateCustomerController {
     /*@ngInject*/
     constructor(api, $routeParams, popup) {
         this.api = api;

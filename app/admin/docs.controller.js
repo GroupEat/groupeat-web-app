@@ -1,4 +1,4 @@
-export class DocsController {
+export default class DocsController {
     /*@ngInject*/
     constructor(api, $window, authentication, $location) {
         this.api = api;

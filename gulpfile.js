@@ -104,7 +104,7 @@ gulp.task('babel', function() {
         .pipe(gulp.dest('temp'));
 });
 
-gulp.task('browserify', ['jscs', 'lint'], function() {
+gulp.task('browserify', function() {
     return gulp.src(['./temp/app.js'])
         .pipe(gulpif(!conf.prod, plumber()))
         .pipe(browserify({
@@ -118,7 +118,7 @@ gulp.task('browserify', ['jscs', 'lint'], function() {
         .pipe(livereload());
 });
 
-gulp.task('bundle', function(callback) {
+gulp.task('bundle', ['jscs', 'lint'], function(callback) {
     return runSequence(
         'babel',
         'browserify',

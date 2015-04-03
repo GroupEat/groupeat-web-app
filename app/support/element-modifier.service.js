@@ -1,4 +1,4 @@
-export class ElementModifier {
+export default class ElementModifier {
     /*@ngInject*/
     constructor($filter, $window) {
         this.capitalize = $filter('capitalize');
@@ -8,7 +8,7 @@ export class ElementModifier {
     }
 
     makeValid(element) {
-        var errors = this.dom.getElementById(element[0].id + 'errors');
+        let errors = this.dom.getElementById(`${element[0].id}-errors`);
 
         if (errors != null) {
             errors.innerHTML = '';
@@ -16,8 +16,8 @@ export class ElementModifier {
     }
 
     makeInvalid(element, errorMessage) {
-        var element = element[0];
-        var errorsId = `${element.id}-errors`;
+        element = element[0];
+        let errorsId = `${element.id}-errors`;
 
         if (this.dom.getElementById(errorsId) === null) {
             var div = this.dom.createElement('div');
@@ -27,7 +27,7 @@ export class ElementModifier {
             element.parentNode.appendChild(div);
         }
 
-        var errorsContainer = this.dom.getElementById(errorsId);
+        let errorsContainer = this.dom.getElementById(errorsId);
 
         errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>' +
             this.capitalize(errorMessage, 'first') +

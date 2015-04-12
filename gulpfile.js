@@ -147,7 +147,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('rsync', function() {
-    return gulp.src(conf.dist)
+    return gulp.src(conf.distPath)
         .pipe(rsync({
             destination: '~/frontend',
             root: '.',

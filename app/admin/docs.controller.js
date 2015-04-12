@@ -1,6 +1,7 @@
 export default class DocsController {
-    /*@ngInject*/
     constructor(api, $window, authentication, $location) {
+        'ngInject';
+
         this.api = api;
         this.authentication = authentication;
         this.$location = $location;

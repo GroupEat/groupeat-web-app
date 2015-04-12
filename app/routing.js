@@ -5,10 +5,14 @@ angular.module('groupeat.routing', [
     'ngRoute'
 ])
     .config($locationProvider => {
+        'ngInject';
+
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     })
     .config($routeProvider => {
+        'ngInject';
+
         $routeProvider
             .when('/', {
                 templateUrl: '/showcase/showcase.html'

@@ -1,6 +1,7 @@
 export default class Authentication {
-    /*@ngInject*/
     constructor($injector, $q, popup) {
+        'ngInject';
+
         this.$injector = $injector;
         this.$q = $q;
         this.popup = popup;

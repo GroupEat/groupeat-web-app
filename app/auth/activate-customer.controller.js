@@ -1,6 +1,7 @@
 export default class ActivateCustomerController {
-    /*@ngInject*/
     constructor(api, $routeParams, popup) {
+        'ngInject';
+
         this.api = api;
         this.popup = popup;
 

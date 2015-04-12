@@ -18,9 +18,13 @@ angular.module('groupeat.config', [
     'jcs-autoValidate'
 ])
     .config(localStorageServiceProvider => {
+        'ngInject';
+
         localStorageServiceProvider.setPrefix('groupeat-web-frontend');
     })
     .config($translateProvider => {
+        'ngInject';
+
         $translateProvider
             .useStaticFilesLoader({
                 prefix: '/translations/',
@@ -31,11 +35,15 @@ angular.module('groupeat.config', [
             .useLocalStorage();
     })
     .config($mdThemingProvider => {
+        'ngInject';
+
         $mdThemingProvider.theme('default')
             .primaryPalette('orange')
             .accentPalette('red');
     })
     .run((validator, elementModifier, defaultErrorMessageResolver) => {
+        'ngInject';
+
         validator.registerDomModifier(elementModifier.key, elementModifier);
         validator.setDefaultElementModifier(elementModifier.key);
         defaultErrorMessageResolver.setI18nFileRootPath('/translations');

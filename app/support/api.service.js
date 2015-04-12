@@ -1,6 +1,7 @@
 export default class Api {
-    /*@ngInject*/
     constructor($http, authentication) {
+        'ngInject';
+
         this.$http = $http;
         this.authentication = authentication;
     }

@@ -1,6 +1,7 @@
 export default class PasswordResetController {
-    /*@ngInject*/
     constructor(api, $routeParams, popup) {
+        'ngInject';
+
         this.api = api;
         this.popup = popup;
 

@@ -1,6 +1,7 @@
 export default class ElementModifier {
-    /*@ngInject*/
     constructor($filter, $window) {
+        'ngInject';
+
         this.capitalize = $filter('capitalize');
         this.dom = $window.document;
 

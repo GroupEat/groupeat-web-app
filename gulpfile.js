@@ -19,6 +19,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var openBrowser = require('gulp-open');
 var plumber = require('gulp-plumber');
 var rsync = require('gulp-rsync');
+var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
@@ -192,6 +193,7 @@ function rebundle(bundler) {
             gutil.log('Bundling error:', gutil.colors.red(err.toString()));
         })
         .pipe(source('bundle.js'))
+        .pipe(gulpif(conf.prod, replace(__dirname, '.')))
         .pipe(ngAnnotate())
         .pipe(gulpif(conf.prod, streamify(uglify())))
         .pipe(gulp.dest(conf.distPath))

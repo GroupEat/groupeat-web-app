@@ -4,7 +4,10 @@ machine:
       0.12.0
 test:
   pre:
-    - npm start:
+    - npm run update-webdriver
+    - npm run start-webdriver:
+        background: true
+    - npm run start-server:
         background: true
     - sleep 5
   override:

@@ -1,0 +1,11 @@
+machine:
+  node:
+    version:
+      0.12.0
+test:
+  pre:
+    - npm start:
+        background: true
+    - sleep 5
+  override:
+    - npm run protractor

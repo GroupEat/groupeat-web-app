@@ -16,5 +16,11 @@
   "eqnull": true,
   "regexp": true,
 
-  "browserify": true
+  "browserify": true,
+  "jasmine": true,
+  "globals": {
+    "browser": false,
+    "by": false,
+    "element": false
+  }
 }

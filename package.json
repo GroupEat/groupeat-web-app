@@ -46,5 +46,12 @@
   "browser": {
     "angular-auto-validate": "./node_modules/angular-auto-validate/dist/jcs-auto-validate.js",
     "angular-capitalize-filter": "./node_modules/angular-capitalize-filter/capitalize.js"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server dist -p 8010",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor ./protractor.conf.js"
   }
 }

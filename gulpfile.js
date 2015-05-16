@@ -31,15 +31,23 @@ var watchify = require('watchify');
 var conf = {
     distPath: 'dist/',
     entryPath: './app/app.js',
-    prodIP: '178.62.158.190',
     mainPath: 'dist/index.html',
     scssPaths: ['scss/**/*.scss'],
     viewsPaths: ['app/**/*.html'],
     assetsPaths: ['assets/**/*'],
     scriptsPaths: ['app/**/*.js'],
     localHost: 'http://groupeat.dev',
-    prod: gutil.env.prod !== undefined
+    productionHost: 'groupeat.fr',
+    stagingHost: 'staging.groupeat.fr',
+    production: gutil.env.production !== undefined,
+    staging: gutil.env.staging !== undefined
 };
+
+var inDev = !conf.production && !conf.staging;
+
+if (!inDev) {
+    var distantHost = conf.production ? conf.productionHost : conf.stagingHost;
+}
 
 gulp.task('default', ['scss', 'views', 'assets'], function(callback) {
     return runSequence(
@@ -91,7 +99,7 @@ gulp.task('jshint', function() {
         .pipe(cached('jshint'))
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
-        .pipe(gulpif(conf.prod, jshint.reporter('fail')));
+        .pipe(gulpif(!inDev, jshint.reporter('fail')));
 });
 
 gulp.task('scripts', ['jscs', 'jshint'], function() {
@@ -100,10 +108,10 @@ gulp.task('scripts', ['jscs', 'jshint'], function() {
 
 gulp.task('scss', function() {
     return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
-        .pipe(gulpif(!conf.prod, plumber()))
-        .pipe(sass({sourceComments: conf.prod ? false : 'map'}))
+        .pipe(gulpif(inDev, plumber()))
+        .pipe(sass({sourceComments: !inDev ? false : 'map'}))
         .pipe(autoprefixer())
-        .pipe(gulpif(conf.prod, minifyCSS({keepSpecialComments: 0})))
+        .pipe(gulpif(!inDev, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))
         .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
@@ -112,7 +120,7 @@ gulp.task('scss', function() {
 gulp.task('views', function() {
     return gulp.src(conf.viewsPaths)
         .pipe(cached('views'))
-        .pipe(gulpif(conf.prod, minifyHTML({
+        .pipe(gulpif(!inDev, minifyHTML({
             empty: true,
             conditionals: true
         })))
@@ -128,7 +136,7 @@ gulp.task('assets', function() {
 });
 
 gulp.task('deploy', function(callback) {
-    conf.prod = true;
+    inDev = false;
 
     return runSequence(
         'build',
@@ -152,7 +160,7 @@ gulp.task('rsync', function() {
         .pipe(rsync({
             destination: '~/frontend',
             root: '.',
-            hostname: conf.prodIP,
+            hostname: distantHost,
             username: 'vagrant',
             incremental: true,
             progress: true,
@@ -160,6 +168,7 @@ gulp.task('rsync', function() {
             emptyDirectories: true,
             recursive: true,
             clean: true,
+            silent: true,
             exclude: ['.DS_Store'],
             include: []
         }));
@@ -171,7 +180,7 @@ function bundle(watch) {
         packageCache: {},
         insertGlobals: true,
         fullPaths: true,
-        debug: !conf.prod,
+        debug: inDev,
         noparse: ['angular', 'lodash']
     });
 
@@ -193,9 +202,9 @@ function rebundle(bundler) {
             gutil.log('Bundling error:', gutil.colors.red(err.toString()));
         })
         .pipe(source('bundle.js'))
-        .pipe(gulpif(conf.prod, replace(__dirname, '.')))
+        .pipe(gulpif(!inDev, replace(__dirname, '.')))
         .pipe(ngAnnotate())
-        .pipe(gulpif(conf.prod, streamify(uglify())))
+        .pipe(gulpif(!inDev, streamify(uglify())))
         .pipe(gulp.dest(conf.distPath))
         .pipe(livereload());
 }

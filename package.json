@@ -37,10 +37,8 @@
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
-    "http-server": "^0.8.0",
     "jshint-stylish": "^1.0.1",
     "lodash": "^3.6.0",
-    "protractor": "^2.0.0",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.1.0"
@@ -48,11 +46,5 @@
   "browser": {
     "angular-auto-validate": "./node_modules/angular-auto-validate/dist/jcs-auto-validate.js",
     "angular-capitalize-filter": "./node_modules/angular-capitalize-filter/capitalize.js"
-  },
-  "scripts": {
-    "update-webdriver": "webdriver-manager update",
-    "start-webdriver": "webdriver-manager start",
-    "start-server": "http-server dist -p 8010",
-    "protractor": "protractor ./protractor.conf.js"
   }
 }

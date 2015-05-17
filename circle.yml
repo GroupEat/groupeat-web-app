@@ -26,3 +26,13 @@ test:
     - sleep 5
   override:
     - protractor protractor.conf.js
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - gulp deploy --production
+  staging:
+    branch: staging
+    commands:
+      - gulp deploy --staging

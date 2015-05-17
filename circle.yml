@@ -33,6 +33,6 @@ deployment:
     commands:
       - gulp deploy --production
   staging:
-    branch: staging
+    branch: develop
     commands:
       - gulp deploy --staging

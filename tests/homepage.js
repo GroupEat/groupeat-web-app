@@ -5,4 +5,11 @@ describe('homepage', function() {
             expect(url).toBe('/');
         });
     });
+
+    it('should have a showcase logo', function() {
+        browser.get('');
+        var showcaseLogo = element(by.id('showcase-logo'));
+        expect(showcaseLogo.isPresent()).toBe(true);
+        expect(showcaseLogo.getAttribute('src')).toContain('/img/logo.svg');
+    });
 });

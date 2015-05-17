@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/GroupEat/groupeat-frontend.svg?style=shield&circle-token=778915449bc9c1f0798ca2e0a53c8fd9c890d3d5)](https://circleci.com/gh/GroupEat/groupeat-frontend)
+
 # Prerequisites
 
  - Node.js

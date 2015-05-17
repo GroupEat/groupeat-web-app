@@ -13,9 +13,6 @@ dependencies:
     - npm install -g protractor
     - npm install -g http-server
 
-  override:
-    - npm install --dev
-
 test:
   pre:
     - webdriver-manager update
@@ -25,4 +22,4 @@ test:
         background: true
     - sleep 5
   override:
-    - protractor ./protractor.conf.js
+    - protractor protractor.conf.js

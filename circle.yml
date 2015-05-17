@@ -12,9 +12,12 @@ dependencies:
     - npm install -g gulp
     - npm install -g protractor
     - npm install -g http-server
+  post:
+    - npm install gulp-sass
 
 test:
   pre:
+    - gulp build
     - webdriver-manager update
     - webdriver-manager start:
         background: true

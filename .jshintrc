@@ -19,8 +19,9 @@
   "browserify": true,
   "jasmine": true,
   "globals": {
-    "browser": false,
     "by": false,
+    "browser": false,
+    "console": false,
     "element": false
   }
 }

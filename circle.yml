@@ -10,22 +10,20 @@ dependencies:
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
     - npm install -g gulp
-    - npm install -g protractor
-    - npm install -g http-server
   post:
     - npm install gulp-sass
 
 test:
   pre:
     - gulp build
-    - webdriver-manager update
-    - webdriver-manager start:
+    - ./node_modules/protractor/bin/webdriver-manager update --standalone
+    - ./node_modules/protractor/bin/webdriver-manager start:
         background: true
-    - http-server dist -p 8010:
+    - ./node_modules/superstatic/bin/server:
         background: true
     - sleep 5
   override:
-    - protractor protractor.conf.js
+    - ./node_modules/protractor/bin/protractor protractor.conf.js
 
 deployment:
   production:

@@ -18,12 +18,14 @@ var minifyHTML = require('gulp-minify-html');
 var ngAnnotate = require('gulp-ng-annotate');
 var openBrowser = require('gulp-open');
 var plumber = require('gulp-plumber');
+var protractor = require('gulp-angular-protractor');
 var rsync = require('gulp-rsync');
 var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
+var superstatic = require('superstatic').server;
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 var watchify = require('watchify');
@@ -42,6 +44,8 @@ var conf = {
     production: gutil.env.production !== undefined,
     staging: gutil.env.staging !== undefined
 };
+
+var superstaticConf = require('./superstatic.json');
 
 var inDev = !conf.production && !conf.staging;
 
@@ -72,6 +76,20 @@ gulp.task('pull', function() {
     return exec('git pull; npm install', function (err, stdout, stderr) {
         gutil.log(stdout);
         gutil.log(gutil.colors.red(stderr));
+    });
+});
+
+gulp.task('test', function() {
+    superstatic(superstaticConf).listen(function() {
+        return gulp.src([])
+            .pipe(protractor({
+                debug: true,
+                autoStartStopServer: true,
+                configFile: './protractor.conf.js'
+            }))
+            .on('error', function(e) {
+                console.log(e);
+            });
     });
 });
 

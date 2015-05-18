@@ -12,17 +12,19 @@ dependencies:
     - npm install -g gulp
   post:
     - npm install gulp-sass
+    - ./node_modules/protractor/bin/webdriver-manager update --standalone
 
 test:
   pre:
     - gulp build
-    - ./node_modules/protractor/bin/webdriver-manager update --standalone
     - ./node_modules/protractor/bin/webdriver-manager start:
         background: true
     - ./node_modules/superstatic/bin/server:
         background: true
     - sleep 5
   override:
+    - gulp jshint
+    - gulp jscs
     - ./node_modules/protractor/bin/protractor protractor.conf.js
 
 deployment:

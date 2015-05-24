@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 
 var autoprefixer = require('gulp-autoprefixer');
+var babel = require('gulp-babel');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var cached = require('gulp-cached');
@@ -20,7 +21,6 @@ var openBrowser = require('gulp-open');
 var plumber = require('gulp-plumber');
 var protractor = require('gulp-angular-protractor');
 var rsync = require('gulp-rsync');
-var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
@@ -31,20 +31,25 @@ var uglify = require('gulp-uglify');
 var watchify = require('watchify');
 
 var conf = {
-    distPath: 'dist/',
-    entryPath: './app/app.js',
-    mainPath: 'dist/index.html',
+    browserRoot: 'dist/',
+    mainEntryPath: './app/app.js',
+    testEntryPath: './app/app.test.js',
     scssPaths: ['scss/**/*.scss'],
     viewsPaths: ['app/**/*.html'],
     assetsPaths: ['assets/**/*'],
-    scriptsPaths: ['app/**/*.js'],
+    testsPaths: ['tests/**/*.js'],
+    es5testsRoot: 'dist-tests/',
     localHost: 'http://groupeat.dev',
     productionHost: 'groupeat.fr',
     stagingHost: 'staging.groupeat.fr',
     production: gutil.env.production !== undefined,
-    staging: gutil.env.staging !== undefined
+    staging: gutil.env.staging !== undefined,
+    test: gutil.env.test !== undefined
 };
 
+conf.browserEntryPoint = conf.browserRoot + 'index.html';
+conf.scriptsPaths = [].concat.apply(['app/**/*.js'], conf.testsPaths);
+conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath;
 var superstaticConf = require('./superstatic.json');
 
 var inDev = !conf.production && !conf.staging;
@@ -62,14 +67,17 @@ gulp.task('default', ['scss', 'views', 'assets'], function(callback) {
 });
 
 gulp.task('build', function(callback) {
-    return runSequence(
-        'clean',
-        ['scripts', 'scss', 'views', 'assets'],
-        callback);
+    var tasks = ['scripts', 'scss', 'views', 'assets'];
+
+    if (conf.test) {
+        tasks.push('build-tests');
+    }
+
+    return runSequence('clean', tasks, callback);
 });
 
 gulp.task('clean', function() {
-    return del(conf.distPath);
+    return del(conf.browserRoot);
 });
 
 gulp.task('pull', function() {
@@ -94,16 +102,16 @@ gulp.task('test', function() {
 });
 
 gulp.task('openBrowser', function() {
-    return gulp.src(conf.mainPath)
+    return gulp.src(conf.browserEntryPoint)
         .pipe(openBrowser('', {
             url: conf.localHost
         }));
 });
 
 gulp.task('inject-livereload', function() {
-    return gulp.src(conf.mainPath)
+    return gulp.src(conf.browserEntryPoint)
         .pipe(footer('<script src="http://127.0.0.1:35729/livereload.js?ext=Chrome"></script>'))
-        .pipe(gulp.dest(conf.distPath));
+        .pipe(gulp.dest(conf.browserRoot));
 });
 
 gulp.task('jscs', function() {
@@ -120,6 +128,13 @@ gulp.task('jshint', function() {
         .pipe(gulpif(!inDev, jshint.reporter('fail')));
 });
 
+gulp.task('build-tests', function() {
+    return gulp.src(conf.testsPaths)
+        .pipe(plumber())
+        .pipe(babel())
+        .pipe(gulp.dest(conf.es5testsRoot));
+});
+
 gulp.task('scripts', ['jscs', 'jshint'], function() {
     return bundle(false);
 });
@@ -131,7 +146,7 @@ gulp.task('scss', function() {
         .pipe(autoprefixer())
         .pipe(gulpif(!inDev, minifyCSS({keepSpecialComments: 0})))
         .pipe(concat('style.css'))
-        .pipe(gulp.dest(conf.distPath))
+        .pipe(gulp.dest(conf.browserRoot))
         .pipe(livereload());
 });
 
@@ -142,14 +157,14 @@ gulp.task('views', function() {
             empty: true,
             conditionals: true
         })))
-        .pipe(gulp.dest(conf.distPath))
+        .pipe(gulp.dest(conf.browserRoot))
         .pipe(livereload());
 });
 
 gulp.task('assets', function() {
     return gulp.src(conf.assetsPaths)
         .pipe(cached('assets'))
-        .pipe(gulp.dest(conf.distPath))
+        .pipe(gulp.dest(conf.browserRoot))
         .pipe(livereload());
 });
 
@@ -168,13 +183,17 @@ gulp.task('watch', function() {
     gulp.watch(conf.assetsPaths, ['assets']);
     gulp.watch(conf.scriptsPaths, ['jscs', 'jshint']);
 
+    if (conf.test) {
+        gulp.watch(conf.testsPaths, ['build-tests']);
+    }
+
     bundle(true);
 
     return livereload.listen();
 });
 
 gulp.task('rsync', function() {
-    return gulp.src(conf.distPath)
+    return gulp.src(conf.browserRoot)
         .pipe(rsync({
             destination: '~/frontend',
             root: '.',
@@ -197,7 +216,7 @@ function bundle(watch) {
         cache: {},
         packageCache: {},
         insertGlobals: true,
-        fullPaths: true,
+        fullPaths: false,
         debug: inDev,
         noparse: ['angular', 'lodash']
     });
@@ -220,9 +239,8 @@ function rebundle(bundler) {
             gutil.log('Bundling error:', gutil.colors.red(err.toString()));
         })
         .pipe(source('bundle.js'))
-        .pipe(gulpif(!inDev, replace(__dirname, '.')))
         .pipe(ngAnnotate())
         .pipe(gulpif(!inDev, streamify(uglify())))
-        .pipe(gulp.dest(conf.distPath))
+        .pipe(gulp.dest(conf.browserRoot))
         .pipe(livereload());
 }

@@ -32,7 +32,8 @@ angular.module('groupeat.config', [
             })
             .preferredLanguage('fr')
             .fallbackLanguage(['fr'])
-            .useLocalStorage();
+            .useLocalStorage()
+            .useSanitizeValueStrategy('escaped');
     })
     .config($mdThemingProvider => {
         'ngInject';

@@ -23,12 +23,16 @@ export default class DocsController {
 
         this.authentication.logIn(this.email, this.password).then(() => {
             this.api.get('admin/docs').success(response => {
-                this.dom.open('text/html');
-                this.dom.write(response); // jshint ignore:line
-                this.dom.close();
+                if (this.$location.port() === 3474) { // Replacing the whole dom will get protractor to fail badly
+                    this.dom.body.innerHTML = response;
+                } else {
+                    this.dom.open('text/html');
+                    this.dom.write(response); // jshint ignore:line
+                    this.dom.close();
 
-                if (hash !== '') {
-                    this.dom.getElementById(hash).scrollIntoView();
+                    if (hash !== '') {
+                        this.dom.getElementById(hash).scrollIntoView();
+                    }
                 }
             });
         });

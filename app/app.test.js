@@ -1,8 +1,8 @@
-import angular from 'angular';
-import './config.test';
-import './modules';
+import angular from 'angular'
+import './config.test'
+import './modules'
 
 angular.module('groupeat', [
-    'groupeat.config.test',
-    'groupeat.modules'
-]);
+  'groupeat.config.test',
+  'groupeat.modules'
+])

@@ -23,8 +23,7 @@ test:
         background: true
     - sleep 5
   override:
-    - gulp jshint
-    - gulp jscs
+    - gulp standard
     - ./node_modules/protractor/bin/protractor protractor.conf.js
 
 deployment:

@@ -1,6 +1,6 @@
-import angular from 'angular';
-import './modules';
+import angular from 'angular'
+import './modules'
 
 angular.module('groupeat', [
-    'groupeat.modules'
-]);
+  'groupeat.modules'
+])

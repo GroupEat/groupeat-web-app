@@ -1,34 +1,37 @@
-var gulp = require('gulp')
+import gulp from 'gulp'
 
-var autoprefixer = require('gulp-autoprefixer')
-var babel = require('gulp-babel')
-var babelify = require('babelify')
-var browserify = require('browserify')
-var cached = require('gulp-cached')
-var concat = require('gulp-concat')
-var del = require('del')
-var exec = require('child_process').exec
-var footer = require('gulp-footer')
-var gulpif = require('gulp-if')
-var gutil = require('gulp-util')
-var livereload = require('gulp-livereload')
-var minifyCSS = require('gulp-minify-css')
-var minifyHTML = require('gulp-minify-html')
-var ngAnnotate = require('gulp-ng-annotate')
-var openBrowser = require('gulp-open')
-var plumber = require('gulp-plumber')
-var protractor = require('gulp-angular-protractor')
-var rsync = require('gulp-rsync')
-var runSequence = require('run-sequence')
-var sass = require('gulp-sass')
-var source = require('vinyl-source-stream')
-var standard = require('gulp-standard')
-var streamify = require('gulp-streamify')
-var superstatic = require('superstatic').server
-var uglify = require('gulp-uglify')
-var watchify = require('watchify')
+import autoprefixer from 'gulp-autoprefixer'
+import babel from 'gulp-babel'
+import babelify from 'babelify'
+import browserify from 'browserify'
+import cached from 'gulp-cached'
+import concat from 'gulp-concat'
+import del from 'del'
+import childProcess from 'child_process'
+const exec = childProcess.exec
+import footer from 'gulp-footer'
+import gulpif from 'gulp-if'
+import gutil from 'gulp-util'
+import livereload from 'gulp-livereload'
+import minifyCSS from 'gulp-minify-css'
+import minifyHTML from 'gulp-minify-html'
+import ngAnnotate from 'gulp-ng-annotate'
+import openBrowser from 'gulp-open'
+import plumber from 'gulp-plumber'
+import protractor from 'gulp-angular-protractor'
+import rsync from 'gulp-rsync'
+import runSequence from 'run-sequence'
+import sass from 'gulp-sass'
+import source from 'vinyl-source-stream'
+import standard from 'gulp-standard'
+import streamify from 'gulp-streamify'
+import {server as superstatic} from 'superstatic'
+import uglify from 'gulp-uglify'
+import watchify from 'watchify'
 
-var conf = {
+import superstaticConf from './superstatic.json'
+
+let conf = {
   browserRoot: 'dist/',
   mainEntryPath: './app/app.js',
   testEntryPath: './app/app.test.js',
@@ -48,23 +51,22 @@ var conf = {
 conf.browserEntryPoint = conf.browserRoot + 'index.html'
 conf.scriptsPaths = [].concat.apply(['app/**/*.js'], conf.testsPaths)
 conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath
-var superstaticConf = require('./superstatic.json')
 
-var inDev = !conf.production && !conf.staging
+let inDev = !conf.production && !conf.staging
 
 if (!inDev) {
-  var distantHost = conf.production ? conf.productionHost : conf.stagingHost
+  const distantHost = conf.production ? conf.productionHost : conf.stagingHost
 }
 
-gulp.task('default', ['scss', 'views', 'assets'], function (callback) {
-  return runSequence(
+gulp.task('default', ['scss', 'views', 'assets'], callback =>
+  runSequence(
     'inject-livereload',
     'watch',
     'openBrowser',
     callback)
-})
+)
 
-gulp.task('build', function (callback) {
+gulp.task('build', callback => {
   var tasks = ['scripts', 'scss', 'views', 'assets']
 
   if (conf.test) {
@@ -74,12 +76,10 @@ gulp.task('build', function (callback) {
   return runSequence('clean', tasks, callback)
 })
 
-gulp.task('clean', function () {
-  return del(conf.browserRoot)
-})
+gulp.task('clean', () => del(conf.browserRoot))
 
-gulp.task('pull', function () {
-  return exec('git pull npm install', function (err, stdout, stderr) {
+gulp.task('pull', () =>
+  exec('git pull npm install', (err, stdout, stderr) => {
     gutil.log(stdout)
     gutil.log(gutil.colors.red(stderr))
 
@@ -87,57 +87,53 @@ gulp.task('pull', function () {
       // do nothing
     }
   })
-})
+)
 
-gulp.task('test', function () {
-  superstatic(superstaticConf).listen(function () {
-    return gulp.src([])
+gulp.task('test', () =>
+  superstatic(superstaticConf).listen(() =>
+    gulp.src([])
       .pipe(protractor({
         debug: true,
         autoStartStopServer: true,
         configFile: './protractor.conf.js'
       }))
-      .on('error', function (e) {
-        console.log(e)
-      })
-  })
-})
+      .on('error', e => console.log(e))
+  )
+)
 
-gulp.task('openBrowser', function () {
-  return gulp.src(conf.browserEntryPoint)
+gulp.task('openBrowser', () =>
+  gulp.src(conf.browserEntryPoint)
     .pipe(openBrowser('', {
       url: conf.localHost
     }))
-})
+)
 
-gulp.task('inject-livereload', function () {
-  return gulp.src(conf.browserEntryPoint)
+gulp.task('inject-livereload', () =>
+  gulp.src(conf.browserEntryPoint)
     .pipe(footer('<script src="http://127.0.0.1:35729/livereload.js?ext=Chrome"></script>'))
     .pipe(gulp.dest(conf.browserRoot))
-})
+)
 
-gulp.task('standard', function () {
-  return gulp.src(conf.scriptsPaths)
+gulp.task('standard', () =>
+  gulp.src(conf.scriptsPaths)
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: true,
       breakOnWarning: true
     }))
-})
+)
 
-gulp.task('build-tests', function () {
-  return gulp.src(conf.testsPaths)
+gulp.task('build-tests', () =>
+  gulp.src(conf.testsPaths)
     .pipe(plumber())
     .pipe(babel())
     .pipe(gulp.dest(conf.es5testsRoot))
-})
+)
 
-gulp.task('scripts', ['standard'], function () {
-  return bundle(false)
-})
+gulp.task('scripts', ['standard'], () => bundle(false))
 
-gulp.task('scss', function () {
-  return gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
+gulp.task('scss', () =>
+  gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
     .pipe(gulpif(inDev, plumber()))
     .pipe(sass({sourceComments: !inDev ? false : 'map'}))
     .pipe(autoprefixer())
@@ -145,10 +141,10 @@ gulp.task('scss', function () {
     .pipe(concat('style.css'))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload())
-})
+)
 
-gulp.task('views', function () {
-  return gulp.src(conf.viewsPaths)
+gulp.task('views', () =>
+  gulp.src(conf.viewsPaths)
     .pipe(cached('views'))
     .pipe(gulpif(!inDev, minifyHTML({
       empty: true,
@@ -156,16 +152,16 @@ gulp.task('views', function () {
     })))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload())
-})
+)
 
-gulp.task('assets', function () {
-  return gulp.src(conf.assetsPaths)
+gulp.task('assets', () =>
+  gulp.src(conf.assetsPaths)
     .pipe(cached('assets'))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload())
-})
+)
 
-gulp.task('deploy', function (callback) {
+gulp.task('deploy', callback => {
   inDev = false
 
   return runSequence(
@@ -174,7 +170,7 @@ gulp.task('deploy', function (callback) {
     callback)
 })
 
-gulp.task('watch', function () {
+gulp.task('watch', () => {
   gulp.watch(conf.scssPaths, ['scss'])
   gulp.watch(conf.viewsPaths, ['views'])
   gulp.watch(conf.assetsPaths, ['assets'])
@@ -189,8 +185,8 @@ gulp.task('watch', function () {
   return livereload.listen()
 })
 
-gulp.task('rsync', function () {
-  return gulp.src(conf.browserRoot)
+gulp.task('rsync', () =>
+  gulp.src(conf.browserRoot)
     .pipe(rsync({
       destination: '~/frontend',
       root: '.',
@@ -206,10 +202,10 @@ gulp.task('rsync', function () {
       exclude: ['.DS_Store'],
       include: []
     }))
-})
+)
 
-function bundle (watch) {
-  var bundler = browserify(conf.entryPath, {
+const bundle = watch => {
+  let bundler = browserify(conf.entryPath, {
     cache: {},
     packageCache: {},
     insertGlobals: true,
@@ -220,16 +216,14 @@ function bundle (watch) {
 
   if (watch) {
     bundler = watchify(bundler)
-    bundler.on('update', function () {
-      return rebundle(bundler)
-    })
+    bundler.on('update', () => rebundle(bundler))
   }
 
   return rebundle(bundler)
 }
 
-function rebundle (bundler) {
-  return bundler
+const rebundle = bundler =>
+  bundler
     .transform(babelify)
     .bundle()
     .on('error', function (err) {
@@ -240,4 +234,3 @@ function rebundle (bundler) {
     .pipe(gulpif(!inDev, streamify(uglify())))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload())
-}

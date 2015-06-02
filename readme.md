@@ -4,7 +4,7 @@
 
  - Node.js
  - NPM
- - Gulp
+ - Gulp >= 3.9.0
 
 # Installing
 

@@ -19,6 +19,7 @@
  - `gulp` for building and watching (livereload)
  - `gulp build` to build only
 
- # Testing
+# Testing
 
- `gulp test`
+ - `gulp build --test`
+ - `gulp test`

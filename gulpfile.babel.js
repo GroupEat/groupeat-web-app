@@ -53,10 +53,7 @@ conf.scriptsPaths = [].concat.apply(['app/**/*.js'], conf.testsPaths)
 conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath
 
 let inDev = !conf.production && !conf.staging
-
-if (!inDev) {
-  const distantHost = conf.production ? conf.productionHost : conf.stagingHost
-}
+const distantHost = conf.production ? conf.productionHost : conf.stagingHost
 
 gulp.task('default', ['scss', 'views', 'assets'], callback =>
   runSequence(
@@ -67,7 +64,7 @@ gulp.task('default', ['scss', 'views', 'assets'], callback =>
 )
 
 gulp.task('build', callback => {
-  var tasks = ['scripts', 'scss', 'views', 'assets']
+  let tasks = ['scripts', 'scss', 'views', 'assets']
 
   if (conf.test) {
     tasks.push('build-tests')

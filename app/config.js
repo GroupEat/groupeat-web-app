@@ -9,13 +9,15 @@ import '../node_modules/angular-translate/dist/angular-translate-storage-local/a
 import '../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie'
 import '../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files'
 import 'angular-auto-validate'
+import 'angular-loading-bar'
 
 angular.module('groupeat.config', [
   'ngMaterial',
   'ngCookies',
   'LocalStorageModule',
   'pascalprecht.translate',
-  'jcs-autoValidate'
+  'jcs-autoValidate',
+  'angular-loading-bar'
 ])
   .config(localStorageServiceProvider => {
     'ngInject'
@@ -41,6 +43,12 @@ angular.module('groupeat.config', [
     $mdThemingProvider.theme('default')
       .primaryPalette('orange')
       .accentPalette('red')
+  })
+  .config(cfpLoadingBarProvider => {
+    'ngInject'
+
+    cfpLoadingBarProvider.includeSpinner = false
+    // cfpLoadingBarProvider.barColor = '#ff5252'
   })
   .run((validator, elementModifier, defaultErrorMessageResolver) => {
     'ngInject'

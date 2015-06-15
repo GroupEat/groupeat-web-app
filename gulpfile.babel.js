@@ -35,7 +35,11 @@ let conf = {
   browserRoot: 'dist/',
   mainEntryPath: './app/app.js',
   testEntryPath: './app/app.test.js',
-  scssPaths: ['scss/**/*.scss'],
+  scssPaths: [
+    './node_modules/angular-loading-bar/build/loading-bar.css',
+    './node_modules/angular-material/angular-material.css',
+    './scss/style.scss'
+  ],
   viewsPaths: ['app/**/*.html'],
   assetsPaths: ['assets/**/*'],
   testsPaths: ['tests/**/*.js'],
@@ -130,7 +134,7 @@ gulp.task('build-tests', () =>
 gulp.task('scripts', ['standard'], () => bundle(false))
 
 gulp.task('scss', () =>
-  gulp.src(['./node_modules/angular-material/angular-material.css', './scss/style.scss'])
+  gulp.src(conf.scssPaths)
     .pipe(gulpif(inDev, plumber()))
     .pipe(sass({sourceComments: !inDev ? false : 'map'}))
     .pipe(autoprefixer())
@@ -168,7 +172,7 @@ gulp.task('deploy', callback => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch(conf.scssPaths, ['scss'])
+  gulp.watch(['scss/**/*.scss'], ['scss'])
   gulp.watch(conf.viewsPaths, ['views'])
   gulp.watch(conf.assetsPaths, ['assets'])
   gulp.watch(conf.scriptsPaths, ['standard'])

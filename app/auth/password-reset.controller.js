@@ -12,7 +12,7 @@ export default class PasswordResetController {
   }
 
   resetPassword () {
-    this.api.post('api/auth/password', {
+    this.api.post('auth/password', {
       email: this.email,
       password: this.password,
       token: this.token

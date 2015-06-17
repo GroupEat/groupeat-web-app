@@ -48,7 +48,7 @@ angular.module('groupeat.config', [
     'ngInject'
 
     cfpLoadingBarProvider.includeSpinner = false
-    // cfpLoadingBarProvider.barColor = '#ff5252'
+    cfpLoadingBarProvider.latencyThreshold = 150
   })
   .run((validator, elementModifier, defaultErrorMessageResolver) => {
     'ngInject'

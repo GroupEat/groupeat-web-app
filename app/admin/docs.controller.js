@@ -1,10 +1,11 @@
 export default class DocsController {
-  constructor (api, $window, authentication, $location) {
+  constructor (api, $window, authentication, $location, cfpLoadingBar) {
     'ngInject'
 
     this.api = api
     this.authentication = authentication
     this.$location = $location
+    this.cfpLoadingBar = cfpLoadingBar
 
     this.dom = $window.document
 
@@ -26,13 +27,17 @@ export default class DocsController {
         if (this.$location.port() === 3474) { // Replacing the whole dom will get protractor to fail badly
           this.dom.body.innerHTML = response
         } else {
-          this.dom.open('text/html')
-          this.dom.write(response) // jshint ignore:line
-          this.dom.close()
+          this.cfpLoadingBar.complete()
 
-          if (hash !== '') {
-            this.dom.getElementById(hash).scrollIntoView()
-          }
+          setTimeout(() => {
+            this.dom.open('text/html')
+            this.dom.write(response) // jshint ignore:line
+            this.dom.close()
+
+            if (hash !== '') {
+              this.dom.getElementById(hash).scrollIntoView()
+            }
+          }, 250)
         }
       })
     })

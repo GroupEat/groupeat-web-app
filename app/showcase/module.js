@@ -1,3 +1,3 @@
-import angular from 'angular'
+import angular from 'angular';
 
-angular.module('groupeat.showcase', [])
+angular.module('groupeat.showcase', []);

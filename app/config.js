@@ -1,15 +1,15 @@
-import angular from 'angular'
-import 'angular-aria'
-import 'angular-animate'
-import 'angular-cookies'
-import 'angular-material'
-import 'angular-local-storage'
-import 'angular-translate'
-import '../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local'
-import '../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie'
-import '../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files'
-import 'angular-auto-validate'
-import 'angular-loading-bar'
+import angular from 'angular';
+import 'angular-aria';
+import 'angular-animate';
+import 'angular-cookies';
+import 'angular-material';
+import 'angular-local-storage';
+import 'angular-translate';
+import '../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
+import '../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
+import '../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
+import 'angular-auto-validate';
+import 'angular-loading-bar';
 
 angular.module('groupeat.config', [
   'ngMaterial',
@@ -20,12 +20,12 @@ angular.module('groupeat.config', [
   'angular-loading-bar'
 ])
   .config(localStorageServiceProvider => {
-    'ngInject'
+    'ngInject';
 
-    localStorageServiceProvider.setPrefix('groupeat-web-frontend')
+    localStorageServiceProvider.setPrefix('groupeat-frontend');
   })
   .config($translateProvider => {
-    'ngInject'
+    'ngInject';
 
     $translateProvider
       .useStaticFilesLoader({
@@ -35,26 +35,26 @@ angular.module('groupeat.config', [
       .preferredLanguage('fr')
       .fallbackLanguage(['fr'])
       .useLocalStorage()
-      .useSanitizeValueStrategy('escaped')
+      .useSanitizeValueStrategy('escaped');
   })
   .config($mdThemingProvider => {
-    'ngInject'
+    'ngInject';
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('orange')
-      .accentPalette('red')
+      .primaryPalette('green')
+      .accentPalette('red');
   })
   .config(cfpLoadingBarProvider => {
-    'ngInject'
+    'ngInject';
 
-    cfpLoadingBarProvider.includeSpinner = false
-    cfpLoadingBarProvider.latencyThreshold = 150
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 150;
   })
   .run((validator, elementModifier, defaultErrorMessageResolver) => {
-    'ngInject'
+    'ngInject';
 
-    validator.registerDomModifier(elementModifier.key, elementModifier)
-    validator.setDefaultElementModifier(elementModifier.key)
-    defaultErrorMessageResolver.setI18nFileRootPath('/translations')
-    defaultErrorMessageResolver.setCulture('fr-FR')
-  })
+    validator.registerDomModifier(elementModifier.key, elementModifier);
+    validator.setDefaultElementModifier(elementModifier.key);
+    defaultErrorMessageResolver.setI18nFileRootPath('/translations');
+    defaultErrorMessageResolver.setCulture('fr-FR');
+  });

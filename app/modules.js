@@ -1,11 +1,11 @@
-import angular from 'angular'
-import './config'
-import './routing'
-import './admin/module'
-import './auth/module'
-import './group-orders/module'
-import './showcase/module'
-import './support/module'
+import angular from 'angular';
+import './config';
+import './routing';
+import './admin/module';
+import './auth/module';
+import './group-orders/module';
+import './showcase/module';
+import './support/module';
 
 angular.module('groupeat.modules', [
   'groupeat.config',
@@ -15,4 +15,4 @@ angular.module('groupeat.modules', [
   'groupeat.groupOrders',
   'groupeat.showcase',
   'groupeat.support'
-])
+]);

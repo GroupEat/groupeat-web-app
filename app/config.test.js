@@ -1,15 +1,15 @@
-import angular from 'angular'
-import 'angular-mocks'
+import angular from 'angular';
+import 'angular-mocks';
 
 angular.module('groupeat.config.test', [
   'ngMockE2E'
 ])
   .run($httpBackend => {
-    'ngInject'
+    'ngInject';
 
-    const httpMethods = ['GET', 'POST', 'PUT', 'DELETE']
+    const httpMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
     httpMethods.map(method => {
-      $httpBackend.when(method, url => !url.includes('/api/')).passThrough()
-    })
-  })
+      $httpBackend.when(method, url => !url.includes('/api/')).passThrough();
+    });
+  });

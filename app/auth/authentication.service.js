@@ -1,38 +1,38 @@
 export default class Authentication {
-  constructor ($injector, $q, popup) {
-    'ngInject'
+  constructor($injector, $q, popup) {
+    'ngInject';
 
-    this.$injector = $injector
-    this.$q = $q
-    this.popup = popup
+    this.$injector = $injector;
+    this.$q = $q;
+    this.popup = popup;
 
-    this.token = ''
+    this.token = null;
   }
 
-  logIn (email, password) {
+  logIn(email, password) {
     return this.$injector.get('api').send('POST', 'auth/token', {
       email,
       password
     })
       .then(response => {
-        this.token = response.data.data.token
+        this.token = response.data.data.token;
       }, () => {
-        this.popup.error('authenticationError')
+        this.popup.error('authenticationError');
 
-        return this.$q.reject(false)
+        return this.$q.reject(false);
       }
-    )
+    );
   }
 
-  isLoggedIn () {
-    return this.token != null
+  isLoggedIn() {
+    return this.token !== null;
   }
 
-  getToken () {
-    return this.token
+  getToken() {
+    return this.token;
   }
 
-  setToken (token) {
-    this.token = token
+  setToken(token) {
+    this.token = token;
   }
 }

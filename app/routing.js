@@ -1,17 +1,17 @@
-import angular from 'angular'
-import 'angular-route'
+import angular from 'angular';
+import 'angular-route';
 
 angular.module('groupeat.routing', [
   'ngRoute'
 ])
   .config($locationProvider => {
-    'ngInject'
+    'ngInject';
 
-    $locationProvider.html5Mode(true)
-    $locationProvider.hashPrefix('!')
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
   })
   .config($routeProvider => {
-    'ngInject'
+    'ngInject';
 
     $routeProvider
       .when('/', {
@@ -30,7 +30,13 @@ angular.module('groupeat.routing', [
       .when('/groupOrders/:groupOrderId/confirm', {
         templateUrl: '/group-orders/confirm.html'
       })
+      .when('/logIn', {
+        templateUrl: '/auth/log-in.html'
+      })
+      .when('/dashboard', {
+        templateUrl: '/restaurants/dashboard.html'
+      })
       .otherwise({
         redirectTo: '/'
-      })
-  })
+      });
+  });

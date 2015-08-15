@@ -10,15 +10,17 @@
 
   "resetPassword": "Réinitialiser votre mot de passe",
 
-  "resetPasswordSuccess": "Le mot de passe a été réinitialisé avec succès !",
-  "badPassword": "Les mots de passe doivent avoir au moins six caractères et doivent être identiques.",
-  "noUserForPasswordResetToken": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail.",
-  "invalidPasswordResetToken": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
-
   "activationSuccessTitle": "Activation de compte",
   "activationSuccess": "Merci d'avoir activé votre compte. Vous pouvez désormais utiliser pleinement l'application !",
   "activationErrorTitle": "Problème d'activation",
   "activationError": "Aucun utilisateur ne correspond à ce jeton",
+
+  "logInTitle": "Connexion à votre compte",
+
+  "resetPasswordSuccess": "Le mot de passe a été réinitialisé avec succès !",
+  "badPassword": "Les mots de passe doivent avoir au moins six caractères et doivent être identiques.",
+  "noUserForPasswordResetToken": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail.",
+  "invalidPasswordResetToken": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
 
   "confirmGroupOrderTitle": "Confirmer la commande",
   "confirmGroupOrderPlaceholder": "Sélectionner l'heure du début de livraison prévue",

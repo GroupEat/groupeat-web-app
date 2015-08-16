@@ -163,7 +163,10 @@ gulp.task('scripts', () => bundle(false));
 
 gulp.task('scss', () =>
   gulp.src(conf.scssPaths)
-    .pipe(gulpif(inDev, plumber()))
+    .pipe(gulpif(inDev, plumber(function(error) {
+      gutil.log(gutil.colors.red(error.message));
+      this.emit('end');
+    })))
     .pipe(sass({sourceComments: !inDev ? false : 'map'}))
     .pipe(autoprefixer())
     .pipe(gulpif(!inDev, minifyCSS({keepSpecialComments: 0})))

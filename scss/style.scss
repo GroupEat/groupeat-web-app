@@ -1,5 +1,4 @@
-$body-background-color: #2c2c2c;
-$loading-bar-color: #e34a4c;
+@import 'variables';
 
 body {
     background-color: $body-background-color;
@@ -68,4 +67,22 @@ md-select-menu {
     -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px;
     box-shadow: $loading-bar-color 1px 0 6px 1px;
   }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+md-sidenav.md-locked-open.md-sidenav-left {
+  width: $left-sidenav-width;
+  min-width: $left-sidenav-width;
+  max-width: $left-sidenav-width;
+}
+
+.material-icons {
+  vertical-align: middle;
+}
+
+#profile-menu {
+  margin: 0;
 }

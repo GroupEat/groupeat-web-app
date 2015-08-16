@@ -4,4 +4,4 @@ exports.config = {
     specs: ['dist-tests/*.js'],
     maxSessions: 1,
     framework: 'jasmine2'
-}
+};

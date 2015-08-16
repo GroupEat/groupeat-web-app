@@ -37,7 +37,8 @@ angular.module('groupeat.routing', [
       })
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'restaurants/dashboard.html'
+        templateUrl: 'restaurants/dashboard.html',
+        controller: 'DashboardController as vm'
       });
 
     $urlRouterProvider.otherwise('/');

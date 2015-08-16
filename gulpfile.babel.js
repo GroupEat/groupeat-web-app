@@ -92,8 +92,9 @@ const bundle = watch => {
   return rebundle(bundler);
 };
 
-gulp.task('default', ['scss', 'views', 'assets', 'fonts'], callback =>
+gulp.task('default', ['scss', 'views', 'assets'], callback =>
   runSequence(
+    'fonts',
     'inject-livereload',
     'watch',
     'openBrowser',
@@ -101,13 +102,13 @@ gulp.task('default', ['scss', 'views', 'assets', 'fonts'], callback =>
 );
 
 gulp.task('build', callback => {
-  let tasks = ['scripts', 'scss', 'views', 'assets', 'fonts'];
+  let tasks = ['scripts', 'scss', 'views', 'assets'];
 
   if (conf.test) {
     tasks.push('build-tests');
   }
 
-  return runSequence('clean', tasks, callback);
+  return runSequence('clean', tasks, 'fonts', callback);
 });
 
 gulp.task('clean', () => del(conf.browserRoot));

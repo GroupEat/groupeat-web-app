@@ -1,6 +1,4 @@
 {
-  "name": "groupeat",
-  "author": "Thibault Derousseaux tib.dex@gmail.com",
   "private": true,
   "dependencies": {
     "airbnb-style": "^2.0.0",

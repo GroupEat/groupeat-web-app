@@ -38,10 +38,14 @@ let conf = {
   scssPaths: [
     './node_modules/angular-loading-bar/build/loading-bar.css',
     './node_modules/angular-material/angular-material.css',
+    './node_modules/material-design-icons-iconfont/dist/material-design-icons.css',
     './scss/style.scss'
   ],
   viewsPaths: ['app/**/*.html'],
   assetsPaths: ['assets/**/*'],
+  fontsPaths: [
+    './node_modules/material-design-icons-iconfont/dist/fonts/*'
+  ],
   testsPaths: ['tests/**/*.js'],
   es5testsRoot: 'dist-tests/',
   localHost: 'http://groupeat.dev',
@@ -88,7 +92,7 @@ const bundle = watch => {
   return rebundle(bundler);
 };
 
-gulp.task('default', ['scss', 'views', 'assets'], callback =>
+gulp.task('default', ['scss', 'views', 'assets', 'fonts'], callback =>
   runSequence(
     'inject-livereload',
     'watch',
@@ -97,7 +101,7 @@ gulp.task('default', ['scss', 'views', 'assets'], callback =>
 );
 
 gulp.task('build', callback => {
-  let tasks = ['scripts', 'scss', 'views', 'assets'];
+  let tasks = ['scripts', 'scss', 'views', 'assets', 'fonts'];
 
   if (conf.test) {
     tasks.push('build-tests');
@@ -184,6 +188,11 @@ gulp.task('assets', () =>
     .pipe(cached('assets'))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload())
+);
+
+gulp.task('fonts', () =>
+  gulp.src(conf.fontsPaths)
+    .pipe(gulp.dest(conf.browserRoot + '/fonts'))
 );
 
 gulp.task('deploy', callback => {

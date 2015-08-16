@@ -40,6 +40,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.5",
     "lodash": "^3.9.3",
+    "material-design-icons-iconfont": "^2.0.3",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2"

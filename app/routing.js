@@ -1,8 +1,8 @@
 import angular from 'angular';
-import 'angular-route';
+import 'angular-ui-router';
 
 angular.module('groupeat.routing', [
-  'ngRoute'
+  'ui.router'
 ])
   .config($locationProvider => {
     'ngInject';
@@ -10,33 +10,35 @@ angular.module('groupeat.routing', [
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
   })
-  .config($routeProvider => {
+  .config(($stateProvider, $urlRouterProvider) => {
     'ngInject';
 
-    $routeProvider
-      .when('/', {
-        templateUrl: '/showcase/showcase.html'
+    $stateProvider
+      .state('showcase', {
+        url: '/',
+        templateUrl: 'showcase/showcase.html'
       })
-      .when('/docs', {
-        templateUrl: '/admin/login.html'
+      .state('docs', {
+        url: '/docs',
+        templateUrl: 'admin/login.html'
       })
-      .when('/auth/activate', {
-        templateUrl: '/showcase/showcase.html',
+      .state('activate', {
+        url: '/auth/activate',
+        templateUrl: 'showcase/showcase.html',
         controller: 'ActivateCustomerController'
       })
-      .when('/auth/password/reset', {
-        templateUrl: '/auth/password-reset.html'
+      .state('passwordReset', {
+        url: '/auth/password/reset',
+        templateUrl: 'auth/password-reset.html'
       })
-      .when('/groupOrders/:groupOrderId/confirm', {
-        templateUrl: '/group-orders/confirm.html'
+      .state('confirm', {
+        url: '/groupOrders/:groupOrderId/confirm',
+        templateUrl: 'group-orders/confirm.html'
       })
-      .when('/logIn', {
-        templateUrl: '/auth/log-in.html'
-      })
-      .when('/dashboard', {
-        templateUrl: '/restaurants/dashboard.html'
-      })
-      .otherwise({
-        redirectTo: '/'
+      .state('dashboard', {
+        url: '/dashboard',
+        templateUrl: 'restaurants/dashboard.html'
       });
+
+    $urlRouterProvider.otherwise('/');
   });

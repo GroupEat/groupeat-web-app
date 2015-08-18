@@ -1,5 +1,4 @@
-<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-            class="md-sidenav-left">
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-sidenav-left">
   <md-toolbar class="md-accent">
     <md-button layout="row" layout-align="center center" class="md-toolbar-tools">
       <h1>GroupEat</h1>
@@ -8,7 +7,7 @@
   <md-button ng-repeat-start="item in vm.menuItems" layout-align="center center">
     <div class="md-tile-content capitalize">
       <i class="material-icons">face</i>
-      action
+      {{ item }}
     </div>
   </md-button>
   <md-divider ng-repeat-end></md-divider>
@@ -19,10 +18,13 @@
     <md-button hide-sm class="toolbar-button">
       <i class="material-icons">notifications</i>
     </md-button>
+    <md-button hide-gt-sm ng-click="vm.toggleSidenav()">
+      <i class="material-icons">menu</i>
+    </md-button>
     <md-menu id="profile-menu">
-      <md-button>
-        <i class="material-icons">keyboard_arrow_down</i>
+      <md-button ng-click="$mdOpenMenu()">
         <span class="capitalize">Allo Pizza</span>
+        <i class="material-icons">keyboard_arrow_down</i>
       </md-button>
       <md-menu-content>
         <md-menu-item><md-button ui-sref="home.profile">Profile</md-button></md-menu-item>

@@ -212,7 +212,6 @@ gulp.task('watch', () => {
   gulp.watch(['scss/**/*.scss'], ['scss']);
   gulp.watch(conf.viewsPaths, ['views']);
   gulp.watch(conf.assetsPaths, ['assets']);
-  gulp.watch(conf.scriptsPaths, ['eslint']);
 
   if (conf.test) {
     gulp.watch(conf.testsPaths, ['build-tests']);

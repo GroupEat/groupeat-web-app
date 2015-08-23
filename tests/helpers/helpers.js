@@ -1,9 +1,42 @@
-const apiUrl = path => `/api/${path}`;
+/* global browser by element expect it */
+export const apiUrl = path => `/api/${path}`;
 
-const translate = key => {
+export const translate = key => {
   const translations = require('../../assets/translations/fr.json');
 
   return translations[key];
 };
 
-export { apiUrl, translate };
+export const logOut = () => {
+  browser.get('logOut');
+};
+
+export const shouldRequireAuthentication = testedUrl => {
+  it('should require authentication', () => {
+    browser.get(testedUrl);
+
+    browser.getLocationAbsUrl().then(url =>
+        expect(url).toBe(`/logIn`)
+    );
+  });
+};
+
+export const browseAuthenticated = (testedUrl, backend, userType, callback) => {
+  backend.whenPUT(apiUrl('auth/token')).respond(JSON.stringify({data: {
+    id: 1,
+    type: userType,
+    token: 'uselessToken'
+  }}));
+
+  browser.get('logIn');
+
+  const form = element(by.name('logInForm'));
+
+  form.element(by.name('email')).clear().sendKeys('useless@email.fr');
+  form.element(by.name('password')).clear().sendKeys('password');
+  form.element(by.tagName('button')).click();
+
+  browser.get(testedUrl);
+
+  callback();
+};

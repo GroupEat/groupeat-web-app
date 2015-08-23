@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
 export default class ConfirmationController {
-  constructor(api, authentication, $stateParams, popup) {
+  constructor(api, auth, $stateParams, popup) {
     'ngInject';
 
     this.preparationTimeInMinutes = 45; // TODO: sync with API value
     this.stepInMinutes = 5;
 
     this.api = api;
-    this.authentication = authentication;
+    this.auth = auth;
     this.popup = popup;
 
     this.token = $stateParams.token;
@@ -17,7 +17,7 @@ export default class ConfirmationController {
     this.availableTimes = {};
     this.preparedAt = undefined;
 
-    this.authentication.setToken(this.token);
+    this.auth.setToken(this.token);
 
     this.api.get(`groupOrders/${this.groupOrderId}`)
       .success(response => {

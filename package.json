@@ -5,11 +5,11 @@
     "angular": "^1.4.1",
     "angular-animate": "^1.4.1",
     "angular-aria": "^1.4.1",
-    "angular-auto-validate": "jonsamwell/angular-auto-validate#4638fd0",
+    "angular-auto-validate": "^1.18.6",
     "angular-capitalize-filter": "^2.1.0",
     "angular-cookies": "^1.4.1",
-    "angular-input-match": "thesharpieone/angular-input-match#2937184",
-    "angular-loading-bar": "^0.7.1",
+    "angular-validation-match": "^1.5.1",
+    "angular-loading-bar": "^0.8.0",
     "angular-local-storage": "^0.1.5",
     "angular-material": "^0.10.0",
     "angular-translate": "^2.7.2",
@@ -48,7 +48,7 @@
     "gulp-angular-protractor": "0.0.2",
     "gulp-babel": "^5.1.0",
     "httpbackend": "^1.2.0",
-    "protractor": "^2.0.0",
+    "protractor": "^2.1.0",
     "superstatic": "^2.2.0"
   },
   "browser": {

@@ -2,14 +2,14 @@
 describe('homepage', () => {
   const URL = '';
 
-  it('should be on homepage', () => {
+  it('should be accessible', () => {
     browser.get(URL);
     browser.getLocationAbsUrl().then(url =>
       expect(url).toBe('/')
     );
   });
 
-  it('should have a showcase logo', () => {
+  it('should display a logo', () => {
     browser.get(URL);
     const showcaseLogo = element(by.id('showcase-logo'));
     expect(showcaseLogo.isPresent()).toBe(true);

@@ -15,7 +15,7 @@
   "activationErrorTitle": "Problème d'activation",
   "activationError": "Aucun utilisateur ne correspond à ce jeton",
 
-  "logInTitle": "Connexion à votre compte",
+  "logInFormTitle": "Connexion à votre compte",
 
   "resetPasswordSuccess": "Le mot de passe a été réinitialisé avec succès !",
   "badPassword": "Les mots de passe doivent avoir au moins six caractères et doivent être identiques.",
@@ -26,7 +26,5 @@
   "confirmGroupOrderPlaceholder": "Sélectionner l'heure du début de livraison prévue",
   "confirmGroupOrderSuccess": "Merci d'avoir confirmé la commande groupée !",
 
-  "authenticationError": "Mauvais identifiants, vous n'avez pas pu être connecté...",
-
-  "adminLogin": "Zone administrateur"
+  "authenticationError": "Mauvais identifiants, vous n'avez pas pu être connecté..."
 }

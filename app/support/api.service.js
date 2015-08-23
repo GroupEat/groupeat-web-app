@@ -1,9 +1,9 @@
 export default class Api {
-  constructor($http, authentication) {
+  constructor(auth, $http) {
     'ngInject';
 
+    this.auth = auth;
     this.$http = $http;
-    this.authentication = authentication;
   }
 
   get(url) {
@@ -39,8 +39,8 @@ export default class Api {
       request.data = data;
     }
 
-    if (this.authentication.isLoggedIn()) {
-      request.headers.Authorization = `Bearer ${this.authentication.getToken()}`;
+    if (this.auth.isLoggedIn()) {
+      request.headers.Authorization = `Bearer ${this.auth.getToken()}`;
     }
 
     return this.$http(request);

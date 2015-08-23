@@ -45,15 +45,8 @@ export default class Auth {
   }
 
   needToLogInFor(state) {
-    if (!_.has(state, 'data.authenticated') || state.data.authenticated === false) {
-      return false;
-    }
-
-    if (_.has(state, 'data.authorizedUser') && state.data.authorizedUser !== this.getUserType()) {
-      return true;
-    }
-
-    return false;
+    return (_.has(state, 'data.authenticated') && state.data.authenticated === true)
+      || (_.has(state, 'data.authorizedUser') && state.data.authorizedUser !== this.getUserType());
   }
 
   isLoggedIn() {

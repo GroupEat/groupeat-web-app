@@ -20,7 +20,7 @@ test:
     - sleep 5
   override:
     - gulp eslint
-    - ./node_modules/protractor/bin/protractor protractor.conf.js
+    - ./node_modules/protractor/bin/protractor
 
 deployment:
   production:

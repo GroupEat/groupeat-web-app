@@ -23,12 +23,16 @@
     </md-button>
     <md-menu id="profile-menu">
       <md-button ng-click="$mdOpenMenu()">
-        <span class="capitalize">Allo Pizza</span>
+        <span hide-sm class="capitalize">{{ vm.restaurant.name }}</span>
         <i class="material-icons">keyboard_arrow_down</i>
       </md-button>
-      <md-menu-content>
-        <md-menu-item><md-button ui-sref="home.profile">Profile</md-button></md-menu-item>
-        <md-menu-item><md-button ui-sref="home.dashboard">Log out</md-button></md-menu-item>
+      <md-menu-content id="profile-menu-content">
+        <md-menu-item>
+          <md-button ui-sref="logOut">
+            <i class="material-icons">exit_to_app</i>
+            {{ 'logOut' | translate }}
+          </md-button>
+        </md-menu-item>
       </md-menu-content>
     </md-menu>
   </md-toolbar>

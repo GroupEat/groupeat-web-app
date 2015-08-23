@@ -87,3 +87,9 @@ md-sidenav.md-sidenav-left {
   margin: 0;
   background-color: $primary-color;
 }
+
+#profile-menu-content {
+  .md-button {
+    display: block;
+  }
+}

@@ -1,6 +1,7 @@
 {
   "confirm": "confirmer",
   "logIn": "se connecter",
+  "logOut": "déconnexion",
 
   "errorPopupTitle": "Oops ...",
 

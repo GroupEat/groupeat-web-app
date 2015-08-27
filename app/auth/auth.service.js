@@ -23,10 +23,6 @@ export default class Auth {
   }
 
   logIn(email, password) {
-    if (this.isLoggedIn()) {
-      return this.$q.when({});
-    }
-
     return this.$injector.get('api').send('PUT', 'auth/token', {
       email,
       password

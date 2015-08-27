@@ -30,8 +30,11 @@ body {
 }
 
 md-card {
-    margin-top: 10em;
     background-color: #fff;
+}
+
+md-card.main {
+  margin-top: 10em;
 }
 
 md-content.md-default-theme {

@@ -18,19 +18,23 @@ angular.module('groupeat.auth', ['validation.match'])
     $stateProvider
       .state('activate', {
         url: '/auth/activate',
-        templateUrl: 'auth/activate.html'
+        templateUrl: 'auth/activate.html',
+        controller: 'ActivateCustomerController as vm'
       })
       .state('logIn', {
         url: '/logIn',
-        templateUrl: 'auth/log-in.html'
+        templateUrl: 'auth/log-in.html',
+        controller: 'LogInController as vm'
       })
       .state('logOut', {
         url: '/logOut',
-        templateUrl: 'auth/log-out.html'
+        templateUrl: 'auth/log-out.html',
+        controller: 'LogOutController as vm'
       })
       .state('passwordReset', {
         url: '/auth/password/reset',
-        templateUrl: 'auth/password-reset.html'
+        templateUrl: 'auth/password-reset.html',
+        controller: 'PasswordResetController as vm'
       });
   })
   .run(($rootScope, auth) => {

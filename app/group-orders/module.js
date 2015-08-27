@@ -9,6 +9,7 @@ angular.module('groupeat.groupOrders', [])
     $stateProvider
       .state('confirm', {
         url: '/groupOrders/:groupOrderId/confirm',
-        templateUrl: 'group-orders/confirm.html'
+        templateUrl: 'group-orders/confirm.html',
+        controller: 'ConfirmationController as vm'
       });
   });

@@ -77,9 +77,15 @@ md-select-menu {
 }
 
 md-sidenav.md-sidenav-left {
+  text-align: center;
+
   width: $left-sidenav-width;
   min-width: $left-sidenav-width;
   max-width: $left-sidenav-width;
+
+  a {
+    margin: auto;
+  }
 }
 
 .material-icons {

@@ -63,6 +63,16 @@ angular.module('groupeat.config', [
 
     $urlRouterProvider.otherwise('/');
   })
+  .run(($rootScope, $state) => {
+    'ngInject';
+
+    $rootScope.$on('$stateChangeStart', (event, to, params) => {
+      if (to.redirectTo) {
+        event.preventDefault();
+        $state.go(to.redirectTo, params);
+      }
+    });
+  })
   .run((validator, elementModifier, defaultErrorMessageResolver) => {
     'ngInject';
 

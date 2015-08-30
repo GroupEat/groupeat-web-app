@@ -6,7 +6,16 @@ export default class DashboardController {
     this.$mdSidenav = $mdSidenav;
     this.restaurant = restaurant;
 
-    this.menuItems = ['foo', 'bar', 'baz'];
+    this.menuItems = [
+      {
+        state: 'dashboard.currentOrders',
+        icon: 'schedule'
+      },
+      {
+        state: 'dashboard.pushExternalOrder',
+        icon: 'group_add'
+      }
+    ];
   }
 
   toggleSidenav() {

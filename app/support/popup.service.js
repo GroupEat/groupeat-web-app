@@ -10,6 +10,13 @@ export default class Popup {
     this.makePopup(dialog => dialog.title(this.translate(title)).content(this.translate(content)));
   }
 
+  fromResponse(response) {
+    const data = response.data.data;
+    const content = data.message || data.errorKey;
+
+    this.makePopup(dialog => dialog.title(this.translate('errorPopupTitle')).content(content));
+  }
+
   error(content) {
     this.makePopup(dialog => dialog.title(this.translate('errorPopupTitle')).content(this.translate(content)));
   }

@@ -50,6 +50,14 @@ md-select-menu {
     background-color: #ffffff;
 }
 
+#dashboard-content {
+  background-color: $body-background-color !important;
+
+  md-toolbar {
+    background-color: grey;
+  }
+}
+
 .groupeat-form {
     padding: 8px;
 }
@@ -70,10 +78,6 @@ md-select-menu {
     -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px;
     box-shadow: $loading-bar-color 1px 0 6px 1px;
   }
-}
-
-.capitalize {
-  text-transform: capitalize;
 }
 
 md-sidenav.md-sidenav-left {

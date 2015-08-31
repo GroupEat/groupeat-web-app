@@ -19,6 +19,10 @@
  - `gulp` for building and watching (livereload)
  - `gulp build` to build only
 
+# Contributing
+
+Follow as much as possible these popular [Angular](https://github.com/johnpapa/angular-styleguide) and [JavaScript](https://github.com/airbnb/javascript) style guides.
+
 # Testing
 
  - `gulp build --test`

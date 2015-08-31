@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const ENDPOINT = 'restaurants';
 
-export default class Restaurants {
+export default class RestaurantsService {
   constructor(api) {
     'ngInject';
 

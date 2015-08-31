@@ -1,4 +1,4 @@
-export default class ElementModifier {
+export default class ElementModifierService {
   constructor($filter, $window) {
     'ngInject';
 

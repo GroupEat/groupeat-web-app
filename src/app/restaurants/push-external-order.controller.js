@@ -2,7 +2,7 @@
 import _ from 'lodash';
 
 export default class PushExternalOrderController {
-  constructor($q, $state, auth, popup, restaurants, productFormats) {
+  constructor($q, $state, auth, popup, restaurantsService, productFormats) {
     'ngInject';
 
     this.addressAutocompleter = new google.maps.places.AutocompleteService();
@@ -12,7 +12,7 @@ export default class PushExternalOrderController {
     this.$state = $state;
     this.auth = auth;
     this.popup = popup;
-    this.restaurants = restaurants;
+    this.restaurantsService = restaurantsService;
     this.availableProductFormats = productFormats;
 
     this.customer = {};
@@ -112,7 +112,7 @@ export default class PushExternalOrderController {
         longitude: place.geometry.location.K
       };
 
-      this.restaurants.pushExternalOrder(
+      this.restaurantsService.pushExternalOrder(
         this.auth.getUserId(),
         customer,
         productFormats,

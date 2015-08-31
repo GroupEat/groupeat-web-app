@@ -2,7 +2,7 @@ import angular from 'angular';
 import ConfirmationController from './confirmation.controller.js';
 
 angular.module('groupeat.groupOrders', [])
-  .controller('ConfirmationController', ConfirmationController)
+  .controller(ConfirmationController.name, ConfirmationController)
   .config($stateProvider => {
     'ngInject';
 
@@ -10,6 +10,6 @@ angular.module('groupeat.groupOrders', [])
       .state('confirm', {
         url: '/groupOrders/:groupOrderId/confirm',
         templateUrl: 'group-orders/confirm.html',
-        controller: 'ConfirmationController as vm'
+        controller: `${ConfirmationController.name} as vm`
       });
   });

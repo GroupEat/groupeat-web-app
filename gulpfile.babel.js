@@ -33,20 +33,20 @@ import superstaticConf from './superstatic.json';
 
 let conf = {
   browserRoot: 'dist/',
-  mainEntryPath: './app/app.js',
-  testEntryPath: './app/app.test.js',
+  mainEntryPath: './src/app/app.js',
+  testEntryPath: './src/app/app.test.js',
   scssPaths: [
     './node_modules/angular-loading-bar/build/loading-bar.css',
     './node_modules/angular-material/angular-material.css',
     './node_modules/material-design-icons-iconfont/dist/material-design-icons.css',
-    './scss/style.scss'
+    './src/scss/style.scss'
   ],
-  viewsPaths: ['app/**/*.html'],
-  assetsPaths: ['assets/**/*'],
+  viewsPaths: ['src/app/**/*.html'],
+  assetsPaths: ['src/assets/**/*'],
   fontsPaths: [
     './node_modules/material-design-icons-iconfont/dist/fonts/*'
   ],
-  testsPaths: ['tests/**/*.js'],
+  testsPaths: ['src/tests/**/*.js'],
   es5testsRoot: 'dist-tests/',
   localHost: 'http://groupeat.dev',
   productionHost: 'groupeat.fr',
@@ -57,7 +57,7 @@ let conf = {
 };
 
 conf.browserEntryPoint = conf.browserRoot + 'index.html';
-conf.scriptsPaths = [].concat.apply(['app/**/*.js'], conf.testsPaths);
+conf.scriptsPaths = [].concat.apply(['src/app/**/*.js'], conf.testsPaths);
 conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath;
 
 let inDev = !(conf.production || conf.staging);
@@ -209,7 +209,7 @@ gulp.task('deploy', callback => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['scss/**/*.scss'], ['scss']);
+  gulp.watch(['src/scss/**/*.scss'], ['scss']);
   gulp.watch(conf.viewsPaths, ['views']);
   gulp.watch(conf.assetsPaths, ['assets']);
 

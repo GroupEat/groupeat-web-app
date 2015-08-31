@@ -8,9 +8,9 @@ import 'angular-local-storage';
 import 'angular-material';
 import 'angular-translate';
 import 'angular-ui-router';
-import '../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
-import '../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
-import '../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
+import '../../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
+import '../../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
+import '../../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
 
 angular.module('groupeat.config', [
   'angular-loading-bar',

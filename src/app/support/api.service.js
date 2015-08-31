@@ -1,4 +1,4 @@
-export default class Api {
+export default class ApiService {
   constructor(auth, $http) {
     'ngInject';
 

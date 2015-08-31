@@ -3,7 +3,7 @@ import _ from 'lodash';
 const LOCAL_STORAGE_TOKEN_KEY = 'AUTH_TOKEN';
 const LOCAL_STORAGE_USER_KEY = 'AUTH_USER';
 
-export default class Auth {
+export default class auth {
   constructor($injector, $q, $state, popup, localStorageService) {
     'ngInject';
 

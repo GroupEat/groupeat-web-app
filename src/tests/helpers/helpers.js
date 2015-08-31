@@ -2,7 +2,7 @@
 export const apiUrl = path => `/api/${path}`;
 
 export const translate = key => {
-  const translations = require('../../assets/translations/fr.json');
+  const translations = require('../../src/assets/translations/fr.json');
 
   return translations[key];
 };

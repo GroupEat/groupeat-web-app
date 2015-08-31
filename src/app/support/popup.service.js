@@ -1,4 +1,4 @@
-export default class Popup {
+export default class PopupService {
   constructor($mdDialog, $filter) {
     'ngInject';
 

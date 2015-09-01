@@ -1,5 +1,5 @@
 import angular from 'angular';
-import 'angular-input-match';
+import 'angular-validation-match';
 import ActivateCustomerController from './activate-customer.controller.js';
 import AuthService from './auth.service.js';
 import LogInController from './log-in.controller.js';

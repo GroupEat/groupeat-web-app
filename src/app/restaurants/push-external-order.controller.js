@@ -120,7 +120,7 @@ export default class PushExternalOrderController {
         this.comment
       )
         .then(() => {
-          this.$state.go('dashboard.currentOrders');
+          this.$state.go('dashboard.orders');
         }, response => {
           this.popup.fromResponse(response);
         });

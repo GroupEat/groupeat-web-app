@@ -8,8 +8,8 @@ export default class DashboardController {
 
     this.menuItems = [
       {
-        state: 'dashboard.currentOrders',
-        icon: 'schedule'
+        state: 'dashboard.orders',
+        icon: 'history'
       },
       {
         state: 'dashboard.pushExternalOrder',

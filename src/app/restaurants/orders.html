@@ -1,0 +1,37 @@
+<md-card id="orders-card">
+  <div class="table-responsive-vertical">
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>{{ 'id' | translate  | capitalize:'first' }}</th>
+        <th>{{ 'productFormatsCount' | translate  | capitalize:'first' }}</th>
+        <th>{{ 'discountRate' | translate  | capitalize:'first' }}</th>
+        <th>{{ 'totalDiscountedPrice' | translate  | capitalize:'first' }}</th>
+        <th>{{ 'createdAt' | translate | capitalize:'first' }}</th>
+        <th>{{ 'endingAt' | translate | capitalize:'first' }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="groupOrder in vm.groupOrders">
+        <td data-title="{{ 'id' | translate | capitalize:'first' }}">
+          {{ groupOrder.id }}
+        </td>
+        <td data-title="{{ 'productFormatsCount' | translate | capitalize:'first' }}">
+          {{ groupOrder.productFormatsCount }}
+        </td>
+        <td data-title="{{ 'discountRate' | translate | capitalize:'first' }}">
+          {{ groupOrder.discountRate }} %</td>
+        <td data-title="{{ 'totalDiscountedPrice' | translate | capitalize:'first' }}">
+          {{ groupOrder.totalDiscountedPrice.toString() }}
+        </td>
+        <td data-title="{{ 'createdAt' | translate | capitalize:'first' }}">
+          <span am-time-ago="groupOrder.createdAt"></span>
+        </td>
+        <td data-title="{{ 'endingAt' | translate | capitalize:'first' }}">
+          <span am-time-ago="groupOrder.endingAt"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</md-card>

@@ -8,12 +8,15 @@ import 'angular-local-storage';
 import 'angular-material';
 import 'angular-translate';
 import 'angular-ui-router';
+import 'angular-moment';
 import '../../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
 import '../../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
 import '../../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
+import '../../node_modules/moment/locale/fr';
 
 angular.module('groupeat.config', [
   'angular-loading-bar',
+  'angularMoment',
   'jcs-autoValidate',
   'LocalStorageModule',
   'ngCookies',
@@ -62,6 +65,11 @@ angular.module('groupeat.config', [
     'ngInject';
 
     $urlRouterProvider.otherwise('/');
+  })
+  .run(amMoment => {
+    'ngInject';
+
+    amMoment.changeLocale('fr');
   })
   .run(($rootScope, $state) => {
     'ngInject';

@@ -1,12 +1,12 @@
 import angular from 'angular';
-import CurrentOrdersController from './current-orders.controller.js';
+import OrdersController from './orders.controller.js';
 import DashboardController from './dashboard.controller.js';
 import PushExternalOrderController from './push-external-order.controller.js';
 import RestaurantsService from './restaurants.service.js';
 import * as userTypes from '../auth/user-types.js';
 
 angular.module('groupeat.restaurants', [])
-  .controller(CurrentOrdersController.name, CurrentOrdersController)
+  .controller(OrdersController.name, OrdersController)
   .controller(DashboardController.name, DashboardController)
   .controller(PushExternalOrderController.name, PushExternalOrderController)
   .service('restaurantsService', RestaurantsService)
@@ -28,10 +28,15 @@ angular.module('groupeat.restaurants', [])
           }
         }
       })
-      .state('dashboard.currentOrders', {
+      .state('dashboard.orders', {
         url: '/orders',
-        templateUrl: 'restaurants/current-orders.html',
-        controller: `${CurrentOrdersController.name} as vm`
+        templateUrl: 'restaurants/orders.html',
+        controller: `${OrdersController.name} as vm`,
+        resolve: {
+          groupOrders: (auth, restaurantsService) => {
+            return restaurantsService.getGroupOrders(auth.getUserId());
+          }
+        }
       })
       .state('dashboard.pushExternalOrder', {
         url: '/pushExternalOrder',

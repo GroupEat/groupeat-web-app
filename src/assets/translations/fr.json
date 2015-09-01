@@ -30,8 +30,15 @@
   "confirmGroupOrderPlaceholder": "sélectionner l'heure du début de livraison prévue",
   "confirmGroupOrderSuccess": "merci d'avoir confirmé la commande groupée !",
 
-  "dashboard.currentOrdersMenuTitle": "en cours",
+  "dashboard.ordersMenuTitle": "mes commandes",
   "dashboard.pushExternalOrderMenuTitle": "commande externe",
+
+  "id": "id",
+  "productFormatsCount": "pizzas",
+  "discountRate": "réduction",
+  "totalDiscountedPrice": "prix réduit total",
+  "createdAt": "création",
+  "endingAt": "fin",
 
   "clientDetails": "détails du client",
   "orderDetails": "détails de la commande",

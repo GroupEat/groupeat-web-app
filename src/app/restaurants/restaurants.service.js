@@ -35,4 +35,23 @@ export default class RestaurantsService {
       {customer, productFormats, deliveryAddress, comment}
     );
   }
+
+  getGroupOrders(id) {
+    return this.api.get(`${ENDPOINT}/${id}/groupOrders?include=orders.productFormats`)
+      .then(response => {
+        return response.data.data.map(groupOrder => {
+          groupOrder.orders = groupOrder.orders.data.map(order => {
+            order.productFormats = order.productFormats.data.map(productFormat => {
+              productFormat.formats = productFormat.formats.data;
+
+              return productFormat;
+            });
+
+            return order;
+          });
+
+          return groupOrder;
+        });
+      });
+  }
 }

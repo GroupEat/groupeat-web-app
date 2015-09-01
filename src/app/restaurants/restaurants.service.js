@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Money from '../support/money.js';
 
 const ENDPOINT = 'restaurants';
 
@@ -20,14 +21,7 @@ export default class RestaurantsService {
         return _.flatten(response.data.data.map(product => {
           return product.formats.data.map(format => {
             format.product = _.pick(product, ['id', 'name', 'description']);
-
-            const price = (parseFloat(format.price) / 100).toLocaleString('fr-FR', {
-              style: 'currency',
-              currency: 'EUR',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            });
-            format.text = `${_._.capitalize(product.name)} - ${format.name} (${price})`;
+            format.text = `${_.capitalize(product.name)} - ${format.name} (${new Money(format.price)})`;
 
             return format;
           });

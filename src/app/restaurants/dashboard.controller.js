@@ -13,7 +13,7 @@ export default class DashboardController {
       },
       {
         state: 'dashboard.pushExternalOrder',
-        icon: 'group_add'
+        icon: 'add_circle_outline'
       }
     ];
   }

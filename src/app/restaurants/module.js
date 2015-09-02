@@ -17,35 +17,20 @@ angular.module('groupeat.restaurants', [])
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: 'restaurants/dashboard.html',
-        controller: `${DashboardController.name} as vm`,
-        redirectTo: 'dashboard.currentOrders',
+        controller: `${DashboardController.name} as dashboard`,
+        redirectTo: 'dashboard.orders',
         data: {
           authorizedUser: userTypes.restaurant
-        },
-        resolve: {
-          restaurant: (auth, restaurantsService) => {
-            return restaurantsService.get(auth.getUserId());
-          }
         }
       })
       .state('dashboard.orders', {
         url: '/orders',
         templateUrl: 'restaurants/orders.html',
-        controller: `${OrdersController.name} as vm`,
-        resolve: {
-          groupOrders: (auth, restaurantsService) => {
-            return restaurantsService.getGroupOrders(auth.getUserId());
-          }
-        }
+        controller: `${OrdersController.name} as vm`
       })
       .state('dashboard.pushExternalOrder', {
         url: '/pushExternalOrder',
         templateUrl: 'restaurants/push-external-order.html',
-        controller: `${PushExternalOrderController.name} as vm`,
-        resolve: {
-          productFormats: (auth, restaurantsService) => {
-            return restaurantsService.getProductFormats(auth.getUserId());
-          }
-        }
+        controller: `${PushExternalOrderController.name} as vm`
       });
   });

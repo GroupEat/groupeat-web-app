@@ -1,10 +1,9 @@
 export default class DashboardController {
-  constructor($q, $mdSidenav, restaurant) {
+  constructor($q, $mdSidenav, auth, restaurantsService) {
     'ngInject';
 
     this.$q = $q;
     this.$mdSidenav = $mdSidenav;
-    this.restaurant = restaurant;
 
     this.menuItems = [
       {
@@ -16,6 +15,10 @@ export default class DashboardController {
         icon: 'add_circle_outline'
       }
     ];
+
+    restaurantsService.get(auth.getUserId()).then(restaurant => {
+      this.restaurant = restaurant;
+    });
   }
 
   toggleSidenav() {

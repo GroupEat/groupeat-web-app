@@ -70,7 +70,9 @@ const rebundle = bundler =>
     .on('error', err => gutil.log('Bundling error:', gutil.colors.red(err.toString())))
     .pipe(source('bundle.js'))
     .pipe(ngAnnotate())
-    //.pipe(gulpif(!inDev, streamify(uglify()))) // TODO understand why this break the dashboard
+    .pipe(gulpif(!inDev, streamify(uglify({
+      mangle: false
+    })))) // TODO understand why mangle breaks the dashboard
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload());
 

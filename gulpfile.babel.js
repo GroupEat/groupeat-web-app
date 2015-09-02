@@ -46,7 +46,7 @@ let conf = {
   fontsPaths: [
     './node_modules/material-design-icons-iconfont/dist/fonts/*'
   ],
-  testsPaths: ['src/tests/**/*.js'],
+  testsPaths: ['tests/**/*.js'],
   es5testsRoot: 'dist-tests/',
   localHost: 'http://groupeat.dev',
   productionHost: 'groupeat.fr',
@@ -60,7 +60,7 @@ conf.browserEntryPoint = conf.browserRoot + 'index.html';
 conf.scriptsPaths = [].concat.apply(['src/app/**/*.js'], conf.testsPaths);
 conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath;
 
-let inDev = !(conf.production || conf.staging);
+let inDev = !(conf.test || conf.production || conf.staging);
 const distantHost = conf.production ? conf.productionHost : conf.stagingHost;
 
 const rebundle = bundler =>

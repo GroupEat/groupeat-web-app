@@ -1,0 +1,33 @@
+machine:
+  node:
+    version:
+      0.12.0
+
+dependencies:
+  pre:
+    - npm install -g gulp
+  post:
+    - npm install gulp-sass
+    - ./node_modules/protractor/bin/webdriver-manager update --standalone
+
+test:
+  pre:
+    - gulp build --test
+    - ./node_modules/protractor/bin/webdriver-manager start:
+        background: true
+    - ./node_modules/superstatic/bin/server:
+        background: true
+    - sleep 5
+  override:
+    - gulp eslint
+    - ./node_modules/protractor/bin/protractor
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - gulp deploy --production
+  staging:
+    branch: develop
+    commands:
+      - gulp deploy --staging

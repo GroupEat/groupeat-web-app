@@ -1,7 +1,0 @@
-{
-  "defaultMsg": "Veuillez ajouter un message d'erreur pour {0}",
-  "required": "ce champ est requis",
-  "email": "adresse e-mail invalide",
-  "passwordMinLength": "le mot de passe doit faire au mois {0} caractères",
-  "passwordConfirmationMatch": "les mots de passe doivent être identiques"
-}

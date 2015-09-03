@@ -1,0 +1,9 @@
+{
+  "defaultMsg": "Veuillez ajouter un message d'erreur pour {0}",
+  "required": "ce champ est requis",
+  "email": "adresse e-mail invalide",
+  "passwordMinLength": "le mot de passe doit faire au mois {0} caractères",
+  "passwordConfirmationMatch": "les mots de passe doivent être identiques",
+  "phoneNumberPattern": "le numéro de téléphone doit respecter le format 0605040302",
+  "orderCommentMaxLength": "Le commentaire ne peut pas faire plus de {0} caractères"
+}

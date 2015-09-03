@@ -1,0 +1,48 @@
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-sidenav-left">
+  <md-toolbar class="md-accent">
+    <md-button layout="row" layout-align="center center" class="md-toolbar-tools">
+      <h1>GroupEat</h1>
+    </md-button>
+  </md-toolbar>
+  <md-button ng-repeat-start="item in dashboard.menuItems" layout-align="center center"
+  ui-sref-active="md-warn" ui-sref="{{ item.state }}">
+    <div class="md-tile-content">
+        <i class="material-icons">{{ item.icon }}</i>
+        <br>
+        {{ (item.state + 'MenuTitle') | translate }}
+    </div>
+  </md-button>
+  <md-divider ng-repeat-end></md-divider>
+</md-sidenav>
+
+<div layout="column" flex>
+  <md-toolbar layout="row" layout-align="end center" class="md-accent">
+    <md-button hide-sm class="toolbar-button">
+      <i class="material-icons">notifications</i>
+    </md-button>
+    <md-button hide-gt-sm ng-click="dashboard.toggleSidenav()">
+      <i class="material-icons">menu</i>
+    </md-button>
+    <md-menu id="profile-menu">
+      <md-button ng-click="$mdOpenMenu()">
+        <span hide-sm>
+          <i class="material-icons">store_mall_directory</i>
+          {{ dashboard.restaurant.name | capitalize:'first' }}
+        </span>
+        <i class="material-icons">keyboard_arrow_down</i>
+      </md-button>
+      <md-menu-content id="profile-menu-content">
+        <md-menu-item>
+          <md-button ui-sref="logOut">
+            <i class="material-icons">exit_to_app</i>
+            {{ 'logOut' | translate }}
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </md-toolbar>
+  <md-content id="dashboard-content" flex>
+    <div ui-view></div>
+  </md-content>
+</div>
+

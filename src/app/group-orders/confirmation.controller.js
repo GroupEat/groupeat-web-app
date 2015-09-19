@@ -1,14 +1,13 @@
-import _ from 'lodash';
+import moment from 'moment';
 
 export default class ConfirmationController {
-  constructor(api, auth, $stateParams, popup) {
+  constructor(api, $stateParams, popup) {
     'ngInject';
 
-    this.preparationTimeInMinutes = 45; // TODO: sync with API value
+    this.preparationTimeInMinutes = 35; // TODO: sync with API value
     this.stepInMinutes = 5;
 
     this.api = api;
-    this.auth = auth;
     this.popup = popup;
 
     this.token = $stateParams.token;
@@ -16,8 +15,6 @@ export default class ConfirmationController {
 
     this.availableTimes = {};
     this.preparedAt = undefined;
-
-    this.auth.setToken(this.token);
 
     this.api.get(`groupOrders/${this.groupOrderId}`)
       .success(response => {
@@ -39,7 +36,7 @@ export default class ConfirmationController {
 
     let timestampOnStep;
     let availableTimestamps = [];
-    const offsetWithStep = (new Date(latestPreparedTimestamp)).getMinutes() % this.stepInMinutes;
+    const offsetWithStep = new Date(latestPreparedTimestamp).getMinutes() % this.stepInMinutes;
 
     if (offsetWithStep !== 0) {
       availableTimestamps.push(latestPreparedTimestamp);
@@ -59,9 +56,8 @@ export default class ConfirmationController {
 
     for (let i = 0; i < availableTimestamps.length; i++) {
       const timestamp = availableTimestamps[i];
-      const date = new Date(timestamp);
 
-      availableTimes[timestamp] = ('0' + date.getHours()).slice(-2) + 'h' + ('0' + date.getMinutes()).slice(-2);
+      availableTimes[timestamp] = moment(new Date(timestamp)).format('LT');
     }
 
     return availableTimes;
@@ -72,14 +68,6 @@ export default class ConfirmationController {
       key => availableTimes[key] === preparedAt
     )[0], 10));
 
-    return [
-      preparedAtDate.getFullYear(),
-      _.padLeft(preparedAtDate.getMonth() + 1),
-      _.padLeft(preparedAtDate.getDate())
-    ].join('-') + ' ' + [
-      _.padLeft(preparedAtDate.getHours()),
-      _.padLeft(preparedAtDate.getMinutes()),
-      _.padLeft(preparedAtDate.getSeconds())
-    ].join(':');
+    return moment(preparedAtDate).format('YYYY-MM-DD HH:mm:ss');
   }
 }

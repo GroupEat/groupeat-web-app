@@ -1,9 +1,9 @@
 import angular from 'angular';
+import * as userTypes from '../auth/user-types.js';
 import OrdersController from './orders.controller.js';
 import DashboardController from './dashboard.controller.js';
 import PushExternalOrderController from './push-external-order.controller.js';
 import RestaurantsService from './restaurants.service.js';
-import * as userTypes from '../auth/user-types.js';
 
 angular.module('groupeat.restaurants', [])
   .controller(OrdersController.name, OrdersController)

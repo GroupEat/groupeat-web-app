@@ -1,10 +1,8 @@
 export default class ElementModifierService {
-  constructor($filter, $window) {
+  constructor($window) {
     'ngInject';
 
-    this.capitalize = $filter('capitalize');
     this.dom = $window.document;
-
     this.key = 'groupeatModifierKey';
   }
 
@@ -30,9 +28,7 @@ export default class ElementModifierService {
 
     let errorsContainer = this.dom.getElementById(errorsId);
 
-    errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>' +
-      this.capitalize(errorMessage, 'first') +
-      '</div>';
+    errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>' + errorMessage + '</div>';
   }
 
   makeDefault(el) {

@@ -17,7 +17,7 @@ angular.module('groupeat.auth', ['validation.match'])
 
     $stateProvider
       .state('activate', {
-        url: '/auth/activate',
+        url: '/auth/activate?token',
         templateUrl: 'auth/activate.html',
         controller: `${ActivateCustomerController.name} as vm`
       })

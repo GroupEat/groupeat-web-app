@@ -12,23 +12,23 @@
   "password": "mot de passe",
   "passwordConfirmation": "confirmation du mot de passe",
 
-  "resetPassword": "réinitialiser votre mot de passe",
+  "resetPasswordTitle": "Réinitialiser le mot de passe",
 
-  "activationSuccessTitle": "activation de compte",
-  "activationSuccess": "merci d'avoir activé votre compte. Vous pouvez désormais utiliser pleinement l'application !",
-  "activationErrorTitle": "problème d'activation",
-  "activationError": "aucun utilisateur ne correspond à ce jeton",
+  "activationSuccessTitle": "Activation de compte",
+  "activationSuccess": "Merci d'avoir activé ton compte. Tu peux désormais utiliser pleinement l'application !",
+  "activationErrorTitle": "Problème d'activation",
+  "activationError": "Aucun utilisateur ne correspond à ce jeton...",
 
-  "logInFormTitle": "connexion à votre compte",
+  "logInFormTitle": "Connexion à ton compte",
 
-  "resetPasswordSuccess": "le mot de passe a été réinitialisé avec succès !",
-  "badPassword": "les mots de passe doivent avoir au moins six caractères et doivent être identiques.",
-  "noUserForPasswordResetToken": "aucun utilisateur n'a été trouvé avec cette adresse e-mail.",
-  "invalidPasswordResetToken": "ce jeton de réinitialisation du mot de passe n'est pas valide.",
+  "resetPasswordSuccess": "Le mot de passe a été réinitialisé avec succès !",
+  "badPassword": "Les mots de passe doivent avoir au moins six caractères et doivent être identiques.",
+  "noUserForPasswordResetToken": "Cette adresse e-mail ne correspond à aucun utilisateur.",
+  "invalidPasswordResetToken": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
 
-  "confirmGroupOrderTitle": "confirmer la commande",
+  "confirmGroupOrderTitle": "Confirmer la commande",
   "confirmGroupOrderPlaceholder": "sélectionner l'heure du début de livraison prévue",
-  "confirmGroupOrderSuccess": "merci d'avoir confirmé la commande groupée !",
+  "confirmGroupOrderSuccess": "Merci d'avoir confirmé la commande groupée !",
 
   "dashboard.ordersMenuTitle": "mes commandes",
   "dashboard.pushExternalOrderMenuTitle": "commande externe",
@@ -50,7 +50,7 @@
   "noAddressFound": "aucune addresse trouvée",
   "optionalComment": "commentaire (optionel)",
 
-  "pushExternalOrdersFormTitle": "propager une commande externe",
+  "pushExternalOrdersFormTitle": "Propager une commande externe",
 
-  "authenticationError": "mauvais identifiants, vous n'avez pas pu être connecté..."
+  "authenticationError": "Mauvais identifiants, vous n'avez pas pu être connecté..."
 }

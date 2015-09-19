@@ -1,6 +1,6 @@
 import angular from 'angular';
-import DocsController from './docs.controller.js';
 import * as userTypes from '../auth/user-types.js';
+import DocsController from './docs.controller.js';
 
 angular.module('groupeat.admin', [])
   .controller(DocsController.name, DocsController)

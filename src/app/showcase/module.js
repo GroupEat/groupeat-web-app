@@ -8,5 +8,9 @@ angular.module('groupeat.showcase', [])
       .state('home', {
         url: '/',
         templateUrl: 'showcase/showcase.html'
+      })
+      .state('terms', {
+        url: '/terms',
+        templateUrl: 'showcase/terms.html'
       });
   });

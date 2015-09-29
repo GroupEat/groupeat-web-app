@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'table';
 
-body {
+body, #ui-router-container {
     background-color: $body-background-color;
 }
 

@@ -32,7 +32,7 @@ angular.module('groupeat.auth', ['validation.match'])
         controller: `${LogOutController.name} as vm`
       })
       .state('passwordReset', {
-        url: '/auth/password/reset',
+        url: '/auth/password/reset?token',
         templateUrl: 'auth/password-reset.html',
         controller: `${PasswordResetController.name} as vm`
       });

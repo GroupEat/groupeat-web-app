@@ -24,10 +24,10 @@ test:
 
 deployment:
   production:
-    branch: master
+    branch: production
     commands:
       - gulp deploy --production
   staging:
-    branch: develop
+    branch: staging
     commands:
       - gulp deploy --staging

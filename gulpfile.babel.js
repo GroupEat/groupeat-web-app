@@ -1,37 +1,36 @@
-import gulp from 'gulp';
+const gulp = require('gulp');
 
-import autoprefixer from 'gulp-autoprefixer';
-import babel from 'gulp-babel';
-import babelify from 'babelify';
-import browserify from 'browserify';
-import cached from 'gulp-cached';
-import concat from 'gulp-concat';
-import del from 'del';
-import childProcess from 'child_process';
-import eslint from 'gulp-eslint';
-const exec = childProcess.exec;
-import footer from 'gulp-footer';
-import gulpif from 'gulp-if';
-import gutil from 'gulp-util';
-import livereload from 'gulp-livereload';
-import minifyCSS from 'gulp-minify-css';
-import minifyHTML from 'gulp-minify-html';
-import ngAnnotate from 'gulp-ng-annotate';
-import openBrowser from 'gulp-open';
-import plumber from 'gulp-plumber';
-import protractor from 'gulp-angular-protractor';
-import rsync from 'gulp-rsync';
-import runSequence from 'run-sequence';
-import sass from 'gulp-sass';
-import source from 'vinyl-source-stream';
-import streamify from 'gulp-streamify';
-import {server as superstatic} from 'superstatic';
-import uglify from 'gulp-uglify';
-import watchify from 'watchify';
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const cached = require('gulp-cached');
+const concat = require('gulp-concat');
+const del = require('del');
+const exec = require('child_process').exec;
+const eslint = require('gulp-eslint');
+const footer = require('gulp-footer');
+const gulpif = require('gulp-if');
+const gutil = require('gulp-util');
+const livereload = require('gulp-livereload');
+const minifyCSS = require('gulp-minify-css');
+const minifyHTML = require('gulp-minify-html');
+const ngAnnotate = require('gulp-ng-annotate');
+const openBrowser = require('gulp-open');
+const plumber = require('gulp-plumber');
+const protractor = require('gulp-angular-protractor');
+const rsync = require('gulp-rsync');
+const runSequence = require('run-sequence');
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
+const streamify = require('gulp-streamify');
+const superstatic = require('superstatic').server;
+const uglify = require('gulp-uglify');
+const watchify = require('watchify');
 
-import superstaticConf from './superstatic.json';
+const superstaticConf = require('./superstatic.json');
 
-let conf = {
+var conf = {
   browserRoot: 'dist/',
   mainEntryPath: './src/app/app.js',
   testEntryPath: './src/app/app.test.js',
@@ -60,7 +59,7 @@ conf.browserEntryPoint = conf.browserRoot + 'index.html';
 conf.scriptsPaths = [].concat.apply(['src/app/**/*.js'], conf.testsPaths);
 conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath;
 
-let inDev = !(conf.test || conf.production || conf.staging);
+var inDev = !(conf.test || conf.production || conf.staging);
 const distantHost = conf.production ? conf.productionHost : conf.stagingHost;
 
 const rebundle = bundler =>
@@ -77,7 +76,7 @@ const rebundle = bundler =>
     .pipe(livereload());
 
 const bundle = watch => {
-  let bundler = browserify(conf.entryPath, {
+  var bundler = browserify(conf.entryPath, {
     cache: {},
     packageCache: {},
     insertGlobals: true,
@@ -104,7 +103,7 @@ gulp.task('default', ['scss', 'views', 'assets'], callback =>
 );
 
 gulp.task('build', callback => {
-  let tasks = ['scripts', 'scss', 'views', 'assets'];
+  var tasks = ['scripts', 'scss', 'views', 'assets'];
 
   if (conf.test) {
     tasks.push('build-tests');

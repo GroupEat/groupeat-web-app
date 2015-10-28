@@ -2,7 +2,7 @@
 
 # Prerequisites
 
- - Node.js
+ - Node.js >= 4.1.0
  - NPM
  - Gulp >= 3.9.0
 

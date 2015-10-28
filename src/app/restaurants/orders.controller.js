@@ -10,7 +10,7 @@ export default class OrdersController {
     socket.on('connect', () => {
       socket.emit('authentication', {token: auth.getToken()});
       socket.on('authenticated', () => {
-        socket.on('GroupOrderHasBeenCreated', event => {
+        socket.on('GroupOrderHasBeenCreated', () => {
           $state.go($state.current, {}, {reload: true});
         });
       });

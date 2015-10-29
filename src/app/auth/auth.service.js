@@ -4,12 +4,13 @@ const LOCAL_STORAGE_TOKEN_KEY = 'AUTH_TOKEN';
 const LOCAL_STORAGE_USER_KEY = 'AUTH_USER';
 
 export default class auth {
-  constructor($injector, $q, $state, popup, localStorageService) {
+  constructor($injector, $q, $state, $window, popup, localStorageService) {
     'ngInject';
 
     this.$injector = $injector;
     this.$q = $q;
     this.$state = $state;
+    this.$window = $window;
     this.popup = popup;
     this.localStorageService = localStorageService;
   }
@@ -52,6 +53,8 @@ export default class auth {
   logOut() {
     this.localStorageService.remove(LOCAL_STORAGE_TOKEN_KEY);
     this.localStorageService.remove(LOCAL_STORAGE_USER_KEY);
+
+    this.redirectToState('home');
   }
 
   getToken() {
@@ -79,8 +82,10 @@ export default class auth {
   }
 
   redirectToIntendedState() {
-    const state = this.intendedState || 'home';
+    this.redirectToState(this.intendedState || 'home');
+  }
 
-    this.$state.go(state);
+  redirectToState(state) {
+    this.$window.location.href = this.$state.href(state, {}, {absolute: true});
   }
 }

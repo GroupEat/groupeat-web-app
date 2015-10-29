@@ -3,6 +3,5 @@ export default class LogOutController {
     'ngInject';
 
     auth.logOut();
-    $state.go('home');
   }
 }

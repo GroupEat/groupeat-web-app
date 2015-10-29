@@ -1,22 +1,22 @@
 import _ from 'lodash';
 import Money from '../support/money.js';
-import io from 'socket.io-client';
 
 export default class OrdersController {
-  constructor($state, auth, restaurantsService) {
+  constructor(auth, restaurantsService, socket) {
     'ngInject';
 
-    const socket = io.connect(`${window.location.origin}:3000`);
-    socket.on('connect', () => {
-      socket.emit('authentication', {token: auth.getToken()});
-      socket.on('authenticated', () => {
-        socket.on('GroupOrderHasBeenCreated', () => {
-          $state.go($state.current, {}, {reload: true});
-        });
-      });
+    this.auth = auth;
+    this.restaurantsService = restaurantsService;
+
+    socket.on('GroupOrderHasBeenCreated', () => {
+      this.loadGroupOrders();
     });
 
-    restaurantsService.getGroupOrders(auth.getUserId()).then(groupOrders => {
+    this.loadGroupOrders();
+  }
+
+  loadGroupOrders() {
+    this.restaurantsService.getGroupOrders(this.auth.getUserId()).then(groupOrders => {
       this.groupOrders = _.sortBy(groupOrders.map(groupOrder => {
         groupOrder.productFormatsCount = _.sum(groupOrder.orders, order =>
             _.sum(order.productFormats, productFormat =>

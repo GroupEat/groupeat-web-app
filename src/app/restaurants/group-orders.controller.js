@@ -15,6 +15,8 @@ export default class GroupOrdersController {
       'GroupOrderHasBeenJoined'
     ], 'reloadGroupOrders', () => {
       this.loadGroupOrders();
+
+      return true;
     });
 
     this.loadGroupOrders();

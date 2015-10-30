@@ -60,8 +60,11 @@ export default class SocketService {
       } else {
         const listener = this.listeners[this.listeners.push(queuedListener) - 1];
         this.socket.on(queuedListener.event, () => {
-          this.notifier.notify();
-          listener.callback();
+          const needToNotify = listener.callback();
+
+          if (needToNotify === true) {
+            this.notifier.notify();
+          }
         });
       }
     });

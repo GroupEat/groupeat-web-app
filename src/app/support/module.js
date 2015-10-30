@@ -9,4 +9,9 @@ angular.module('groupeat.support', ['angular-capitalize-filter'])
   .service('api', ApiService)
   .service('elementModifier', ElementModifierService)
   .service('popup', PopupService)
-  .service('socket', SocketService);
+  .service('socket', SocketService)
+  .filter('title', $filter => {
+    'ngInject';
+
+    return input => $filter('capitalize')($filter('translate')(input), 'first');
+  });

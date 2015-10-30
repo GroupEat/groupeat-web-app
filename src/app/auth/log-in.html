@@ -10,14 +10,14 @@
       </md-toolbar>
       <form name="logInForm" class="groupeat-form" novalidate>
         <md-input-container>
-          <label>{{ 'email' | translate | capitalize:'first' }}</label>
+          <label>{{ 'email' | title }}</label>
           <input name="email"
                  type="email"
                  ng-model="vm.email"
                  required>
         </md-input-container>
         <md-input-container>
-          <label>{{ 'password' | translate | capitalize:'first' }}</label>
+          <label>{{ 'password' | title }}</label>
           <input name="password"
                  type="password"
                  ng-model="vm.password"

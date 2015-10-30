@@ -38,7 +38,8 @@
   "discountRate": "réduction",
   "totalDiscountedPrice": "prix réduit total",
   "createdAt": "création",
-  "endingAt": "fin",
+  "foodrush": "foodrush",
+  "foodrushOver": "fini",
 
   "clientDetails": "détails du client",
   "orderDetails": "détails de la commande",

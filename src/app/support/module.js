@@ -10,6 +10,13 @@ angular.module('groupeat.support', ['angular-capitalize-filter'])
   .service('elementModifier', ElementModifierService)
   .service('popup', PopupService)
   .service('socket', SocketService)
+  .directive('timeAgo', () => {
+    return {
+      restrict: 'E',
+      scope: {date: '='},
+      templateUrl: 'support/time-ago.html'
+    };
+  })
   .filter('title', $filter => {
     'ngInject';
 

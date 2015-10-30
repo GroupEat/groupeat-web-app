@@ -11,7 +11,9 @@
             'totalDiscountedPrice',
             'createdAt',
             'endingAt'
-          ]">{{ header | title }}</th>
+          ]">
+            {{ header | title }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -29,10 +31,10 @@
             {{ groupOrder.totalDiscountedPrice.toString() }}
           </td>
           <td data-title="{{ 'createdAt' | title }}">
-            <span am-time-ago="groupOrder.createdAt"></span>
+            <time-ago date="groupOrder.createdAt"/>
           </td>
           <td data-title="{{ 'endingAt' | title }}">
-            <span am-time-ago="groupOrder.endingAt"></span>
+            <time-ago date="groupOrder.endingAt"/>
           </td>
         </tr>
       </tbody>

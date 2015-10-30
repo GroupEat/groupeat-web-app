@@ -2,9 +2,10 @@ import _ from 'lodash';
 import io from 'socket.io-client';
 
 export default class SocketService {
-  constructor(auth) {
+  constructor(notifier, auth) {
     'ngInject';
 
+    this.notifier = notifier;
     this.listeners = [];
     this.queuedListeners = [];
 
@@ -59,6 +60,7 @@ export default class SocketService {
       } else {
         const listener = this.listeners[this.listeners.push(queuedListener) - 1];
         this.socket.on(queuedListener.event, () => {
+          this.notifier.notify();
           listener.callback();
         });
       }

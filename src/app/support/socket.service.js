@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import io from 'socket.io-client';
 
 export default class SocketService {
@@ -5,6 +6,7 @@ export default class SocketService {
     'ngInject';
 
     this.listeners = [];
+    this.queuedListeners = [];
 
     if (auth.isLoggedIn()) {
       const socket = io.connect(`${window.location.origin}:3000`);
@@ -18,25 +20,50 @@ export default class SocketService {
     }
   }
 
-  on(event, callback) {
+  on(events, action, callback) {
+    (_.isArray(events) ? events : [events]) .map(event => {
+      this.queueListener(event, action, callback);
+    });
+
     if (this.socket) {
-      this.socket.on(event, callback);
-    } else {
-      this.queueListener(event, callback);
+      this.attachQueuedListeners();
     }
 
     return this;
   }
 
-  queueListener(event, callback) {
-    this.listeners.push({event, callback});
+  queueListener(event, action, callback) {
+    const isSame = listener => {
+      return listener.event === event && listener.action === action;
+    };
+
+    const sameListener = this.queuedListeners.find(isSame);
+
+    if (sameListener) {
+      sameListener.callback = callback;
+    } else {
+      this.queuedListeners.push({event, action, callback});
+    }
   }
 
   attachQueuedListeners() {
-    this.listeners.map(listener => {
-      this.socket.on(listener.event, listener.callback);
+    this.queuedListeners.forEach(queuedListener => {
+      const isSame = listener => {
+        return listener.event === queuedListener.event && listener.action === queuedListener.action;
+      };
+
+      const sameListener = this.listeners.find(isSame);
+
+      if (sameListener) {
+        sameListener.callback = queuedListener.callback;
+      } else {
+        const listener = this.listeners[this.listeners.push(queuedListener) - 1];
+        this.socket.on(queuedListener.event, () => {
+          listener.callback();
+        });
+      }
     });
 
-    this.listeners = [];
+    this.queuedListeners = [];
   }
 }

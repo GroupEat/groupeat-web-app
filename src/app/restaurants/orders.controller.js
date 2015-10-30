@@ -8,7 +8,12 @@ export default class OrdersController {
     this.auth = auth;
     this.restaurantsService = restaurantsService;
 
-    socket.on('GroupOrderHasBeenCreated', () => {
+    socket.on([
+      'GroupOrderHasBeenClosed',
+      'GroupOrderHasBeenCreated',
+      'GroupOrderHasBeenConfirmed',
+      'GroupOrderHasBeenJoined'
+    ], 'reloadGroupOrders', () => {
       this.loadGroupOrders();
     });
 

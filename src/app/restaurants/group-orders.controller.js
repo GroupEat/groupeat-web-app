@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Money from '../support/money.js';
 
-export default class OrdersController {
+export default class GroupOrdersController {
   constructor(auth, restaurantsService, socket) {
     'ngInject';
 

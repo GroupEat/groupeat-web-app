@@ -15,60 +15,58 @@ export default class SocketService {
         socket.emit('authentication', {token: auth.getToken()});
         socket.on('authenticated', () => {
           this.socket = socket;
-          this.attachQueuedListeners();
+          this.attachListeners();
         });
       });
     }
   }
 
-  on(events, action, callback) {
+  on($scope, events, callback) {
     (_.isArray(events) ? events : [events]) .map(event => {
-      this.queueListener(event, action, callback);
+      this.addListener($scope, event, callback);
     });
 
     if (this.socket) {
-      this.attachQueuedListeners();
+      this.attachListeners();
     }
 
     return this;
   }
 
-  queueListener(event, action, callback) {
-    const isSame = listener => {
-      return listener.event === event && listener.action === action;
-    };
+  addListener($scope, event, callback) {
+    const wrappedCallback = this.wrapCallback(event, callback);
+    this.queuedListeners.push({event, callback: wrappedCallback});
 
-    const sameListener = this.queuedListeners.find(isSame);
+    $scope.$on('$destroy', () => {
+      const listenerStillQueuedIndex = this.queuedListeners.findIndex(listener => {
+        return listener.event === event && listener.callback === wrappedCallback;
+      });
 
-    if (sameListener) {
-      sameListener.callback = callback;
-    } else {
-      this.queuedListeners.push({event, action, callback});
-    }
+      if (listenerStillQueuedIndex > -1) {
+        this.queuedListeners.splice(listenerStillQueuedIndex);
+      } else if (this.socket) {
+        this.socket.removeListener(event, wrappedCallback);
+      }
+    });
   }
 
-  attachQueuedListeners() {
-    this.queuedListeners.forEach(queuedListener => {
-      const isSame = listener => {
-        return listener.event === queuedListener.event && listener.action === queuedListener.action;
-      };
-
-      const sameListener = this.listeners.find(isSame);
-
-      if (sameListener) {
-        sameListener.callback = queuedListener.callback;
-      } else {
-        const listener = this.listeners[this.listeners.push(queuedListener) - 1];
-        this.socket.on(queuedListener.event, () => {
-          const needToNotify = listener.callback();
-
-          if (needToNotify === true) {
-            this.notifier.notify();
-          }
-        });
-      }
+  attachListeners() {
+    this.queuedListeners.forEach(listener => {
+      this.listeners.push(listener);
+      this.socket.on(listener.event, listener.callback);
     });
 
     this.queuedListeners = [];
+  }
+
+  wrapCallback(eventName, callback) {
+    return event => {
+      console.debug(eventName, event);
+      const needToNotify = callback(event);
+
+      if (needToNotify === true) {
+        this.notifier.notify();
+      }
+    };
   }
 }

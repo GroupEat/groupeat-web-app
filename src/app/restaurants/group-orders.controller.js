@@ -2,18 +2,18 @@ import _ from 'lodash';
 import Money from '../support/money.js';
 
 export default class GroupOrdersController {
-  constructor(auth, restaurantsService, socket) {
+  constructor($scope, auth, restaurantsService, socket) {
     'ngInject';
 
     this.auth = auth;
     this.restaurantsService = restaurantsService;
 
-    socket.on([
+    socket.on($scope, [
       'GroupOrderHasBeenClosed',
       'GroupOrderHasBeenCreated',
       'GroupOrderHasBeenConfirmed',
       'GroupOrderHasBeenJoined'
-    ], 'reloadGroupOrders', () => {
+    ], () => {
       this.loadGroupOrders();
 
       return true;

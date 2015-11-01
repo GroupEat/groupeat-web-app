@@ -61,7 +61,6 @@ export default class SocketService {
 
   wrapCallback(eventName, callback) {
     return event => {
-      console.debug(eventName, event);
       const needToNotify = callback(event);
 
       if (needToNotify === true) {

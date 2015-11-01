@@ -111,8 +111,8 @@ export default class PushExternalOrderController {
       const deliveryAddress = {
         street: place.formatted_address.split(',')[0],
         details: this.deliveryAddressDetails,
-        latitude: place.geometry.location.G,
-        longitude: place.geometry.location.K
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng()
       };
 
       this.restaurantsService.pushExternalOrder(

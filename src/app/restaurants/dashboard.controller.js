@@ -7,7 +7,7 @@ export default class DashboardController {
 
     this.menuItems = [
       {
-        state: 'dashboard.orders',
+        state: 'dashboard.groupOrders',
         icon: 'history'
       },
       {

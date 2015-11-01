@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Money from '../support/money.js';
+import PhoneNumber from '../support/phone-number.js';
 
 const ENDPOINT = 'restaurants';
 
@@ -10,13 +11,13 @@ export default class RestaurantsService {
     this.api = api;
   }
 
-  get(id) {
-    return this.api.get(`${ENDPOINT}/${id}`)
+  get(restaurantId) {
+    return this.api.get(`${ENDPOINT}/${restaurantId}`)
       .then(response => response.data.data);
   }
 
-  getProductFormats(id) {
-    return this.api.get(`${ENDPOINT}/${id}/products?include=formats`)
+  getProductFormats(restaurantId) {
+    return this.api.get(`${ENDPOINT}/${restaurantId}/products?include=formats`)
       .then(response => {
         return _.flatten(response.data.data.map(product => {
           return product.formats.data.map(format => {
@@ -29,29 +30,46 @@ export default class RestaurantsService {
       });
   }
 
-  pushExternalOrder(id, customer, productFormats, deliveryAddress, comment) {
+  pushExternalOrder(restaurantId, customer, productFormats, deliveryAddress, comment) {
     return this.api.post(
-      `${ENDPOINT}/${id}/externalOrders`,
+      `${ENDPOINT}/${restaurantId}/externalOrders`,
       {customer, productFormats, deliveryAddress, comment}
     );
   }
 
-  getGroupOrders(id) {
-    return this.api.get(`${ENDPOINT}/${id}/groupOrders?include=orders.productFormats`)
-      .then(response => {
-        return response.data.data.map(groupOrder => {
-          groupOrder.orders = groupOrder.orders.data.map(order => {
-            order.productFormats = order.productFormats.data.map(productFormat => {
-              productFormat.formats = productFormat.formats.data;
+  getGroupOrders(restaurantId) {
+    return this.api.get(`${ENDPOINT}/${restaurantId}/groupOrders?include=orders.productFormats`)
+      .then(response => response.data.data.map(this.flattenGroupOrder));
+  }
 
-              return productFormat;
-            });
+  getGroupOrder(groupOrderId) {
+    return this.api.get(
+      `groupOrders/${groupOrderId}?include=orders.productFormats,orders.customer,orders.deliveryAddress`
+    ).then(response => this.flattenGroupOrder(response.data.data));
+  }
 
-            return order;
-          });
+  flattenGroupOrder(groupOrder) {
+    groupOrder.orders = groupOrder.orders.data.map(order => {
+      if (order.customer) {
+        order.customer = order.customer.data;
+        order.customer.phoneNumber = new PhoneNumber(order.customer.phoneNumber);
+      }
 
-          return groupOrder;
-        });
+      if (order.deliveryAddress) {
+        order.deliveryAddress = order.deliveryAddress.data;
+      }
+
+      order.productFormats = order.productFormats.data.map(productFormat => {
+        productFormat.formats = productFormat.formats.data;
+
+        return productFormat;
       });
+
+      return order;
+    });
+
+    groupOrder.unconfirmed = !groupOrder.confirmed && groupOrder.closedAt;
+
+    return groupOrder;
   }
 }

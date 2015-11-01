@@ -1,16 +1,16 @@
 import moment from 'moment';
 
 export default class ConfirmationController {
-  constructor(api, $stateParams, popup) {
+  constructor(api, $state, $stateParams, popup) {
     'ngInject';
 
     this.preparationTimeInMinutes = 35; // TODO: sync with API value
     this.stepInMinutes = 5;
 
     this.api = api;
+    this.$state = $state;
     this.popup = popup;
 
-    this.token = $stateParams.token;
     this.groupOrderId = $stateParams.groupOrderId;
 
     this.availableTimes = {};
@@ -26,7 +26,10 @@ export default class ConfirmationController {
     this.api.post(`groupOrders/${this.groupOrderId}/confirm`, {
       preparedAt: this.getPreparedAtString(this.availableTimes, this.preparedAt)
     })
-      .success(() => this.popup.defaultContentOnly('confirmGroupOrderSuccess'))
+      .success(() => {
+        this.popup.defaultContentOnly('confirmGroupOrderSuccess');
+        this.$state.go('dashboard.groupOrder', {groupOrderId: this.groupOrderId});
+      })
       .error(response => this.popup.error(response.errorKey));
   }
 

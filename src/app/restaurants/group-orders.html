@@ -1,5 +1,4 @@
-<md-card id="orders-card">
-  <div ng-bind-html="vm.test"></div>
+<md-card class="responsive-table-card">
   <div class="table-responsive-vertical">
     <table class="table table-hover table-bordered">
       <thead>
@@ -17,7 +16,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="groupOrder in vm.groupOrders">
+        <tr ng-repeat="groupOrder in vm.groupOrders"
+            ng-class="(groupOrder.confirmed ? 'closed' : (groupOrder.unconfirmed ? 'unconfirmed' : 'opened'))
+              + '-group-order'"
+            ui-sref="dashboard.groupOrder({groupOrderId: groupOrder.id})">
           <td data-title="{{ 'id' | title }}">
             {{ groupOrder.id }}
           </td>
@@ -31,10 +33,10 @@
             {{ groupOrder.totalDiscountedPrice.toString() }}
           </td>
           <td data-title="{{ 'createdAt' | title }}">
-            <time-ago date="groupOrder.createdAt"/>
+            <time-ago date="groupOrder.createdAt" />
           </td>
           <td data-title="{{ 'foodrush' | title }}">
-            <foodrush group-order="groupOrder"/>
+            <foodrush group-order="groupOrder" />
           </td>
         </tr>
       </tbody>

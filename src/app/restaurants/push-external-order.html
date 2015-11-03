@@ -97,7 +97,7 @@
     <section layout="row" layout-sm="column" layout-align="center center">
       <button class="groupeat-submit md-raised md-button md-primary"
               ng-click="vm.pushOrder()"
-              ng-disabled="false && (pushExternalOrderForm.$invalid || !vm.deliveryAddress)">
+              ng-disabled="pushExternalOrderForm.$invalid || !vm.deliveryAddress">
         <span>{{ 'confirm' | translate }}</span>
       </button>
     </section>

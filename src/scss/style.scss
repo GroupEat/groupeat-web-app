@@ -108,7 +108,19 @@ md-sidenav.md-sidenav-left {
   }
 }
 
-#orders-card {
+.responsive-table-card {
   background-color: transparent !important;
   box-shadow: none;
+}
+
+.time-ago, .foodrush-progress {
+  cursor: pointer;
+}
+
+tr.unconfirmed-group-order {
+  background-color: $accent-color;
+}
+
+tr.closed-group-order {
+  background-color: $primary-color;
 }

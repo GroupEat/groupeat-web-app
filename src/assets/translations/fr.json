@@ -30,7 +30,7 @@
   "confirmGroupOrderPlaceholder": "sélectionner l'heure du début de livraison prévue",
   "confirmGroupOrderSuccess": "Merci d'avoir confirmé la commande groupée !",
 
-  "dashboard.ordersMenuTitle": "mes commandes",
+  "dashboard.groupOrdersMenuTitle": "mes commandes",
   "dashboard.pushExternalOrderMenuTitle": "commande externe",
 
   "id": "id",
@@ -38,7 +38,16 @@
   "discountRate": "réduction",
   "totalDiscountedPrice": "prix réduit total",
   "createdAt": "création",
-  "endingAt": "fin",
+  "foodrush": "foodrush",
+  "foodrushOver": "fini",
+
+  "orderSummary": "Récapitulatif de la commande",
+  "productFormats": "pizzas",
+  "customer": "client",
+  "deliveryAddress": "adresse de livraison",
+  "discountedPrice": "prix à payer",
+  "closedAt": "fin du foodrush",
+  "preparedAt": "préparation",
 
   "clientDetails": "détails du client",
   "orderDetails": "détails de la commande",

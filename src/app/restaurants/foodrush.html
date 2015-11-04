@@ -1,0 +1,10 @@
+<div ng-show="over">{{ "foodrushOver" | translate }} <span am-time-ago="closedAt" /></div>
+<div layout="row" ng-hide="over" class="foodrush-progress"
+     layout-align-sm="end start" layout-align-md="end start" layout-align-gt-md="start start">
+  <md-progress-circular class="{{ progress > 75 ? 'md-accent' : '' }}"
+                        md-mode="determinate"
+                        value="{{ progress }}" ></md-progress-circular>
+  <md-tooltip md-direction="left">
+    {{ "foodrushOver" | translate }} <span am-time-ago="endingAt" />
+  </md-tooltip>
+</div>

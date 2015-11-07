@@ -47,7 +47,7 @@
   "deliveryAddress": "adresse de livraison",
   "discountedPrice": "prix à payer",
   "closedAt": "fin du foodrush",
-  "preparedAt": "préparation",
+  "preparedAt": "début de livraison",
 
   "clientDetails": "détails du client",
   "orderDetails": "détails de la commande",

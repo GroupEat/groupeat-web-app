@@ -8,6 +8,7 @@
             'productFormatsCount',
             'totalDiscountedPrice',
             'createdAt',
+            'closedAt'
           ]">
             {{ header | title }}
           </th>
@@ -17,7 +18,7 @@
         <tr ng-repeat="groupOrder in vm.groupOrders"
             ng-class="(groupOrder.confirmed ? 'closed' : (groupOrder.unconfirmed ? 'unconfirmed' : 'opened'))
               + '-group-order'"
-            ui-sref="dashboard.groupOrder({groupOrderId: groupOrder.id})">
+            ng-click="vm.goToOrder(groupOrder)">
           <td data-title="{{ 'id' | title }}">
             {{ groupOrder.id }}
           </td>

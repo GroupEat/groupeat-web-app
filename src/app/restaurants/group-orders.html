@@ -9,7 +9,6 @@
             'discountRate',
             'totalDiscountedPrice',
             'createdAt',
-            'foodrush'
           ]">
             {{ header | title }}
           </th>
@@ -35,8 +34,8 @@
           <td data-title="{{ 'createdAt' | title }}">
             <time-ago date="groupOrder.createdAt" />
           </td>
-          <td data-title="{{ 'foodrush' | title }}">
-            <foodrush group-order="groupOrder" />
+          <td data-title="{{ 'closedAt' | title }}">
+            <time-ago date="groupOrder.closedAt || groupOrder.endingAt" />
           </td>
         </tr>
       </tbody>

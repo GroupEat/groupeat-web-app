@@ -81,9 +81,7 @@
           ({{ order.customer.phoneNumber.toString() }})
         </td>
         <td data-title="{{ 'deliveryAddress' | title }}">
-          {{ order.deliveryAddress.street }},
-          {{ order.deliveryAddress.city }}
-          {{ order.deliveryAddress.details ? ' (' + order.deliveryAddress.details + ')' : '' }}
+          {{ order.deliveryAddress.toString() }}
         </td>
         <td data-title="{{ 'discountedPrice' | title }}">
           {{ order.discountedPrice.toString() }}

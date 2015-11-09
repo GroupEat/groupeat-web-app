@@ -6,7 +6,6 @@
           <th ng-repeat="header in [
             'id',
             'productFormatsCount',
-            'discountRate',
             'totalDiscountedPrice',
             'createdAt',
           ]">
@@ -24,9 +23,6 @@
           </td>
           <td data-title="{{ 'productFormatsCount' | title }}">
             {{ groupOrder.productFormatsCount }}
-          </td>
-          <td data-title="{{ 'discountRate' | title }}">
-            {{ groupOrder.discountRate }} %
           </td>
           <td data-title="{{ 'totalDiscountedPrice' | title }}">
             {{ groupOrder.totalDiscountedPrice.toString() }}

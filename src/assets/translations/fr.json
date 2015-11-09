@@ -36,7 +36,7 @@
   "id": "id",
   "productFormatsCount": "pizzas",
   "discountRate": "réduction",
-  "totalDiscountedPrice": "prix réduit total",
+  "totalDiscountedPrice": "prix total",
   "createdAt": "créée",
 
   "orderSummary": "Récapitulatif de la commande",

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Address from './address.js';
 import Money from '../support/money.js';
 
 export default class GroupOrderController {
@@ -30,6 +31,11 @@ export default class GroupOrderController {
       this.groupOrder = groupOrder;
       this.productFormats = {};
       this.orders = groupOrder.orders.map(order => {
+        order.deliveryAddress = new Address(
+          order.deliveryAddress.street,
+          order.deliveryAddress.city,
+          order.deliveryAddress.details
+        );
         order.discountedPrice = new Money(order.discountedPrice);
 
         order.productFormats.forEach(product => {

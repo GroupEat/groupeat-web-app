@@ -2,9 +2,10 @@ import _ from 'lodash';
 import Money from '../support/money.js';
 
 export default class GroupOrdersController {
-  constructor($scope, auth, restaurantsService, socket) {
+  constructor($scope, $state, auth, restaurantsService, socket) {
     'ngInject';
 
+    this.$state = $state;
     this.auth = auth;
     this.restaurantsService = restaurantsService;
 
@@ -36,5 +37,11 @@ export default class GroupOrdersController {
         return groupOrder;
       }), 'createdAt').reverse();
     });
+  }
+
+  goToOrder(groupOrder) {
+    if (groupOrder.closedAt) {
+      this.$state.go('dashboard.groupOrder', {groupOrderId: groupOrder.id});
+    }
   }
 }

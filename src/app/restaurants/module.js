@@ -5,7 +5,6 @@ import GroupOrdersController from './group-orders.controller.js';
 import DashboardController from './dashboard.controller.js';
 import PushExternalOrderController from './push-external-order.controller.js';
 import RestaurantsService from './restaurants.service.js';
-import foodrushDirective from './foodrush.directive.js';
 
 angular.module('groupeat.restaurants', [])
   .controller(GroupOrderController.name, GroupOrderController)
@@ -13,7 +12,6 @@ angular.module('groupeat.restaurants', [])
   .controller(DashboardController.name, DashboardController)
   .controller(PushExternalOrderController.name, PushExternalOrderController)
   .service('restaurantsService', RestaurantsService)
-  .directive('foodrush', foodrushDirective)
   .config($stateProvider => {
     'ngInject';
 

@@ -6,10 +6,9 @@
           <th ng-repeat="header in [
             'id',
             'productFormatsCount',
-            'discountRate',
             'totalDiscountedPrice',
             'createdAt',
-            'foodrush'
+            'closedAt'
           ]">
             {{ header | title }}
           </th>
@@ -19,15 +18,12 @@
         <tr ng-repeat="groupOrder in vm.groupOrders"
             ng-class="(groupOrder.confirmed ? 'closed' : (groupOrder.unconfirmed ? 'unconfirmed' : 'opened'))
               + '-group-order'"
-            ui-sref="dashboard.groupOrder({groupOrderId: groupOrder.id})">
+            ng-click="vm.goToOrder(groupOrder)">
           <td data-title="{{ 'id' | title }}">
             {{ groupOrder.id }}
           </td>
           <td data-title="{{ 'productFormatsCount' | title }}">
             {{ groupOrder.productFormatsCount }}
-          </td>
-          <td data-title="{{ 'discountRate' | title }}">
-            {{ groupOrder.discountRate }} %
           </td>
           <td data-title="{{ 'totalDiscountedPrice' | title }}">
             {{ groupOrder.totalDiscountedPrice.toString() }}
@@ -35,8 +31,8 @@
           <td data-title="{{ 'createdAt' | title }}">
             <time-ago date="groupOrder.createdAt" />
           </td>
-          <td data-title="{{ 'foodrush' | title }}">
-            <foodrush group-order="groupOrder" />
+          <td data-title="{{ 'closedAt' | title }}">
+            <time-ago date="groupOrder.closedAt || groupOrder.endingAt" />
           </td>
         </tr>
       </tbody>

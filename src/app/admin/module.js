@@ -15,5 +15,12 @@ angular.module('groupeat.admin', [])
         data: {
           authorizedUser: userTypes.admin
         }
+      })
+      .state('analytics', {
+        url: '/analytics',
+        template: '',
+        controller: () => {
+          window.location = `${window.location.origin}:8000`;
+        }
       });
   });

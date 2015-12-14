@@ -47,7 +47,7 @@ var conf = {
   ],
   testsPaths: ['tests/**/*.js'],
   es5testsRoot: 'dist-tests/',
-  localHost: 'http://groupeat.dev',
+  localHost: 'http://app.groupeat.dev',
   productionHost: 'groupeat.fr',
   stagingHost: 'staging.groupeat.fr',
   production: gutil.env.production !== undefined,

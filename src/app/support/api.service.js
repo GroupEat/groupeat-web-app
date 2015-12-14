@@ -1,9 +1,10 @@
 export default class ApiService {
-  constructor(auth, $http) {
+  constructor(auth, $http, $window) {
     'ngInject';
 
     this.auth = auth;
     this.$http = $http;
+    this.baseUrl = `${$window.location.origin.replace('app.', '')}/api`;
   }
 
   get(url) {
@@ -41,7 +42,7 @@ export default class ApiService {
   send(method, url, data) {
     let request = {
       method,
-      url: `/api/${url}`,
+      url: `${this.baseUrl}/${url}`,
       headers: {
         Accept: 'application/vnd.groupeat.v1+json'
       }

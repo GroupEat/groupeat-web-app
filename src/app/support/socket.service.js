@@ -2,7 +2,7 @@ import _ from 'lodash';
 import io from 'socket.io-client';
 
 export default class SocketService {
-  constructor(notifier, auth) {
+  constructor(broadcastUrl, notifier, auth) {
     'ngInject';
 
     this.notifier = notifier;
@@ -10,7 +10,7 @@ export default class SocketService {
     this.queuedListeners = [];
 
     if (auth.isLoggedIn()) {
-      const socket = io.connect(`${window.location.origin}:3000`);
+      const socket = io.connect(broadcastUrl);
       socket.on('connect', () => {
         socket.emit('authentication', {token: auth.getToken()});
         socket.on('authenticated', () => {

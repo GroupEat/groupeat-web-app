@@ -241,7 +241,7 @@ gulp.task('watch', () => {
 gulp.task('rsync', () =>
   gulp.src(conf.browserRoot)
     .pipe(rsync({
-      destination: '~/frontend',
+      destination: '~/app',
       root: '.',
       hostname: conf.env.host,
       username: 'vagrant',

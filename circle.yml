@@ -1,7 +1,7 @@
 machine:
   node:
     version:
-      4.1.0
+      5.1.0
 
 dependencies:
   pre:
@@ -12,7 +12,7 @@ dependencies:
 
 test:
   pre:
-    - gulp build --test
+    - gulp build --env test
     - ./node_modules/protractor/bin/webdriver-manager start:
         background: true
     - ./node_modules/superstatic/bin/server:
@@ -26,8 +26,8 @@ deployment:
   production:
     branch: production
     commands:
-      - gulp deploy --production
+      - gulp deploy --env production
   staging:
     branch: staging
     commands:
-      - gulp deploy --staging
+      - gulp deploy --env staging

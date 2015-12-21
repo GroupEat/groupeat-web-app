@@ -1,5 +1,5 @@
 /* global browser by element expect it */
-export const apiUrl = path => `/api/${path}`;
+export const apiUrl = path => `API_BASE_URL/${path}`;
 
 export const translate = key => {
   const translations = require('../../src/assets/translations/fr.json');

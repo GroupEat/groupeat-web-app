@@ -1,9 +1,10 @@
 export default class ApiService {
-  constructor(auth, $http) {
+  constructor(apiBaseUrl, auth, $http) {
     'ngInject';
 
     this.auth = auth;
     this.$http = $http;
+    this.baseUrl = apiBaseUrl;
   }
 
   get(url) {
@@ -26,10 +27,22 @@ export default class ApiService {
     return this.send('DELETE', url, data);
   }
 
+  config(key) {
+    if (this.configValues) {
+      return Promise.resolve(this.configValues[key]);
+    }
+
+    return this.get('config').then(response => {
+      this.configValues = response.data.data;
+
+      return this.configValues[key];
+    });
+  }
+
   send(method, url, data) {
     let request = {
       method,
-      url: `/api/${url}`,
+      url: `${this.baseUrl}/${url}`,
       headers: {
         Accept: 'application/vnd.groupeat.v1+json'
       }

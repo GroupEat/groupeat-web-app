@@ -37,21 +37,25 @@ const environments = {
   test: {
     entryPath: './src/app/app.test.js',
     host: 'groupeat.dev',
+    broadcastUrl: 'http://groupeat.dev:3000',
     apiBaseUrl: 'http://groupeat.dev/api'
   },
   development: {
     entryPath: './src/app/app.js',
     host: 'groupeat.dev',
+    broadcastUrl: 'http://groupeat.dev:3000',
     apiBaseUrl: 'http://groupeat.dev/api'
   },
   staging: {
     entryPath: './src/app/app.js',
     host: 'staging.groupeat.fr',
+    broadcastUrl: 'https://staging.groupeat.fr:3000',
     apiBaseUrl: 'https://staging.groupeat.fr/api'
   },
   production: {
     entryPath: './src/app/app.js',
     host: 'groupeat.fr',
+    broadcastUrl: 'https://groupeat.fr:3000',
     apiBaseUrl: 'https://groupeat.fr/api'
   }
 };
@@ -96,6 +100,7 @@ const rebundle = bundler =>
       mangle: false
     })))) // TODO: understand why mangle breaks the dashboard
     .pipe(replace('API_BASE_URL', conf.env.apiBaseUrl))
+    .pipe(replace('BROADCAST_URL', conf.env.broadcastUrl))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload());
 

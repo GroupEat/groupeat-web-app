@@ -57,6 +57,7 @@
             'productFormats',
             'customer',
             'deliveryAddress',
+            'comment',
             'discountedPrice'
           ]">
           {{ header | title }}
@@ -82,6 +83,9 @@
         </td>
         <td data-title="{{ 'deliveryAddress' | title }}">
           {{ order.deliveryAddress.toString() }}
+        </td>
+        <td data-title="{{ 'comment' | title }}">
+          {{ order.comment }}
         </td>
         <td data-title="{{ 'discountedPrice' | title }}">
           {{ order.discountedPrice.toString() }}

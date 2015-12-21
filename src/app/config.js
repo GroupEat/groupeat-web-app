@@ -67,6 +67,7 @@ angular.module('groupeat.config', [
     $urlRouterProvider.otherwise('/');
   })
   .constant('apiBaseUrl', 'API_BASE_URL')
+  .constant('broadcastUrl', 'BROADCAST_URL')
   .run(amMoment => {
     'ngInject';
 

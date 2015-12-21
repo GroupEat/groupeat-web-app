@@ -57,5 +57,9 @@
   },
   "browser": {
     "angular-auto-validate": "./node_modules/angular-auto-validate/dist/jcs-auto-validate.js"
-  }
+  },
+  "engines": {
+    "node": ">=4.1.2",
+    "npm": ">=3.3.9"
+  },
 }

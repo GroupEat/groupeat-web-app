@@ -46,6 +46,7 @@
   "discountedPrice": "prix à payer",
   "closedAt": "finie",
   "preparedAt": "début de livraison",
+  "comment": "commentaire",
 
   "clientDetails": "détails du client",
   "orderDetails": "détails de la commande",

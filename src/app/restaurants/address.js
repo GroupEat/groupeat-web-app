@@ -20,12 +20,9 @@ export default class Address {
   }
 
   isProto204(details) { // TODO: remove when Proto event is done
-    console.log(details);
     if (!details) {
       return false;
     }
-
-    console.log(details);
 
     return details.match(/(#|@)(proto|proto204|kite)\b/i);
   }

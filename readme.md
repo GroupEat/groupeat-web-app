@@ -25,5 +25,5 @@ Follow as much as possible these popular [Angular](https://github.com/johnpapa/a
 
 # Testing
 
- - `gulp build --test`
+ - `gulp build --env test`
  - `gulp test`

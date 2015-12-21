@@ -1,10 +1,10 @@
 export default class ApiService {
-  constructor(auth, $http, $window) {
+  constructor(apiBaseUrl, auth, $http) {
     'ngInject';
 
     this.auth = auth;
     this.$http = $http;
-    this.baseUrl = `${$window.location.origin.replace('app.', '')}/api`;
+    this.baseUrl = apiBaseUrl;
   }
 
   get(url) {

@@ -19,6 +19,7 @@ const ngAnnotate = require('gulp-ng-annotate');
 const openBrowser = require('gulp-open');
 const plumber = require('gulp-plumber');
 const protractor = require('gulp-angular-protractor');
+const replace = require('gulp-replace');
 const rsync = require('gulp-rsync');
 const runSequence = require('run-sequence');
 const sass = require('gulp-sass');
@@ -30,10 +31,35 @@ const watchify = require('watchify');
 
 const superstaticConf = require('./superstatic.json');
 
-var conf = {
+const environments = {
+  test: {
+    entryPath: './src/app/app.test.js',
+    host: 'groupeat.dev',
+    apiBaseUrl: 'http://groupeat.dev/api'
+  },
+  development: {
+    entryPath: './src/app/app.js',
+    host: 'groupeat.dev',
+    apiBaseUrl: 'http://groupeat.dev/api'
+  },
+  staging: {
+    entryPath: './src/app/app.js',
+    host: 'staging.groupeat.fr',
+    apiBaseUrl: 'https://staging.groupeat.fr/api'
+  },
+  production: {
+    entryPath: './src/app/app.js',
+    host: 'groupeat.fr',
+    apiBaseUrl: 'https://groupeat.fr/api'
+  }
+};
+
+const envName = gutil.env.env || 'development';
+const env = environments[envName];
+env.name = envName
+
+const conf = {
   browserRoot: 'dist/',
-  mainEntryPath: './src/app/app.js',
-  testEntryPath: './src/app/app.test.js',
   scssPaths: [
     './node_modules/angular-loading-bar/build/loading-bar.css',
     './node_modules/angular-material/angular-material.css',
@@ -47,20 +73,15 @@ var conf = {
   ],
   testsPaths: ['tests/**/*.js'],
   es5testsRoot: 'dist-tests/',
-  localHost: 'http://app.groupeat.dev',
-  productionHost: 'groupeat.fr',
-  stagingHost: 'staging.groupeat.fr',
-  production: gutil.env.production !== undefined,
-  staging: gutil.env.staging !== undefined,
-  test: gutil.env.test !== undefined
+  env: env
 };
+
 
 conf.browserEntryPoint = conf.browserRoot + 'index.html';
 conf.scriptsPaths = [].concat.apply(['src/app/**/*.js'], conf.testsPaths);
-conf.entryPath = conf.test ? conf.testEntryPath : conf.mainEntryPath;
 
-var inDev = !(conf.test || conf.production || conf.staging);
-const distantHost = conf.production ? conf.productionHost : conf.stagingHost;
+let inDev = conf.env.name === 'development';
+let inTest = conf.env.name === 'test';
 
 const rebundle = bundler =>
   bundler
@@ -71,12 +92,13 @@ const rebundle = bundler =>
     .pipe(ngAnnotate())
     .pipe(gulpif(!inDev, streamify(uglify({
       mangle: false
-    })))) // TODO understand why mangle breaks the dashboard
+    })))) // TODO: understand why mangle breaks the dashboard
+    .pipe(replace('API_BASE_URL', conf.env.apiBaseUrl))
     .pipe(gulp.dest(conf.browserRoot))
     .pipe(livereload());
 
 const bundle = watch => {
-  var bundler = browserify(conf.entryPath, {
+  var bundler = browserify(conf.env.entryPath, {
     cache: {},
     packageCache: {},
     insertGlobals: true,
@@ -98,14 +120,13 @@ gulp.task('default', ['scss', 'views', 'assets'], callback =>
     'fonts',
     'inject-livereload',
     'watch',
-    'openBrowser',
     callback)
 );
 
 gulp.task('build', callback => {
   var tasks = ['scripts', 'scss', 'views', 'assets'];
 
-  if (conf.test) {
+  if (inTest) {
     tasks.push('build-tests');
   }
 
@@ -133,13 +154,6 @@ gulp.task('test', () =>
   )
 );
 
-gulp.task('openBrowser', () =>
-  gulp.src(conf.browserEntryPoint)
-    .pipe(openBrowser('', {
-      url: conf.localHost
-    }))
-);
-
 gulp.task('inject-livereload', () =>
   gulp.src(conf.browserEntryPoint)
     .pipe(footer('<script src="http://127.0.0.1:35729/livereload.js?ext=Chrome"></script>'))
@@ -158,6 +172,7 @@ gulp.task('build-tests', () =>
   gulp.src(conf.testsPaths)
     .pipe(plumber())
     .pipe(babel())
+    .pipe(replace('API_BASE_URL', conf.env.apiBaseUrl))
     .pipe(gulp.dest(conf.es5testsRoot))
 );
 
@@ -214,7 +229,7 @@ gulp.task('watch', () => {
   gulp.watch(conf.viewsPaths, ['views']);
   gulp.watch(conf.assetsPaths, ['assets']);
 
-  if (conf.test) {
+  if (inTest) {
     gulp.watch(conf.testsPaths, ['build-tests']);
   }
 
@@ -228,7 +243,7 @@ gulp.task('rsync', () =>
     .pipe(rsync({
       destination: '~/frontend',
       root: '.',
-      hostname: distantHost,
+      hostname: conf.env.host,
       username: 'vagrant',
       incremental: true,
       progress: true,

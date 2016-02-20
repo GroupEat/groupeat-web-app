@@ -38,6 +38,7 @@
   "discountRate": "réduction",
   "totalDiscountedPrice": "prix total",
   "createdAt": "créée",
+  "promotions": "promotions",
 
   "orderSummary": "Récapitulatif de la commande",
   "productFormats": "pizzas",

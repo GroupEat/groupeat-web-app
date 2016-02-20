@@ -25,15 +25,15 @@ angular.module('groupeat.restaurants', [])
           authorizedUser: userTypes.restaurant
         }
       })
-      .state('dashboard.groupOrder', {
-        url: '/groupOrder/:groupOrderId',
-        templateUrl: 'restaurants/group-order.html',
-        controller: `${GroupOrderController.name} as vm`
-      })
       .state('dashboard.groupOrders', {
         url: '/groupOrders',
         templateUrl: 'restaurants/group-orders.html',
         controller: `${GroupOrdersController.name} as vm`
+      })
+      .state('dashboard.groupOrder', {
+        url: '/groupOrders/:groupOrderId',
+        templateUrl: 'restaurants/group-order.html',
+        controller: `${GroupOrderController.name} as vm`
       })
       .state('dashboard.pushExternalOrder', {
         url: '/pushExternalOrder',

@@ -44,7 +44,7 @@ export default class RestaurantsService {
 
   getGroupOrder(groupOrderId) {
     return this.api.get(
-      `groupOrders/${groupOrderId}?include=orders.productFormats,orders.customer,orders.deliveryAddress`
+      `groupOrders/${groupOrderId}?include=orders.productFormats,orders.customer,orders.deliveryAddress,orders.restaurantPromotions`
     ).then(response => this.flattenGroupOrder(response.data.data));
   }
 
@@ -64,6 +64,14 @@ export default class RestaurantsService {
 
         return productFormat;
       });
+
+      order.promotions = [];
+
+      if (order.restaurantPromotions) {
+        order.promotions = order.restaurantPromotions.data.map(restaurantPromotion => {
+          return restaurantPromotion.name;
+        });
+      }
 
       return order;
     });

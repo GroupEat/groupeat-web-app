@@ -58,6 +58,7 @@
             'customer',
             'deliveryAddress',
             'comment',
+            'promotions',
             'discountedPrice'
           ]">
           {{ header | title }}
@@ -87,7 +88,10 @@
         <td data-title="{{ 'comment' | title }}">
           {{ order.comment }}
         </td>
-        <td data-title="{{ 'discountedPrice' | title }}">
+        <td data-title="{{ 'promotions' | title }}">
+          {{ order.promotions.join(', ') }}
+        </td>
+        <td data-title="{{ 'discountedPrice' | title }}" class="md-primary">
           {{ order.discountedPrice.toString() }}
         </td>
       </tr>

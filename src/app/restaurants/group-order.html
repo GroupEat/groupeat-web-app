@@ -5,12 +5,14 @@
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
-            <th ng-repeat="header in [
-              'productFormats',
-              'createdAt',
-              'closedAt',
-              'preparedAt'
-            ]">
+            <th
+              ng-repeat="header in [
+                'productFormats',
+                'createdAt',
+                'closedAt',
+                'preparedAt'
+              ]"
+            />
               {{ header | title }}
             </th>
           </tr>
@@ -18,13 +20,13 @@
         <tbody>
           <tr>
             <td data-title="{{ 'productFormats' | title }}">
-              <span ng-repeat="(productName, formats) in vm.productFormats">
-                {{ productName | capitalize:'first' }} :
-                <span ng-repeat="(formatName, quantity) in formats">
-                  {{ quantity }} {{ formatName }}{{ $last ? '' : ', ' }}
+                <span ng-repeat="(productName, formats) in vm.productFormats">
+                  {{ productName | capitalize:'first' }} :
+                  <span ng-repeat="(formatName, quantity) in formats">
+                    {{ quantity }} {{ formatName }}{{ $last ? '' : ', ' }}
+                  </span>
+                  <br />
                 </span>
-                <br>
-              </span>
             </td>
             <td data-title="{{ 'createdAt' | title }}">
               <time-ago date="vm.groupOrder.createdAt" />
@@ -39,8 +41,12 @@
         </tbody>
       </table>
     </div>
-    <div ng-show="vm.groupOrder.closedAt && !vm.groupOrder.confirmed"
-         class="md-actions" layout="row" layout-align="end center">
+    <div
+      ng-show="vm.groupOrder.closedAt && !vm.groupOrder.confirmed"
+      class="md-actions"
+      layout="row"
+      layout-align="end center"
+    />
       <md-button class="md-raised md-primary" ui-sref="confirm({groupOrderId: vm.groupOrderId})">
         {{ 'confirmGroupOrderTitle' | title }}
       </md-button>
@@ -51,50 +57,52 @@
   <div class="table-responsive-vertical">
     <table class="table table-hover table-bordered">
       <thead>
-      <tr>
-        <th ng-repeat="header in [
-            'id',
-            'productFormats',
-            'customer',
-            'deliveryAddress',
-            'comment',
-            'promotions',
-            'discountedPrice'
-          ]">
-          {{ header | title }}
-        </th>
-      </tr>
+        <tr>
+          <th
+            ng-repeat="header in [
+              'id',
+              'productFormats',
+              'customer',
+              'deliveryAddress',
+              'comment',
+              'promotions',
+              'discountedPrice'
+            ]"
+          />
+            {{ header | title }}
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="order in vm.orders">
-        <td data-title="{{ 'id' | title }}">
-          {{ order.id }}
-        </td>
-        <td data-title="{{ 'productFormats' | title }}">
-          <span ng-repeat="product in order.productFormats">
-            {{ product.name | capitalize:'first' }} :
-            <span ng-repeat="format in product.formats">{{ format.quantity }} {{ format.name }}{{ $last ? '' : ', ' }}</span>
-            <br>
-          </span>
-        </td>
-        <td data-title="{{ 'customer' | title }}">
-          {{ order.customer.firstName }}
-          {{ order.customer.lastName }}
-          ({{ order.customer.phoneNumber.toString() }})
-        </td>
-        <td data-title="{{ 'deliveryAddress' | title }}">
-          {{ order.deliveryAddress.toString() }}
-        </td>
-        <td data-title="{{ 'comment' | title }}">
-          {{ order.comment }}
-        </td>
-        <td data-title="{{ 'promotions' | title }}">
-          {{ order.promotions.join(', ') }}
-        </td>
-        <td data-title="{{ 'discountedPrice' | title }}" class="md-primary">
-          {{ order.discountedPrice.toString() }}
-        </td>
-      </tr>
+        <tr ng-repeat="order in vm.orders">
+          <td data-title="{{ 'id' | title }}">
+            {{ order.id }}
+          </td>
+          <td data-title="{{ 'productFormats' | title }}">
+            <span ng-repeat="product in order.productFormats">
+              {{ product.name | capitalize:'first' }} :
+              <span ng-repeat="format in product.formats">{{ format.quantity }} {{ format.name }}{{ $last ? '' : ', ' }}</span>
+              <br />
+            </span>
+          </td>
+          <td data-title="{{ 'customer' | title }}">
+            {{ order.customer.firstName }}
+            {{ order.customer.lastName }}
+            ({{ order.customer.phoneNumber.toString() }})
+          </td>
+          <td data-title="{{ 'deliveryAddress' | title }}">
+            {{ order.deliveryAddress.toString() }}
+          </td>
+          <td data-title="{{ 'comment' | title }}">
+            {{ order.comment }}
+          </td>
+          <td data-title="{{ 'promotions' | title }}">
+            {{ order.promotions.join(', ') }}
+          </td>
+          <td data-title="{{ 'discountedPrice' | title }}" class="md-primary">
+            {{ order.discountedPrice.toString() }}
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

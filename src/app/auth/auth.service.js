@@ -26,7 +26,7 @@ export default class auth {
   logIn(email, password) {
     return this.$injector.get('api').send('PUT', 'auth/token', {
       email,
-      password
+      password,
     })
       .then(response => {
         const data = response.data.data;
@@ -86,6 +86,6 @@ export default class auth {
   }
 
   redirectToState(state) {
-    this.$window.location.href = this.$state.href(state, {}, {absolute: true});
+    this.$window.location.href = this.$state.href(state, {}, { absolute: true });
   }
 }

@@ -3,24 +3,16 @@ machine:
     version:
       5.1.0
 
-dependencies:
-  pre:
-    - npm install -g gulp
-  post:
-    - npm install gulp-sass
-    - ./node_modules/protractor/bin/webdriver-manager update --standalone
-
 test:
   pre:
-    - gulp build --env test
-    - ./node_modules/protractor/bin/webdriver-manager start:
+    - ./node_modules/.bin/webdriver-manager start:
         background: true
-    - ./node_modules/superstatic/bin/server:
+    - npm run start -- --env test --optimize:
         background: true
+    - npm run test:compile -- --optimize
     - sleep 5
   override:
-    - gulp eslint
-    - ./node_modules/protractor/bin/protractor
+    - npm test
 
 deployment:
   production:

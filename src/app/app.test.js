@@ -4,5 +4,5 @@ import './modules';
 
 angular.module('groupeat', [
   'groupeat.config.test',
-  'groupeat.modules'
+  'groupeat.modules',
 ]);

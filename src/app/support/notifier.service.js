@@ -16,7 +16,7 @@ export default class NotifierService {
 
   notify() {
     if (!this.tabFocused) {
-      new Audio('/sounds/notification.wav').play();
+      new Audio(require('./assets/notification.wav')).play();
       this.favicon.increment();
     }
   }

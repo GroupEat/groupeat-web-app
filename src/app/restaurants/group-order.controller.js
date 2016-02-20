@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Address from './address.js';
-import Money from '../support/money.js';
+import Address from './address';
+import Money from '../support/money';
 
 export default class GroupOrderController {
   constructor($scope, $stateParams, restaurantsService, socket) {
@@ -12,7 +12,7 @@ export default class GroupOrderController {
     socket.on($scope, [
       'GroupOrderHasBeenClosed',
       'GroupOrderHasBeenConfirmed',
-      'GroupOrderHasBeenJoined'
+      'GroupOrderHasBeenJoined',
     ], event => {
       const groupOrderId = event.order ? event.order.groupOrderId : event.groupOrder.id;
 
@@ -21,6 +21,8 @@ export default class GroupOrderController {
 
         return true;
       }
+
+      return false;
     });
 
     this.loadGroupOrder();
@@ -48,8 +50,8 @@ export default class GroupOrderController {
               this.productFormats[product.name][format.name] = 0;
             }
 
-            this.productFormats[product.name][format.name] = this.productFormats[product.name][format.name]
-              + format.quantity;
+            this.productFormats[product.name][format.name] =
+              this.productFormats[product.name][format.name] + format.quantity;
           });
         });
 

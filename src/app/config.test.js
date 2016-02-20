@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-mocks';
 
 angular.module('groupeat.config.test', [
-  'ngMockE2E'
+  'ngMockE2E',
 ])
   .run($httpBackend => {
     'ngInject';

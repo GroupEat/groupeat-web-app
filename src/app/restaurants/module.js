@@ -1,10 +1,10 @@
 import angular from 'angular';
-import * as userTypes from '../auth/user-types.js';
-import GroupOrderController from './group-order.controller.js';
-import GroupOrdersController from './group-orders.controller.js';
-import DashboardController from './dashboard.controller.js';
-import PushExternalOrderController from './push-external-order.controller.js';
-import RestaurantsService from './restaurants.service.js';
+import * as userTypes from '../auth/user-types';
+import GroupOrderController from './group-order.controller';
+import GroupOrdersController from './group-orders.controller';
+import DashboardController from './dashboard.controller';
+import PushExternalOrderController from './push-external-order.controller';
+import RestaurantsService from './restaurants.service';
 
 angular.module('groupeat.restaurants', [])
   .controller(GroupOrderController.name, GroupOrderController)
@@ -18,26 +18,26 @@ angular.module('groupeat.restaurants', [])
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'restaurants/dashboard.html',
+        template: require('./dashboard.html'),
         controller: `${DashboardController.name} as dashboard`,
         redirectTo: 'dashboard.groupOrders',
         data: {
-          authorizedUser: userTypes.restaurant
-        }
+          authorizedUser: userTypes.restaurant,
+        },
       })
       .state('dashboard.groupOrders', {
         url: '/groupOrders',
-        templateUrl: 'restaurants/group-orders.html',
-        controller: `${GroupOrdersController.name} as vm`
+        template: require('./group-orders.html'),
+        controller: `${GroupOrdersController.name} as vm`,
       })
       .state('dashboard.groupOrder', {
         url: '/groupOrders/:groupOrderId',
-        templateUrl: 'restaurants/group-order.html',
-        controller: `${GroupOrderController.name} as vm`
+        template: require('./group-order.html'),
+        controller: `${GroupOrderController.name} as vm`,
       })
       .state('dashboard.pushExternalOrder', {
         url: '/pushExternalOrder',
-        templateUrl: 'restaurants/push-external-order.html',
-        controller: `${PushExternalOrderController.name} as vm`
+        template: require('./push-external-order.html'),
+        controller: `${PushExternalOrderController.name} as vm`,
       });
   });

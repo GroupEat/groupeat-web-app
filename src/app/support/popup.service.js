@@ -18,7 +18,10 @@ export default class PopupService {
   }
 
   error(content) {
-    this.makePopup(dialog => dialog.title(this.translate('errorPopupTitle')).content(this.translate(content)));
+    this.makePopup(dialog => dialog
+      .title(this.translate('errorPopupTitle'))
+      .content(this.translate(content))
+    );
   }
 
   defaultContentOnly(content) {

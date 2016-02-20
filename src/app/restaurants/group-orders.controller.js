@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Money from '../support/money.js';
+import Money from '../support/money';
 
 export default class GroupOrdersController {
   constructor($scope, $state, auth, restaurantsService, socket) {
@@ -13,7 +13,7 @@ export default class GroupOrdersController {
       'GroupOrderHasBeenClosed',
       'GroupOrderHasBeenCreated',
       'GroupOrderHasBeenConfirmed',
-      'GroupOrderHasBeenJoined'
+      'GroupOrderHasBeenJoined',
     ], () => {
       this.loadGroupOrders();
 
@@ -26,13 +26,14 @@ export default class GroupOrdersController {
   loadGroupOrders() {
     this.restaurantsService.getGroupOrders(this.auth.getUserId()).then(groupOrders => {
       this.groupOrders = _.sortBy(groupOrders.map(groupOrder => {
-        groupOrder.productFormatsCount = _.sum(groupOrder.orders, order =>
-            _.sum(order.productFormats, productFormat =>
-                _.sum(productFormat.formats, 'quantity')
+        groupOrder.productFormatsCount = _.sumBy(groupOrder.orders, order =>
+            _.sumBy(order.productFormats, productFormat =>
+                _.sumBy(productFormat.formats, 'quantity')
             )
         );
 
-        groupOrder.totalDiscountedPrice = new Money(groupOrder.totalRawPrice).applyDiscount(groupOrder.discountRate);
+        groupOrder.totalDiscountedPrice = new Money(groupOrder.totalRawPrice)
+          .applyDiscount(groupOrder.discountRate);
 
         return groupOrder;
       }), 'createdAt').reverse();
@@ -41,7 +42,7 @@ export default class GroupOrdersController {
 
   goToOrder(groupOrder) {
     if (groupOrder.closedAt) {
-      this.$state.go('dashboard.groupOrder', {groupOrderId: groupOrder.id});
+      this.$state.go('dashboard.groupOrder', { groupOrderId: groupOrder.id });
     }
   }
 }

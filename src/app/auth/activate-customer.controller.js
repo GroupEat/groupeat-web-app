@@ -4,7 +4,7 @@ export default class ActivateCustomerController {
 
     const token = $stateParams.token;
 
-    api.post('auth/activationTokens', {token})
+    api.post('auth/activationTokens', { token })
       .success(() => popup.default('activationSuccessTitle', 'activationSuccess'))
       .error(() => popup.default('activationErrorTitle', 'activationError'));
   }

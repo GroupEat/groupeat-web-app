@@ -10,10 +10,10 @@ export default class Address {
       return 'Proto204 (204 Rue André Ampère, 91440 Bures-sur-Yvette)';
     }
 
-    let str = this.street + ', ' + this.city;
+    let str = `${this.street}, ${this.city}`;
 
     if (this.details) {
-      str = str + ' (' + this.details + ')';
+      str = `${str} (${this.details})`;
     }
 
     return str;

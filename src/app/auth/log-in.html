@@ -11,22 +11,28 @@
       <form name="logInForm" class="groupeat-form" novalidate>
         <md-input-container>
           <label>{{ 'email' | title }}</label>
-          <input name="email"
-                 type="email"
-                 ng-model="vm.email"
-                 required>
+          <input
+            name="email"
+            type="email"
+            ng-model="vm.email"
+            required
+          />
         </md-input-container>
         <md-input-container>
           <label>{{ 'password' | title }}</label>
-          <input name="password"
-                 type="password"
-                 ng-model="vm.password"
-                 required>
+          <input
+            name="password"
+            type="password"
+            ng-model="vm.password"
+            required
+          />
         </md-input-container>
         <section layout="row" layout-sm="column" layout-align="center center">
-          <button class="groupeat-submit md-raised md-primary md-button md-default-theme"
-                  ng-click="vm.logIn()"
-                  ng-disabled="logInForm.$invalid">
+          <button
+            class="groupeat-submit md-raised md-primary md-button md-default-theme"
+            ng-click="vm.logIn()"
+            ng-disabled="logInForm.$invalid"
+          />
             <span>{{ 'logIn' | translate }}</span>
           </button>
         </section>

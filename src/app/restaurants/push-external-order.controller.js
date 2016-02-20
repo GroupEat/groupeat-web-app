@@ -15,9 +15,10 @@ export default class PushExternalOrderController {
     this.restaurantsService = restaurantsService;
 
     this.customer = {};
-    this.productFormats = [{format: {}, quantity: 1}];
+    this.productFormats = [{ format: {}, quantity: 1 }];
     this.deliveryAddress = {};
     this.deliveryAddressDetails = '';
+    this.deliveryAddressSearchText = '';
     this.comment = '';
 
     restaurantsService.getProductFormats(auth.getUserId()).then(productFormats => {
@@ -39,7 +40,7 @@ export default class PushExternalOrderController {
 
   productFormatChanged(index, format, quantity) {
     if (format && index === (this.productFormats.length - 1)) {
-      this.productFormats[index] = {format, quantity};
+      this.productFormats[index] = { format, quantity };
       this.productFormats.push(this.getEmptyProductFormat());
     }
   }
@@ -51,7 +52,7 @@ export default class PushExternalOrderController {
   getEmptyProductFormat() {
     return {
       format: {},
-      quantity: 1
+      quantity: 1,
     };
   }
 
@@ -71,12 +72,10 @@ export default class PushExternalOrderController {
     const deferred = this.$q.defer();
 
     this.predictAddress(input).then(predictions => {
-      deferred.resolve(predictions.map(prediction => {
-        return {
-          text: prediction.description,
-          placeId: prediction.place_id
-        };
-      }));
+      deferred.resolve(predictions.map(prediction => ({
+        text: prediction.description,
+        placeId: prediction.place_id,
+      })));
     });
 
     return deferred.promise;
@@ -86,7 +85,7 @@ export default class PushExternalOrderController {
     const deferred = this.$q.defer();
 
     if (input) {
-      this.addressAutocompleter.getPlacePredictions({input}, data => {
+      this.addressAutocompleter.getPlacePredictions({ input }, data => {
         deferred.resolve(data || []);
       });
     } else {
@@ -106,13 +105,13 @@ export default class PushExternalOrderController {
 
     const productFormats = this.getProductFormatsInBackendFormat();
 
-    this.geocoder.geocode({placeId: this.deliveryAddress.placeId}, places => {
+    this.geocoder.geocode({ placeId: this.deliveryAddress.placeId }, places => {
       const place = places[0];
       const deliveryAddress = {
         street: place.formatted_address.split(',')[0],
         details: this.deliveryAddressDetails,
         latitude: place.geometry.location.lat(),
-        longitude: place.geometry.location.lng()
+        longitude: place.geometry.location.lng(),
       };
 
       this.restaurantsService.pushExternalOrder(

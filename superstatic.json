@@ -1,8 +1,0 @@
-{
-  "port": 3474,
-  "debug": true,
-  "root": "dist",
-  "routes": {
-    "**": "index.html"
-  }
-}

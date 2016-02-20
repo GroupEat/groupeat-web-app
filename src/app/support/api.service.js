@@ -40,12 +40,12 @@ export default class ApiService {
   }
 
   send(method, url, data) {
-    let request = {
+    const request = {
       method,
       url: `${this.baseUrl}/${url}`,
       headers: {
-        Accept: 'application/vnd.groupeat.v1+json'
-      }
+        Accept: 'application/vnd.groupeat.v1+json',
+      },
     };
 
     if (method !== 'GET') {

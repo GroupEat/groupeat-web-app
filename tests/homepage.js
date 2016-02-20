@@ -13,6 +13,6 @@ describe('homepage', () => {
     browser.get(URL);
     const showcaseLogo = element(by.id('showcase-logo'));
     expect(showcaseLogo.isPresent()).toBe(true);
-    expect(showcaseLogo.getAttribute('src')).toContain('/img/logo.svg');
+    expect(showcaseLogo.getAttribute('src')).toContain('.svg');
   });
 });

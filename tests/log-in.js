@@ -44,7 +44,11 @@ describe('log in', () => {
   });
 
   it('should accept valid credentials', () => {
-    backend.whenPUT(helpers.apiUrl('auth/token')).respond(JSON.stringify({data: {token: 'uselessToken'}}));
+    backend.whenPUT(helpers.apiUrl('auth/token')).respond(JSON.stringify({
+      data: {
+        token: 'uselessToken',
+      },
+    }));
 
     browser.get(URL);
 
@@ -66,6 +70,7 @@ describe('log in', () => {
 
     button.click();
 
-    expect(element(by.tagName('body')).getText()).toContain(helpers.translate('authenticationError'));
+    expect(element(by.tagName('body')).getText())
+      .toContain(helpers.translate('authenticationError'));
   });
 });

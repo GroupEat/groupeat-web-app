@@ -15,7 +15,7 @@ export default class PasswordResetController {
     this.api.post('auth/password', {
       email: this.email,
       password: this.password,
-      token: this.token
+      token: this.token,
     })
       .success(() => this.popup.defaultContentOnly('resetPasswordSuccess'))
       .error(response => this.popup.default('errorDialogTitle', response.errorKey));

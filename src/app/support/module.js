@@ -1,13 +1,13 @@
 import angular from 'angular';
 import 'angular-capitalize-filter';
-import ApiService from './api.service.js';
-import ElementModifierService from './element-modifier.service.js';
-import FaviconService from './favicon.service.js';
-import NotifierService from './notifier.service.js';
-import PopupService from './popup.service.js';
-import SocketService from './socket.service.js';
-import timeAgoDirective from './time-ago.directive.js';
-import titleFilter from './title.filter.js';
+import ApiService from './api.service';
+import ElementModifierService from './element-modifier.service';
+import FaviconService from './favicon.service';
+import NotifierService from './notifier.service';
+import PopupService from './popup.service';
+import SocketService from './socket.service';
+import timeAgoDirective from './time-ago.directive';
+import titleFilter from './title.filter';
 
 angular.module('groupeat.support', ['angular-capitalize-filter'])
   .service('api', ApiService)

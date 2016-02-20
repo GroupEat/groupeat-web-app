@@ -1,5 +1,5 @@
 export default class LogOutController {
-  constructor($state, auth) {
+  constructor(auth) {
     'ngInject';
 
     auth.logOut();

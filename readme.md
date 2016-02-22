@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/GroupEat/groupeat-frontend/tree/staging.svg?style=svg&circle-token=778915449bc9c1f0798ca2e0a53c8fd9c890d3d5)](https://circleci.com/gh/GroupEat/groupeat-frontend/tree/staging)
+[![Circle CI](https://circleci.com/gh/GroupEat/groupeat-web-app/tree/staging.svg?style=svg&circle-token=778915449bc9c1f0798ca2e0a53c8fd9c890d3d5)](https://circleci.com/gh/GroupEat/groupeat-web-app/tree/staging)
 
 # Prerequisites
 

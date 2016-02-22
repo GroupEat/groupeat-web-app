@@ -25,7 +25,7 @@ module.exports = shipit => {
   );
 
   shipit.blTask('install', () => shipit
-      .remote(`cd ${shipit.releasePath} && npm instal && npm run build --optimize`)
+      .remote(`cd ${shipit.releasePath} && npm instal && npm run build -- --env ${shipit.config.branch} --optimize`)
       .then(() => {
         shipit.log('Install Done!');
       })

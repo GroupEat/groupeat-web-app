@@ -1,5 +1,6 @@
 module.exports = {
   test: {
+    port: 3474,
     entry: './src/app/app.test.js',
     definitions: {
       'process.env.API_BASE_URL': '"http://mock/api"',
@@ -7,6 +8,7 @@ module.exports = {
     },
   },
   development: {
+    port: 8080,
     entry: './src/app/app.js',
     definitions: {
       'process.env.API_BASE_URL': '"http://groupeat.dev/api"',
@@ -14,6 +16,7 @@ module.exports = {
     },
   },
   staging: {
+    port: 8080,
     entry: './src/app/app.js',
     definitions: {
       'process.env.API_BASE_URL': '"http://staging.groupeat.fr/api"',
@@ -21,6 +24,7 @@ module.exports = {
     },
   },
   production: {
+    port: 8080,
     entry: './src/app/app.js',
     definitions: {
       'process.env.API_BASE_URL': '"http://groupeat.fr/api"',

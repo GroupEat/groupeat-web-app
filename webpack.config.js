@@ -6,7 +6,7 @@ const getConfig = require('./webpack.common.config');
 const env = require('./env')[argv.env || 'development'];
 
 if (argv.optimize) {
-  env.definitions['process.env.NODE_ENV'] = `'production'`;
+  env.definitions['process.env.NODE_ENV'] = '"production"';
 }
 
 const config = getConfig(env);
@@ -61,13 +61,10 @@ if (argv.optimize) {
 }
 
 config.devServer = {
+  port: env.port,
   inline: true,
   historyApiFallback: true,
 };
-
-if (argv.port) {
-  config.devServer.port = argv.port;
-}
 
 config.htmlhint = {
   failOnError: argv.optimize,

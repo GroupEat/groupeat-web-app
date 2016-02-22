@@ -9,7 +9,7 @@
     "test:clean": "rm -rf ./dist-test",
     "pretest:build": "npm run test:clean",
     "test:build": "webpack --config webpack.test.config.js",
-    "test:watch": "concurrently 'webdriver-manager update --standalone && webdriver-manager start' 'npm run start -- --env test --port 3474' 'npm run test:build -- --watch'",
+    "test:watch": "concurrently 'webdriver-manager update --standalone && webdriver-manager start' 'npm run start -- --env test' 'npm run test:build -- --watch'",
     "test": "protractor",
     "postinstall": "npm prune"
   },

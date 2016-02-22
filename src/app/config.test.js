@@ -9,7 +9,7 @@ angular.module('groupeat.config.test', [
 
     const httpMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
-    httpMethods.map(method => {
+    httpMethods.forEach(method => {
       $httpBackend.when(method, url => !url.includes('/api/')).passThrough();
     });
   });

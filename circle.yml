@@ -18,8 +18,8 @@ deployment:
   production:
     branch: production
     commands:
-      - gulp deploy --env production
+      - ./node_modules/.bin/shipit production deploy
   staging:
     branch: staging
     commands:
-      - gulp deploy --env staging
+      - ./node_modules/.bin/shipit staging deploy

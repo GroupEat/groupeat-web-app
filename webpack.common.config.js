@@ -1,7 +1,7 @@
 const argv = require('yargs').argv;
 const webpack = require('webpack');
 
-const getConfig = env => ({
+module.exports = env => ({
   module: {
     loaders: [
       {
@@ -30,5 +30,3 @@ const getConfig = env => ({
     failOnError: argv.optimize,
   },
 });
-
-module.exports = getConfig;

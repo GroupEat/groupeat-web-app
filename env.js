@@ -19,16 +19,16 @@ module.exports = {
     port: 8080,
     entry: './src/app/app.js',
     definitions: {
-      'process.env.API_BASE_URL': '"http://staging.groupeat.fr/api"',
-      'process.env.BROADCAST_URL': '"http://staging.groupeat.fr:3000"',
+      'process.env.API_BASE_URL': '"https://staging.groupeat.fr/api"',
+      'process.env.BROADCAST_URL': '"https://staging.groupeat.fr:3000"',
     },
   },
   production: {
     port: 8080,
     entry: './src/app/app.js',
     definitions: {
-      'process.env.API_BASE_URL': '"http://groupeat.fr/api"',
-      'process.env.BROADCAST_URL': '"http://groupeat.fr:3000"',
+      'process.env.API_BASE_URL': '"https://groupeat.fr/api"',
+      'process.env.BROADCAST_URL': '"https://groupeat.fr:3000"',
     },
   },
 };

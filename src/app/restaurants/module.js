@@ -3,6 +3,7 @@ import * as userTypes from '../auth/user-types';
 import GroupOrderController from './group-order.controller';
 import GroupOrdersController from './group-orders.controller';
 import DashboardController from './dashboard.controller';
+import orderedProductFormatsDirective from './ordered-product-formats.directive';
 import PushExternalOrderController from './push-external-order.controller';
 import RestaurantsService from './restaurants.service';
 
@@ -10,6 +11,7 @@ angular.module('groupeat.restaurants', [])
   .controller(GroupOrderController.name, GroupOrderController)
   .controller(GroupOrdersController.name, GroupOrdersController)
   .controller(DashboardController.name, DashboardController)
+  .directive('orderedProductFormats', orderedProductFormatsDirective)
   .controller(PushExternalOrderController.name, PushExternalOrderController)
   .service('restaurantsService', RestaurantsService)
   .config($stateProvider => {

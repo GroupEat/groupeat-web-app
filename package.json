@@ -2,7 +2,6 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf ./dist",
-    "prestart": "npm run clean",
     "start": "webpack-dev-server",
     "prebuild": "npm run clean",
     "build": "webpack",

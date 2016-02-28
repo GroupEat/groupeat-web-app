@@ -43,7 +43,7 @@
   "orderSummary": "Récapitulatif de la commande",
   "productFormats": "pizzas",
   "customer": "client",
-  "deliveryAddress": "adresse de livraison",
+  "address": "adresse",
   "discountedPrice": "prix à payer",
   "closedAt": "finie",
   "preparedAt": "début de livraison",

@@ -39,62 +39,15 @@
       <i class="material-icons">assignment</i>
       {{ 'orderDetails' | title }}
     </h4>
-    <div layout="column" layout-gt-md="row" ng-repeat="productFormat in vm.productFormats">
-      <div flex="15">
-        <md-button
-          ng-disabled="$index === (vm.productFormats.length - 1)"
-          ng-click="vm.removeProductFormat($index)"
-        />
-          <md-tooltip>{{ 'removeProductFormat' | title }}</md-tooltip>
-          <i class="material-icons">remove_circle_outline</i>
-        </md-button>
-      </div>
-      <md-autocomplete
-        flex="55"
-        md-floating-label="{{ 'addProduct' | title }}"
-        md-selected-item="productFormat.format"
-        md-search-text-change="vm.filterProductFormats(productFormat.search)"
-        md-selected-item-change="vm.productFormatChanged($index, item, productFormat.quantity)"
-        md-search-text="productFormat.search"
-        md-items="item in vm.filterProductFormats(productFormat.search)"
-        md-item-text="item.text"
-        md-min-length="0"
-        required
-      />
-        <md-item-template>
-          <span md-highlight-text="productFormat.search" md-highlight-flags="^i">{{ item.text }}</span>
-        </md-item-template>
-      </md-autocomplete>
-      <md-input-container flex="30">
-        <label>{{ 'productFormatQuantity' | title }}</label>
-        <input
-          name="quantity"
-          type="number"
-          ng-model="productFormat.quantity"
-          min="1"
-          required
-        />
-      </md-input-container>
+    <div layout="column" layout-gt-md="row">
+      <ordered-product-formats flex available="vm.availableProductFormats" ordered="vm.orderedProductFormats" />
+    </div>
+    <br />
+    <br />
+    <div layout="column" layout-gt-md="row">
+      <address-autocomplete flex required address="vm.deliveryAddress" />
     </div>
     <div layout="column" layout-gt-md="row">
-      <md-autocomplete
-        flex
-        md-floating-label="{{ 'deliveryAddress' | title }}"
-        md-no-cache="true"
-        md-selected-item="vm.deliveryAddress"
-        md-search-text-change="vm.searchAddress(vm.deliveryAddressSearchText)"
-        md-selected-item-change="vm.deliveryAddressChanged(item)"
-        md-search-text="vm.deliveryAddressSearchText"
-        md-items="item in vm.searchAddress(vm.deliveryAddressSearchText)"
-        md-item-text="item.text"
-        md-min-length="1"
-        required
-      />
-        <md-item-template>
-          <span md-highlight-text="vm.deliveryAddressSearchText" md-highlight-flags="^i">{{ item.text }}</span>
-        </md-item-template>
-        <md-not-found>{{ 'noAddressFound' | translate }}</md-not-found>
-      </md-autocomplete>
       <md-input-container flex>
         <label>{{ 'addressDetails' | title }}</label>
         <input

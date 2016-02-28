@@ -9,7 +9,7 @@
         </h2>
       </md-toolbar>
       <form name="logInForm" class="groupeat-form" novalidate>
-        <md-input-container>
+        <md-input-container class="md-block">
           <label>{{ 'email' | title }}</label>
           <input
             name="email"
@@ -18,12 +18,13 @@
             required
           />
         </md-input-container>
-        <md-input-container>
+        <md-input-container class="md-block">
           <label>{{ 'password' | title }}</label>
           <input
             name="password"
             type="password"
             ng-model="vm.password"
+            autocomplete="off"
             required
           />
         </md-input-container>

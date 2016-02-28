@@ -1,5 +1,7 @@
 import angular from 'angular';
 import 'angular-capitalize-filter';
+
+import addressAutocompleteDirective from './address-autocomplete.directive';
 import ApiService from './api.service';
 import ElementModifierService from './element-modifier.service';
 import FaviconService from './favicon.service';
@@ -10,6 +12,7 @@ import timeAgoDirective from './time-ago.directive';
 import titleFilter from './title.filter';
 
 angular.module('groupeat.support', ['angular-capitalize-filter'])
+  .directive('addressAutocomplete', addressAutocompleteDirective)
   .service('api', ApiService)
   .service('elementModifier', ElementModifierService)
   .service('favicon', FaviconService)

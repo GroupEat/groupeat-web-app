@@ -70,14 +70,14 @@ md-select-menu {
 
 #loading-bar {
   .bar {
-    background: $loading-bar-color;
+    background: $loading-bar-color !important;
   }
 
   .peg {
-    -moz-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    -ms-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    box-shadow: $loading-bar-color 1px 0 6px 1px;
+    -moz-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    -ms-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    box-shadow: $loading-bar-color 1px 0 6px 1px !important;
   }
 }
 

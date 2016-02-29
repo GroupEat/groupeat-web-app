@@ -18,6 +18,8 @@ config.output = {
   filename: `${argv.optimize ? '[hash].' : ''}[name].js`,
 };
 
+const cssLoader = `css${argv.optimize ? '?minimize' : ''}`;
+
 config.module.loaders = config.module.loaders.concat([
   {
     test: /\.html$/,
@@ -25,11 +27,11 @@ config.module.loaders = config.module.loaders.concat([
   },
   {
     test: /\.scss/,
-    loader: 'style!css!sass',
+    loader: `style!${cssLoader}!sass`,
   },
   {
     test: /\.css/,
-    loader: 'style!css',
+    loader: `style!${cssLoader}`,
   },
   {
     test: /\.(eot|svg|ttf|wav|woff|woff2)/,
@@ -56,8 +58,6 @@ if (argv.optimize) {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
   ]);
-} else {
-  config.devtool = '#source-map';
 }
 
 config.devServer = {

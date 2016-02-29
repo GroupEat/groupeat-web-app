@@ -22,6 +22,7 @@ module.exports = env => ({
       },
     ],
   },
+  devtool: '#source-map',
   plugins: [
     new webpack.DefinePlugin(env.definitions),
   ],

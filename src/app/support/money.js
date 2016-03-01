@@ -12,7 +12,6 @@ export default class Money {
       style: 'currency',
       currency: 'EUR',
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
     });
   }
 }

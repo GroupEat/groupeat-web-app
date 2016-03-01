@@ -1,8 +1,8 @@
 /* global browser by element expect it */
-export const apiUrl = path => `API_BASE_URL/${path}`;
+export const apiUrl = path => `${process.env.API_BASE_URL}/${path}`;
 
 export const translate = key => {
-  const translations = require('../../src/assets/translations/fr.json');
+  const translations = require('../../src/translations/fr.json');
 
   return translations[key];
 };
@@ -16,17 +16,19 @@ export const shouldRequireAuthentication = testedUrl => {
     browser.get(testedUrl);
 
     browser.getLocationAbsUrl().then(url =>
-        expect(url).toBe(`/logIn`)
+        expect(url).toBe('/logIn')
     );
   });
 };
 
 export const browseAuthenticated = (testedUrl, backend, userType, callback) => {
-  backend.whenPUT(apiUrl('auth/token')).respond(JSON.stringify({data: {
-    id: 1,
-    type: userType,
-    token: 'uselessToken'
-  }}));
+  backend.whenPUT(apiUrl('auth/token')).respond(JSON.stringify({
+    data: {
+      id: 1,
+      type: userType,
+      token: 'uselessToken',
+    },
+  }));
 
   browser.get('logIn');
 

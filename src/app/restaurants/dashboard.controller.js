@@ -8,12 +8,12 @@ export default class DashboardController {
     this.menuItems = [
       {
         state: 'dashboard.groupOrders',
-        icon: 'history'
+        icon: 'history',
       },
       {
         state: 'dashboard.pushExternalOrder',
-        icon: 'add_circle_outline'
-      }
+        icon: 'add_circle_outline',
+      },
     ];
 
     restaurantsService.get(auth.getUserId()).then(restaurant => {

@@ -1,0 +1,17 @@
+<md-autocomplete
+  md-floating-label="{{ 'address' | title }}"
+  md-no-cache="true"
+  md-selected-item="selected"
+  md-search-text-change="search(input)"
+  md-selected-item-change="change(item.placeId)"
+  md-search-text="input"
+  md-items="item in search(input)"
+  md-item-text="item.text"
+  md-min-length="1"
+  required="required"
+>
+  <md-item-template>
+    <span md-highlight-text="input" md-highlight-flags="^i">{{ item.text }}</span>
+  </md-item-template>
+  <md-not-found>{{ 'noAddressFound' | translate }}</md-not-found>
+</md-autocomplete>

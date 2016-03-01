@@ -4,12 +4,16 @@
       <h1>GroupEat</h1>
     </md-button>
   </md-toolbar>
-  <md-button ng-repeat-start="item in dashboard.menuItems" layout-align="center center"
-  ui-sref-active="md-warn" ui-sref="{{ item.state }}">
+  <md-button
+    ng-repeat-start="item in dashboard.menuItems"
+    layout-align="center center"
+    ui-sref-active="md-warn"
+    ui-sref="{{ item.state }}"
+  />
     <div class="md-tile-content">
-        <i class="material-icons">{{ item.icon }}</i>
-        <br>
-        {{ (item.state + 'MenuTitle') | translate }}
+      <i class="material-icons">{{ item.icon }}</i>
+      <br />
+      {{ (item.state + 'MenuTitle') | translate }}
     </div>
   </md-button>
   <md-divider ng-repeat-end></md-divider>

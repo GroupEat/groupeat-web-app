@@ -1,6 +1,6 @@
 import angular from 'angular';
-import * as userTypes from '../auth/user-types.js';
-import DocsController from './docs.controller.js';
+import * as userTypes from '../auth/user-types';
+import DocsController from './docs.controller';
 
 angular.module('groupeat.admin', [])
   .controller(DocsController.name, DocsController)
@@ -10,17 +10,17 @@ angular.module('groupeat.admin', [])
     $stateProvider
       .state('docs', {
         url: '/docs',
-        templateUrl: 'admin/docs.html',
+        template: require('./docs.html'),
         controller: `${DocsController.name} as vm`,
         data: {
-          authorizedUser: userTypes.admin
-        }
+          authorizedUser: userTypes.admin,
+        },
       })
       .state('analytics', {
         url: '/analytics',
         template: '',
         controller: () => {
           window.location = `${window.location.origin}:8000`;
-        }
+        },
       });
   });

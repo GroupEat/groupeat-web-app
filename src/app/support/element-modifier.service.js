@@ -7,7 +7,7 @@ export default class ElementModifierService {
   }
 
   makeValid(element) {
-    let errors = this.dom.getElementById(`${element[0].id}-errors`);
+    const errors = this.dom.getElementById(`${element[0].id}-errors`);
 
     if (errors !== null) {
       errors.innerHTML = '';
@@ -16,19 +16,21 @@ export default class ElementModifierService {
 
   makeInvalid(element, errorMessage) {
     const firstElement = element[0];
-    let errorsId = `${firstElement.id}-errors`;
+    const errorsId = `${firstElement.id}-errors`;
 
     if (this.dom.getElementById(errorsId) === null) {
       const div = this.dom.createElement('div');
-      div.setAttribute('ng-messages', firstElement.form.name + '.' + firstElement.getAttribute('name') + '.$error');
+      div.setAttribute('ng-messages',
+        `{firstElement.form.name}.${firstElement.getAttribute('name')}.$error`
+      );
       div.setAttribute('class', 'ng-active');
       div.setAttribute('id', errorsId);
       firstElement.parentNode.appendChild(div);
     }
 
-    let errorsContainer = this.dom.getElementById(errorsId);
+    const errorsContainer = this.dom.getElementById(errorsId);
 
-    errorsContainer.innerHTML = '<div ng-message=\'error\' class=\'ng-scope\'>' + errorMessage + '</div>';
+    errorsContainer.innerHTML = `<div ng-message='error' class='ng-scope'>${errorMessage}</div>`;
   }
 
   makeDefault(el) {

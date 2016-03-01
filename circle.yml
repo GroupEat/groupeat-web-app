@@ -5,29 +5,29 @@ machine:
 
 dependencies:
   pre:
-    - npm install -g gulp
-  post:
-    - npm install gulp-sass
-    - ./node_modules/protractor/bin/webdriver-manager update --standalone
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - sudo apt-get update
+    - sudo apt-get install google-chrome-stable
 
 test:
   pre:
-    - gulp build --env test
-    - ./node_modules/protractor/bin/webdriver-manager start:
+    - ./node_modules/.bin/webdriver-manager update --standalone
+    - ./node_modules/.bin/webdriver-manager start:
         background: true
-    - ./node_modules/superstatic/bin/server:
+    - npm run start -- --env test --optimize:
         background: true
+    - npm run test:build -- --optimize
     - sleep 5
   override:
-    - gulp eslint
-    - ./node_modules/protractor/bin/protractor
+    - npm test
 
 deployment:
   production:
     branch: production
     commands:
-      - gulp deploy --env production
+      - ./node_modules/.bin/shipit production deploy
   staging:
     branch: staging
     commands:
-      - gulp deploy --env staging
+      - ./node_modules/.bin/shipit staging deploy

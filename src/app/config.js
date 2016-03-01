@@ -9,10 +9,7 @@ import 'angular-material';
 import 'angular-moment';
 import 'angular-translate';
 import 'angular-ui-router';
-import '../../node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local';
-import '../../node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie';
-import '../../node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files';
-import '../../node_modules/moment/locale/fr';
+import 'moment/locale/fr';
 
 angular.module('groupeat.config', [
   'angular-loading-bar',
@@ -22,7 +19,7 @@ angular.module('groupeat.config', [
   'ngCookies',
   'ngMaterial',
   'pascalprecht.translate',
-  'ui.router'
+  'ui.router',
 ])
   .config(cfpLoadingBarProvider => {
     'ngInject';
@@ -52,13 +49,9 @@ angular.module('groupeat.config', [
     'ngInject';
 
     $translateProvider
-      .useStaticFilesLoader({
-        prefix: '/translations/',
-        suffix: '.json'
-      })
+      .translations('fr', require('../translations/fr.json'))
       .preferredLanguage('fr')
       .fallbackLanguage(['fr'])
-      .useLocalStorage()
       .useSanitizeValueStrategy('escaped');
   })
   .config($urlRouterProvider => {
@@ -66,8 +59,8 @@ angular.module('groupeat.config', [
 
     $urlRouterProvider.otherwise('/');
   })
-  .constant('apiBaseUrl', 'API_BASE_URL')
-  .constant('broadcastUrl', 'BROADCAST_URL')
+  .constant('apiBaseUrl', process.env.API_BASE_URL)
+  .constant('broadcastUrl', process.env.BROADCAST_URL)
   .run(amMoment => {
     'ngInject';
 
@@ -88,6 +81,7 @@ angular.module('groupeat.config', [
 
     validator.registerDomModifier(elementModifier.key, elementModifier);
     validator.setDefaultElementModifier(elementModifier.key);
-    defaultErrorMessageResolver.setI18nFileRootPath('/translations');
-    defaultErrorMessageResolver.setCulture('fr-FR');
+    defaultErrorMessageResolver.setCulture('fr-FR', () => Promise.resolve({
+      data: require('../translations/jcs-auto-validate_fr-fr.json'),
+    }));
   });

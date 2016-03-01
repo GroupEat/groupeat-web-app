@@ -12,7 +12,7 @@ export default class SocketService {
     if (auth.isLoggedIn()) {
       const socket = io.connect(broadcastUrl);
       socket.on('connect', () => {
-        socket.emit('authentication', {token: auth.getToken()});
+        socket.emit('authentication', { token: auth.getToken() });
         socket.on('authenticated', () => {
           this.socket = socket;
           this.attachListeners();
@@ -22,7 +22,7 @@ export default class SocketService {
   }
 
   on($scope, events, callback) {
-    (_.isArray(events) ? events : [events]) .map(event => {
+    (_.isArray(events) ? events : [events]).forEach(event => {
       this.addListener($scope, event, callback);
     });
 
@@ -35,12 +35,12 @@ export default class SocketService {
 
   addListener($scope, event, callback) {
     const wrappedCallback = this.wrapCallback(event, callback);
-    this.queuedListeners.push({event, callback: wrappedCallback});
+    this.queuedListeners.push({ event, callback: wrappedCallback });
 
     $scope.$on('$destroy', () => {
-      const listenerStillQueuedIndex = this.queuedListeners.findIndex(listener => {
-        return listener.event === event && listener.callback === wrappedCallback;
-      });
+      const listenerStillQueuedIndex = this.queuedListeners.findIndex(
+        listener => listener.event === event && listener.callback === wrappedCallback
+      );
 
       if (listenerStillQueuedIndex > -1) {
         this.queuedListeners.splice(listenerStillQueuedIndex);

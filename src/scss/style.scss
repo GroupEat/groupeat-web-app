@@ -2,53 +2,53 @@
 @import 'table';
 
 body, #ui-router-container {
-    background-color: $body-background-color;
+  background-color: $body-background-color;
 }
 
 @media screen and (orientation: portrait) {
-    #showcase-logo {
-        max-width: 90%;
-    }
+  #showcase-logo {
+    max-width: 90%;
+  }
 }
 
 @media screen and (orientation: landscape) {
-    #showcase-logo {
-        max-height: 80%;
-    }
+  #showcase-logo {
+    max-height: 80%;
+  }
 }
 
 #showcase-logo {
-    position: absolute;
-    max-width: 90%;
-    top: 5%;
-    left: 5%;
+  position: absolute;
+  max-width: 90%;
+  top: 5%;
+  left: 5%;
 }
 
 #showcase-logo:empty {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 md-card {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 md-card.main {
   margin-top: 10em;
 }
 
-md-content.md-default-theme {
-    background-color: transparent !important;
+md-content {
+  background-color: transparent !important;
 }
 
 md-select {
-    width: 100%;
-    margin-bottom: 25px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
 md-select-menu {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 #dashboard-content {
@@ -60,24 +60,24 @@ md-select-menu {
 }
 
 .groupeat-form {
-    padding: 8px;
+  padding: 8px;
 }
 
 .groupeat-submit {
-    width: 100%;
-    height: 45px;
+  width: 100%;
+  height: 45px;
 }
 
 #loading-bar {
   .bar {
-    background: $loading-bar-color;
+    background: $loading-bar-color !important;
   }
 
   .peg {
-    -moz-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    -ms-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px;
-    box-shadow: $loading-bar-color 1px 0 6px 1px;
+    -moz-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    -ms-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    -webkit-box-shadow: $loading-bar-color 1px 0 6px 1px !important;
+    box-shadow: $loading-bar-color 1px 0 6px 1px !important;
   }
 }
 
@@ -99,7 +99,6 @@ md-sidenav.md-sidenav-left {
 
 #profile-menu {
   margin: 0;
-  background-color: $primary-color;
 }
 
 #profile-menu-content {

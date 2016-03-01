@@ -1,10 +1,10 @@
 import angular from 'angular';
 import 'angular-validation-match';
-import ActivateCustomerController from './activate-customer.controller.js';
-import AuthService from './auth.service.js';
-import LogInController from './log-in.controller.js';
-import LogOutController from './log-out.controller.js';
-import PasswordResetController from './password-reset.controller.js';
+import ActivateCustomerController from './activate-customer.controller';
+import AuthService from './auth.service';
+import LogInController from './log-in.controller';
+import LogOutController from './log-out.controller';
+import PasswordResetController from './password-reset.controller';
 
 angular.module('groupeat.auth', ['validation.match'])
   .controller(ActivateCustomerController.name, ActivateCustomerController)
@@ -18,23 +18,23 @@ angular.module('groupeat.auth', ['validation.match'])
     $stateProvider
       .state('activate', {
         url: '/auth/activate?token',
-        templateUrl: 'auth/activate.html',
-        controller: `${ActivateCustomerController.name} as vm`
+        template: require('./activate.html'),
+        controller: `${ActivateCustomerController.name} as vm`,
       })
       .state('logIn', {
         url: '/logIn',
-        templateUrl: 'auth/log-in.html',
-        controller: `${LogInController.name} as vm`
+        template: require('./log-in.html'),
+        controller: `${LogInController.name} as vm`,
       })
       .state('logOut', {
         url: '/logOut',
-        templateUrl: 'auth/log-out.html',
-        controller: `${LogOutController.name} as vm`
+        template: require('./log-out.html'),
+        controller: `${LogOutController.name} as vm`,
       })
       .state('passwordReset', {
         url: '/auth/password/reset?token',
-        templateUrl: 'auth/password-reset.html',
-        controller: `${PasswordResetController.name} as vm`
+        template: require('./password-reset.html'),
+        controller: `${PasswordResetController.name} as vm`,
       });
   })
   .run(($rootScope, auth) => {

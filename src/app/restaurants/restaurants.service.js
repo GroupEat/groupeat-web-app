@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Money from '../support/money.js';
-import PhoneNumber from '../support/phone-number.js';
+import Money from '../support/money';
+import PhoneNumber from '../support/phone-number';
 
 const ENDPOINT = 'restaurants';
 
@@ -18,22 +18,21 @@ export default class RestaurantsService {
 
   getProductFormats(restaurantId) {
     return this.api.get(`${ENDPOINT}/${restaurantId}/products?include=formats`)
-      .then(response => {
-        return _.flatten(response.data.data.map(product => {
-          return product.formats.data.map(format => {
-            format.product = _.pick(product, ['id', 'name', 'description']);
-            format.text = `${_.capitalize(product.name)} - ${format.name} (${new Money(format.price)})`;
+      .then(response => _.flatten(
+        response.data.data.map(product => product.formats.data.map(format => {
+          format.product = _.pick(product, ['id', 'name', 'description']);
+          const formatPrice = new Money(format.price);
+          format.text = `${_.capitalize(product.name)} - ${format.name} (${formatPrice})`;
 
-            return format;
-          });
-        }));
-      });
+          return format;
+        }))
+      ));
   }
 
   pushExternalOrder(restaurantId, customer, productFormats, deliveryAddress, comment) {
     return this.api.post(
       `${ENDPOINT}/${restaurantId}/externalOrders`,
-      {customer, productFormats, deliveryAddress, comment}
+      { customer, productFormats, deliveryAddress, comment }
     );
   }
 
@@ -44,7 +43,7 @@ export default class RestaurantsService {
 
   getGroupOrder(groupOrderId) {
     return this.api.get(
-      `groupOrders/${groupOrderId}?include=orders.productFormats,orders.customer,orders.deliveryAddress`
+      `groupOrders/${groupOrderId}?include=orders.productFormats,orders.customer,orders.deliveryAddress,orders.restaurantPromotions` // eslint-disable-line max-len
     ).then(response => this.flattenGroupOrder(response.data.data));
   }
 
@@ -64,6 +63,14 @@ export default class RestaurantsService {
 
         return productFormat;
       });
+
+      order.promotions = [];
+
+      if (order.restaurantPromotions) {
+        order.promotions = order.restaurantPromotions.data.map(
+          restaurantPromotion => restaurantPromotion.name
+        );
+      }
 
       return order;
     });

@@ -1,0 +1,23 @@
+<md-chips
+  md-autocomplete-snap
+  ng-model="selectedFormats"
+  md-transform-chip="transformChip($chip)"
+  md-require-match="true"
+>
+  <md-autocomplete
+    md-autoselect
+    md-no-cache="true"
+    md-selected-item="selectedItem"
+    md-search-text="input"
+    md-items="item in search(input)"
+    md-item-text="item.name"
+    placeholder="{{ 'addProduct' | title }}"
+  >
+    <span md-highlight-text="input" md-highlight-flags="i">{{ item.text }}</span>
+  </md-autocomplete>
+  <md-chip-template>
+        <span>
+          {{ $chip.text }}
+        </span>
+  </md-chip-template>
+</md-chips>

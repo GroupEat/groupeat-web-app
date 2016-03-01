@@ -3,22 +3,25 @@
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
-          <th ng-repeat="header in [
-            'id',
-            'productFormatsCount',
-            'totalDiscountedPrice',
-            'createdAt',
-            'closedAt'
-          ]">
+          <th
+            ng-repeat="header in [
+              'id',
+              'productFormatsCount',
+              'totalDiscountedPrice',
+              'createdAt',
+              'closedAt'
+            ]"
+          />
             {{ header | title }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="groupOrder in vm.groupOrders"
-            ng-class="(groupOrder.confirmed ? 'closed' : (groupOrder.unconfirmed ? 'unconfirmed' : 'opened'))
-              + '-group-order'"
-            ng-click="vm.goToOrder(groupOrder)">
+        <tr
+          ng-repeat="groupOrder in vm.groupOrders"
+          ng-class="(groupOrder.confirmed ? 'closed' : (groupOrder.unconfirmed ? 'unconfirmed' : 'opened')) + '-group-order'"
+          ng-click="vm.goToOrder(groupOrder)"
+        />
           <td data-title="{{ 'id' | title }}">
             {{ groupOrder.id }}
           </td>

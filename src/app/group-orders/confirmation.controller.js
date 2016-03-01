@@ -24,11 +24,11 @@ export default class ConfirmationController {
 
   confirmGroupOrder() {
     this.api.post(`groupOrders/${this.groupOrderId}/confirm`, {
-      preparedAt: this.getPreparedAtString(this.availableTimes, this.preparedAt)
+      preparedAt: this.getPreparedAtString(this.availableTimes, this.preparedAt),
     })
       .success(() => {
         this.popup.defaultContentOnly('confirmGroupOrderSuccess');
-        this.$state.go('dashboard.groupOrder', {groupOrderId: this.groupOrderId});
+        this.$state.go('dashboard.groupOrder', { groupOrderId: this.groupOrderId });
       })
       .error(response => this.popup.error(response.errorKey));
   }
@@ -38,7 +38,7 @@ export default class ConfirmationController {
     const latestPreparedTimestamp = closedAt + 60000 * this.preparationTimeInMinutes;
 
     let timestampOnStep;
-    let availableTimestamps = [];
+    const availableTimestamps = [];
     const offsetWithStep = new Date(latestPreparedTimestamp).getMinutes() % this.stepInMinutes;
 
     if (offsetWithStep !== 0) {
@@ -55,7 +55,7 @@ export default class ConfirmationController {
 
     availableTimestamps.reverse();
 
-    let availableTimes = {};
+    const availableTimes = {};
 
     for (let i = 0; i < availableTimestamps.length; i++) {
       const timestamp = availableTimestamps[i];

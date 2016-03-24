@@ -21,7 +21,7 @@ describe('docs', () => {
   helpers.shouldRequireAuthentication(URL);
 
   const browseAs = (userType, callback) => {
-    backend.whenGET(helpers.apiUrl('admin/docs')).respond(DOCS_CONTENT);
+    backend.whenGET(helpers.apiUrl('docs')).respond(DOCS_CONTENT);
 
     helpers.browseAuthenticated(URL, backend, userType, () => {
       callback();

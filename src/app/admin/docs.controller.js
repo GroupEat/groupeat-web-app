@@ -5,7 +5,7 @@ export default class DocsController {
     const dom = $window.document;
     const hash = $location.hash();
 
-    api.get('admin/docs').success(response => {
+    api.get('docs').success(response => {
       if ($location.port() === 3474) { // Replacing the whole dom will get protractor to fail badly
         dom.body.innerHTML = response;
       } else {

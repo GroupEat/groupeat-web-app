@@ -2,6 +2,8 @@
   "defaultMsg": "veuillez ajouter un message d'erreur pour {0}",
   "required": "ce champ est requis",
   "email": "adresse e-mail invalide",
+  "min": "ce champ doit être supérieur à {0}",
+  "max": "ce champ doit être inférieur à {0}",
   "passwordMinLength": "le mot de passe doit faire au mois {0} caractères",
   "passwordConfirmationMatch": "les mots de passe doivent être identiques",
   "phoneNumberPattern": "le numéro de téléphone doit respecter le format 0605040302",

@@ -11,6 +11,11 @@ export default class RestaurantsService {
     this.api = api;
   }
 
+  list(opened = true) {
+    return this.api.get(`${ENDPOINT}?opened=${opened ? 1 : 0}`)
+      .then(response => response.data.data);
+  }
+
   get(restaurantId) {
     return this.api.get(`${ENDPOINT}/${restaurantId}`)
       .then(response => response.data.data);

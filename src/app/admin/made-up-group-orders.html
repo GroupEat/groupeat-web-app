@@ -1,0 +1,47 @@
+<div flex-sm="5" flex="10" flex-lg="30" flex-gt-lg="33"></div>
+<div flex-sm="90" flex="80" flex-lg="40" flex-gt-lg="33">
+  <md-content>
+    <md-card class="main">
+      <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools">
+          <span>{{ 'makeUpGroupOrder' | translate }}</span>
+        </h2>
+      </md-toolbar>
+      <form name="makeUpGroupOrderForm" class="groupeat-form" novalidate>
+        <md-select ng-model="vm.restaurant" placeholder="{{ 'restaurant' | title }}" required>
+          <md-option ng-repeat="restaurant in vm.restaurants" ng-value="restaurant">
+            {{ restaurant.name }}
+          </md-option>
+        </md-select>
+        <md-input-container class="md-block">
+          <label>{{ 'initialDiscountRate' | title }}</label>
+          <input
+            ng-model="vm.initialDiscountRate"
+            type="number"
+            step="5"
+            min="0"
+            max="{{ vm.restaurant.maximumDiscountRate }}"
+            required
+          />
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>{{ 'endingAt' | title }}</label>
+          <input
+            ng-model="vm.endingAt"
+            type="datetime-local"
+            required
+          />
+        </md-input-container>
+        <section layout="row" layout-sm="column" layout-align="center center">
+          <button
+            class="groupeat-submit md-raised md-button md-primary"
+            ng-click="vm.makeUpGroupOrder()"
+            ng-disabled="makeUpGroupOrderForm.$invalid"
+          />
+          <span>{{ 'confirm' | translate }}</span>
+          </button>
+        </section>
+      </form>
+    </md-card>
+  </md-content>
+</div>

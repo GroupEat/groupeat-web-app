@@ -17,7 +17,7 @@ describe('log in', () => {
   });
 
   afterEach(() => {
-    helpers.logOut();
+    helpers.cleanBrowser();
     backend.clear();
   });
 

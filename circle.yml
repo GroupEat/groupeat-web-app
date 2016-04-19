@@ -6,19 +6,15 @@ machine:
 dependencies:
   pre:
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
 
 test:
   pre:
-    - ./node_modules/.bin/webdriver-manager update --standalone
-    - ./node_modules/.bin/webdriver-manager start:
+    - npm run test:watch:
         background: true
-    - npm run start -- --env test --optimize:
-        background: true
-    - npm run test:build -- --optimize
-    - sleep 5
+    - sleep 10
   override:
     - npm test
 

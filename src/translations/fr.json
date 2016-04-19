@@ -61,5 +61,11 @@
 
   "pushExternalOrdersFormTitle": "Propager une commande externe",
 
+  "makeUpGroupOrder": "Fabriquer une commande",
+  "restaurant": "restaurant",
+  "initialDiscountRate": "réduction initiale",
+  "endingAt": "fin de la commande",
+  "groupOrderMadeUpSuccessfully": "La commande a bien été créée ! On croise les doigts ^^",
+
   "authenticationError": "Mauvais identifiants, vous n'avez pas pu être connecté..."
 }

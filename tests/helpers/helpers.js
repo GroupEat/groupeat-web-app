@@ -1,17 +1,18 @@
 /* global browser by element expect it */
-export const apiUrl = path => `${process.env.API_BASE_URL}/${path}`;
+const apiUrl = path => `${process.env.API_BASE_URL}/${path}`;
 
-export const translate = key => {
+const translate = key => {
   const translations = require('../../src/translations/fr.json');
 
   return translations[key];
 };
 
-export const logOut = () => {
-  browser.get('logOut');
+const cleanBrowser = () => {
+  browser.executeScript('window.sessionStorage.clear();');
+  browser.executeScript('window.localStorage.clear();');
 };
 
-export const shouldRequireAuthentication = testedUrl => {
+const shouldRequireAuthentication = testedUrl => {
   it('should require authentication', () => {
     browser.get(testedUrl);
 
@@ -21,7 +22,7 @@ export const shouldRequireAuthentication = testedUrl => {
   });
 };
 
-export const browseAuthenticated = (testedUrl, backend, userType, callback) => {
+const browseAuthenticated = (testedUrl, backend, userType, callback) => {
   backend.whenPUT(apiUrl('auth/token')).respond(JSON.stringify({
     data: {
       id: 1,
@@ -41,4 +42,12 @@ export const browseAuthenticated = (testedUrl, backend, userType, callback) => {
   browser.get(testedUrl);
 
   callback();
+};
+
+export {
+  apiUrl,
+  translate,
+  cleanBrowser,
+  shouldRequireAuthentication,
+  browseAuthenticated,
 };

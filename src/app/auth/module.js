@@ -1,13 +1,11 @@
 import angular from 'angular';
 import 'angular-validation-match';
-import ActivateCustomerController from './activate-customer.controller';
 import AuthService from './auth.service';
 import LogInController from './log-in.controller';
 import LogOutController from './log-out.controller';
 import PasswordResetController from './password-reset.controller';
 
 angular.module('groupeat.auth', ['validation.match'])
-  .controller(ActivateCustomerController.name, ActivateCustomerController)
   .controller(LogInController.name, LogInController)
   .controller(LogOutController.name, LogOutController)
   .controller(PasswordResetController.name, PasswordResetController)
@@ -16,11 +14,6 @@ angular.module('groupeat.auth', ['validation.match'])
     'ngInject';
 
     $stateProvider
-      .state('activate', {
-        url: '/auth/activate?token',
-        template: require('./activate.html'),
-        controller: `${ActivateCustomerController.name} as vm`,
-      })
       .state('logIn', {
         url: '/logIn',
         template: require('./log-in.html'),

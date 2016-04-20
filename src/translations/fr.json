@@ -14,11 +14,6 @@
 
   "resetPasswordTitle": "Réinitialiser le mot de passe",
 
-  "activationSuccessTitle": "Activation de compte",
-  "activationSuccess": "Merci d'avoir activé ton compte. Tu peux désormais utiliser pleinement l'application !",
-  "activationErrorTitle": "Problème d'activation",
-  "activationError": "Aucun utilisateur ne correspond à ce jeton...",
-
   "logInFormTitle": "Connexion à ton compte",
 
   "resetPasswordSuccess": "Le mot de passe a été réinitialisé avec succès !",

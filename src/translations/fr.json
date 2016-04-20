@@ -34,14 +34,14 @@
   "dashboard.pushExternalOrderMenuTitle": "commande externe",
 
   "id": "id",
-  "productFormatsCount": "pizzas",
+  "productFormatsCount": "produits",
   "discountRate": "réduction",
   "totalDiscountedPrice": "prix total",
   "createdAt": "créée",
   "promotions": "promotions",
 
   "orderSummary": "Récapitulatif de la commande",
-  "productFormats": "pizzas",
+  "productFormats": "produits",
   "customer": "client",
   "address": "adresse",
   "discountedPrice": "prix à payer",

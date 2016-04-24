@@ -6,8 +6,6 @@
   "errorPopupTitle": "Oops ...",
 
   "email": "adresse e-mail",
-  "firstName": "prénom",
-  "lastName": "nom de famille",
   "phoneNumber": "numéro de téléphone",
   "password": "mot de passe",
   "passwordConfirmation": "confirmation du mot de passe",

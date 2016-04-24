@@ -4,37 +4,17 @@
       <i class="material-icons">contact_phone</i>
       {{ 'clientDetails' | title }}
     </h4>
-    <div layout="column" layout-gt-md="row">
-      <md-input-container flex="40">
-        <label>{{ 'firstName' | title }}</label>
-        <input
-          name="firstName"
-          type="text"
-          ng-model="vm.customer.firstName"
-          required
-        />
-      </md-input-container>
-      <md-input-container flex="40">
-        <label>{{ 'lastName' | title }}</label>
-        <input
-          name="lastName"
-          type="text"
-          ng-model="vm.customer.lastName"
-          required
-        />
-      </md-input-container>
-      <md-input-container flex="20">
-        <label>{{ 'phoneNumber' | title }}</label>
-        <input
-          name="phoneNumber"
-          type="tel"
-          ng-model="vm.customer.phoneNumber"
-          required
-          pattern="\d{10}"
-          pattern-err-type="phoneNumberPattern"
-        />
-      </md-input-container>
-    </div>
+    <md-input-container class="md-block">
+      <label>{{ 'phoneNumber' | title }}</label>
+      <input
+        name="phoneNumber"
+        type="tel"
+        ng-model="vm.customer.phoneNumber"
+        required
+        pattern="\d{10}"
+        pattern-err-type="phoneNumberPattern"
+      />
+    </md-input-container>
     <h4 class="md-title">
       <i class="material-icons">assignment</i>
       {{ 'orderDetails' | title }}
